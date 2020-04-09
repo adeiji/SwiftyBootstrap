@@ -152,8 +152,7 @@ class GRBootstrapElement : UIView {
     weak var topConstraint:Constraint?
     
     weak var viewAbove: UIView?
-    /// The margin that should be around this card
-    var margin: CGFloat?
+    
     /// Whether or not this card should be anchored to the bottom of it's superview
     var anchorToBottom:Bool?
     /// The elements that are shown on this card.
@@ -337,26 +336,24 @@ class GRBootstrapElement : UIView {
     ///   - margin: The margin for the view
     ///   - viewAbove: If there is a view you want this card to be below
     ///   - anchorToBottom: Whether the card should be anchored to the bottom of the view
-    func addToSuperview (superview: UIView, margin: CGFloat, viewAbove: UIView? = nil, anchorToBottom:Bool = false, topMargin: Sizes? = nil, left:CGFloat? = nil, right:CGFloat? = nil, top:CGFloat? = nil, bottom:CGFloat? = nil) {
+    func addToSuperview (superview: UIView, viewAbove: UIView? = nil, anchorToBottom:Bool = false, topMargin: Sizes? = nil, left:CGFloat? = nil, right:CGFloat? = nil, top:CGFloat? = nil, bottom:CGFloat? = nil) {
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
-            make.left.equalTo(superview).offset(left ?? margin)
-            make.right.equalTo(superview).offset(-(right ?? margin))
-            
-            make.width.equalTo(UIScreen.main.bounds.size.width - (margin * 2.0))
+            make.left.equalTo(superview).offset(left ?? 0)
+            make.right.equalTo(superview).offset(-(right ?? 0))
+            make.width.equalTo(UIScreen.main.bounds.size.width - (left ?? 0) - (right ?? 0))
             
             if let viewAbove = viewAbove {
-                self.topConstraint = make.top.equalTo(viewAbove.snp.bottom).offset(top ?? topMargin?.rawValue ?? margin).constraint
+                self.topConstraint = make.top.equalTo(viewAbove.snp.bottom).offset(top ?? topMargin?.rawValue ?? 0).constraint
             } else {
-                self.topConstraint = make.top.equalTo(superview).offset(top ?? topMargin?.rawValue ?? margin).constraint
+                self.topConstraint = make.top.equalTo(superview).offset(top ?? topMargin?.rawValue ?? 0).constraint
             }
             
             if anchorToBottom {
-                make.bottom.equalTo(superview).offset(-(bottom ?? margin))
+                make.bottom.equalTo(superview).offset(-(bottom ?? 0))
             }
         }
         
-        self.margin = margin
         self.viewAbove = viewAbove
         self.anchorToBottom = anchorToBottom
         
@@ -389,10 +386,9 @@ class GRBootstrapElement : UIView {
         self.removeFromSuperview()
         let elements = self.elements
         self.elements = [GRCardSet]()
-//        self.addElements(elements: elements)
+
         self.addToSuperview(
             superview: superview,
-            margin: self.margin ?? 0,
             viewAbove: self.viewAbove,
             anchorToBottom: self.anchorToBottom ?? false)
     }
@@ -717,6 +713,8 @@ class GRBootstrapElement : UIView {
                         column.cardSet.newLine = true
                         currentXPos = 0
                     }
+                } else if (column.colWidth == .Twelve) {
+                    column.cardSet.newLine = true
                 }
                 
                 // If this is the first element in the card than it's new line property should be set to true
@@ -796,7 +794,7 @@ class GRBootstrapElement : UIView {
                 // Set the left margins relative to the card
                 make.left.equalTo(self)
             } else {
-                make.left.equalTo(columns[index - 1].cardSet.content.snp.right)
+                make.left.equalTo(columns[index - 1].snp.right)
             }
         }
         
@@ -846,5 +844,6 @@ class GRBootstrapElement : UIView {
             super.init(coder: coder)
         }
     }
-    
 }
+
+typealias Column = GRBootstrapElement.Column

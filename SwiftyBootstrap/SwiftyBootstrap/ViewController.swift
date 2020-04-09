@@ -19,56 +19,24 @@ class ViewController: UIViewController {
         
         card
             .addRow(columns: [
-                    GRBootstrapElement.Column(cardSet:
-                        Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue)
-                            .toCardSet()
-                            .withHeight(50),
-                                  colWidth: .Four),
-                    GRBootstrapElement.Column(cardSet:
-                        Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue)
-                            .toCardSet()
-                            .withHeight(50),
-                                  colWidth: .Four),
-                    GRBootstrapElement.Column(cardSet:Style.largeButton(with: "Okay", superview: nil,backgroundColor: UIColor.Pinterest.aquaBlue)
-                        .toCardSet()
-                        .withHeight(50),
-                    colWidth: .Four),
-                    GRBootstrapElement.Column(cardSet:
-                        Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue)
-                            .toCardSet()
-                            .withHeight(50),
-                                  colWidth: .Four)
+                Column(cardSet: Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue).toCardSet().withHeight(75), colWidth: .Four),
+                Column(cardSet: Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue).toCardSet().withHeight(50),colWidth: .Four),
+                Column(cardSet:Style.largeButton(with: "Okay", superview: nil,backgroundColor: UIColor.Pinterest.aquaBlue).toCardSet().withHeight(50), colWidth: .Four),
+                Column(cardSet: Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue).toCardSet().withHeight(50), colWidth: .Twelve),
+                Column(cardSet: Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue).toCardSet().withHeight(50), colWidth: .Four)
             ]).addRow(columns: [
-                    GRBootstrapElement.Column(cardSet: Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue).toCardSet().withHeight(50),
-                                  colWidth: .Four),
-                    GRBootstrapElement.Column(cardSet: Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue)
-                            .toCardSet()
-                        .withHeight(50),
-                    colWidth: .Four),
-                    GRBootstrapElement.Column(cardSet:
-                        Style.largeButton(with: "Okay",
-                                          superview: nil,
-                                          backgroundColor: UIColor.Pinterest.aquaBlue)
-                        .toCardSet()
-                        .withHeight(50),
-                    colWidth: .Four),
-                    GRBootstrapElement.Column(cardSet:
-                        Style.largeButton(with: "Okay",
-                                          superview: nil,
-                                          backgroundColor: UIColor.Pinterest.aquaBlue)
-                        .toCardSet()
-                        .withHeight(50),
-                    colWidth: .Four)
+                Column(cardSet: Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue).toCardSet().withHeight(50), colWidth: .Four),
+                Column(cardSet: Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue).toCardSet().withHeight(50), colWidth: .Four),
+                Column(cardSet: Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue).toCardSet().withHeight(50), colWidth: .Four),
+                Column(cardSet: Style.largeButton(with: "Okay", superview: nil, backgroundColor: UIColor.Pinterest.aquaBlue).toCardSet().withHeight(50), colWidth: .Four)
             ]).addRow(columns: [
-                GRBootstrapElement.Column(cardSet: Style.label(withText: "This is Cool", superview: nil, color: .black, textAlignment: .center).toCardSet(), colWidth: .Twelve)
+                Column(cardSet: Style.label(withText: "This is Cool", superview: nil, color: .black, textAlignment: .center).toCardSet(), colWidth: .Twelve)
                     .addRow(columns: [
-                        GRBootstrapElement.Column(cardSet:
-                            Style.largeButton(with: "Oh Yeah").toCardSet(), colWidth: .Twelve)
+                        Column(cardSet: Style.largeButton(with: "Oh Yeah").toCardSet(), colWidth: .Twelve),
                     ])
             ])
-            
-                        
-        card.addToSuperview(superview: self.view, margin: 0)
+                                    
+        card.addToSuperview(superview: self.view, top: 40.0)
     }
 }
 
