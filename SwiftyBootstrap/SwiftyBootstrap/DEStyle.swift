@@ -738,9 +738,17 @@ class Style {
         return button;
     }
     
-    class func largeButton (with title: String, superview: UIView? = nil, backgroundColor:UIColor? = nil, borderColor:UIColor? = nil, fontColor:UIColor? = nil) -> UIButton {
+    class func largeButton (with title: String, superview: UIView? = nil, backgroundColor:UIColor? = nil, borderColor:UIColor? = nil, fontColor:UIColor? = nil, imageName:String? = nil) -> UIButton {
+        
+        
         
         let button = UIButton()
+        
+        if let imageName = imageName {
+            button.setImage(UIImage(named: imageName), for: .normal)
+            return button
+        }
+        
         button.titleLabel?.font = UIFont.init(name: FontNames.all.rawValue, size: FontSizes.small.rawValue)
         button.setTitleColor(.white, for: .normal)
         button.setTitle(title, for: .normal)

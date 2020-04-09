@@ -19,6 +19,7 @@
 		F4992CD3243F05E500F2C628 /* SwiftyBootstrapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4992CD2243F05E500F2C628 /* SwiftyBootstrapTests.swift */; };
 		F4992CDE243F05E500F2C628 /* SwiftyBootstrapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4992CDD243F05E500F2C628 /* SwiftyBootstrapUITests.swift */; };
 		F4992CEC243F060600F2C628 /* GRCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4992CEB243F060600F2C628 /* GRCard.swift */; };
+		F49AC653243F6C9D0081A117 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F49AC652243F6C9C0081A117 /* Assets.xcassets */; };
 		F4A875C2243F06F900EE78F7 /* DEStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A875C1243F06F900EE78F7 /* DEStyle.swift */; };
 		F4A875C4243F077300EE78F7 /* UIColor+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A875C3243F077300EE78F7 /* UIColor+Style.swift */; };
 		F4A875C6243F08D600EE78F7 /* GRButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A875C5243F08D600EE78F7 /* GRButton.swift */; };
@@ -68,6 +69,7 @@
 		F4992CDD243F05E500F2C628 /* SwiftyBootstrapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyBootstrapUITests.swift; sourceTree = "<group>"; };
 		F4992CDF243F05E500F2C628 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4992CEB243F060600F2C628 /* GRCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GRCard.swift; sourceTree = "<group>"; };
+		F49AC652243F6C9C0081A117 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../graffiti-app/Graffiti/Assets.xcassets"; sourceTree = "<group>"; };
 		F4A875C1243F06F900EE78F7 /* DEStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DEStyle.swift; sourceTree = "<group>"; };
 		F4A875C3243F077300EE78F7 /* UIColor+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Style.swift"; sourceTree = "<group>"; };
 		F4A875C5243F08D600EE78F7 /* GRButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GRButton.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		F4992CBA243F05E400F2C628 /* SwiftyBootstrap */ = {
 			isa = PBXGroup;
 			children = (
+				F49AC652243F6C9C0081A117 /* Assets.xcassets */,
 				F4A875C7243F08FB00EE78F7 /* GraffitiStyle.swift */,
 				F4A875C5243F08D600EE78F7 /* GRButton.swift */,
 				F4A875C3243F077300EE78F7 /* UIColor+Style.swift */,
@@ -299,6 +302,7 @@
 			files = (
 				F4992CC8243F05E500F2C628 /* LaunchScreen.storyboard in Resources */,
 				F4992CC5243F05E500F2C628 /* Assets.xcassets in Resources */,
+				F49AC653243F6C9D0081A117 /* Assets.xcassets in Resources */,
 				F4992CC3243F05E400F2C628 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
