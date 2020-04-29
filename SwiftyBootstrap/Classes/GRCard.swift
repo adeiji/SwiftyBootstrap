@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-extension UIView {
+public extension UIView {
     
     /// Creates a card set from a UIView object.  This card set can then be used to add to a GRCard for clean,
     /// simple layout purposes.  For more information look at the initializer for GRCardSet
@@ -74,7 +74,7 @@ public enum ColWidth:CGFloat {
 }
 
 
-class GRCardSet {
+public class GRCardSet {
     
     let content:UIView
     fileprivate var newLine:Bool
@@ -144,7 +144,7 @@ class GRCardSet {
     card.addElements(elements: [cardSet1, cardSet2])
     card.addToSuperview(superview: self.view, margin: Sizes.smallMargin.rawValue, viewAbove:nil, anchorToBottom:false)
  */
-class GRBootstrapElement : UIView {
+public class GRBootstrapElement : UIView {
     
     weak var header:UIView?
     
