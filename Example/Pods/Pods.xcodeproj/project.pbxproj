@@ -14,12 +14,12 @@
 		7E0B5256581C66553C725710AF6D00E3 /* Pods-SwiftyBootstrap_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EEC719B0822189DA47097F18A63AAE /* Pods-SwiftyBootstrap_Tests-dummy.m */; };
 		8F7FE99499D1D9EA2642F1ABEE566100 /* SwiftyBootstrap-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6289AE09397C28FCC488D939A98B0F3E /* SwiftyBootstrap-dummy.m */; };
 		EEA56551CE3FEAB6EF0CEF098FD7D0FF /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6105117EF1F7FD22AE5799B08D4945A /* ReplaceMe.swift */; };
-		F42851D0245A06D700C381DE /* GRNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851CE245A06D700C381DE /* GRNavBar.swift */; };
-		F42851D1245A06D700C381DE /* UIButton+CenteredImageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851CF245A06D700C381DE /* UIButton+CenteredImageTitle.swift */; };
-		F42851D6245A06F800C381DE /* GRButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851D2245A06F800C381DE /* GRButton.swift */; };
-		F42851D7245A06F800C381DE /* GraffitiStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851D3245A06F800C381DE /* GraffitiStyle.swift */; };
-		F42851D8245A06F800C381DE /* GRCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851D4245A06F800C381DE /* GRCard.swift */; };
-		F42851D9245A06F800C381DE /* UIColor+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851D5245A06F800C381DE /* UIColor+Style.swift */; };
+		F42851DB245A0A7E00C381DE /* GraffitiStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851D3245A06F800C381DE /* GraffitiStyle.swift */; };
+		F42851DC245A0A7E00C381DE /* GRButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851D2245A06F800C381DE /* GRButton.swift */; };
+		F42851DD245A0A7E00C381DE /* GRCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851D4245A06F800C381DE /* GRCard.swift */; };
+		F42851DE245A0A7E00C381DE /* UIColor+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851D5245A06F800C381DE /* UIColor+Style.swift */; };
+		F42851DF245A0A7E00C381DE /* GRNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851CE245A06D700C381DE /* GRNavBar.swift */; };
+		F42851E0245A0A7E00C381DE /* UIButton+CenteredImageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42851CF245A06D700C381DE /* UIButton+CenteredImageTitle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -315,8 +315,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F42851E0245A0A7E00C381DE /* UIButton+CenteredImageTitle.swift in Sources */,
 				EEA56551CE3FEAB6EF0CEF098FD7D0FF /* ReplaceMe.swift in Sources */,
 				8F7FE99499D1D9EA2642F1ABEE566100 /* SwiftyBootstrap-dummy.m in Sources */,
+				F42851DC245A0A7E00C381DE /* GRButton.swift in Sources */,
+				F42851DE245A0A7E00C381DE /* UIColor+Style.swift in Sources */,
+				F42851DD245A0A7E00C381DE /* GRCard.swift in Sources */,
+				F42851DB245A0A7E00C381DE /* GraffitiStyle.swift in Sources */,
+				F42851DF245A0A7E00C381DE /* GRNavBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,13 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F42851D1245A06D700C381DE /* UIButton+CenteredImageTitle.swift in Sources */,
-				F42851D0245A06D700C381DE /* GRNavBar.swift in Sources */,
-				F42851D9245A06F800C381DE /* UIColor+Style.swift in Sources */,
-				F42851D8245A06F800C381DE /* GRCard.swift in Sources */,
-				F42851D6245A06F800C381DE /* GRButton.swift in Sources */,
 				7E0B5256581C66553C725710AF6D00E3 /* Pods-SwiftyBootstrap_Tests-dummy.m in Sources */,
-				F42851D7245A06F800C381DE /* GraffitiStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
