@@ -1,0 +1,6 @@
+use_frameworks!
+target 'SwiftyBootstrap_Tests' do
+  pod 'SwiftyBootstrap', :path => '../'
+  
+  
+end
