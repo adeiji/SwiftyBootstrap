@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootstrap'
-  s.version          = '1.0.3'
+  s.version          = '1.0.4'
   s.summary          = 'Bootstrap for Swift.'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ My own version of Bootstrap written for Swift and iOS.
   s.source           = { :git => 'https://github.com/adeiji/SwiftyBootstrap.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'SwiftyBootstrap/Classes/**/*'
   
