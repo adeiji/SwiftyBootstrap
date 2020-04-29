@@ -1,0 +1,22 @@
+{
+  "name": "SwiftyBootstrap",
+  "version": "0.1.0",
+  "summary": "A short description of SwiftyBootstrap.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/adeiji/SwiftyBootstrap",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "adeiji": "adeiji@yahoo.com"
+  },
+  "source": {
+    "git": "https://github.com/adeiji/SwiftyBootstrap.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "SwiftyBootstrap/Classes/**/*"
+}

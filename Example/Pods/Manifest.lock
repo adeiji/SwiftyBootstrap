@@ -1,0 +1,16 @@
+PODS:
+  - SwiftyBootstrap (0.1.0)
+
+DEPENDENCIES:
+  - SwiftyBootstrap (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftyBootstrap:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SwiftyBootstrap: b7674ad7ad654b38d7e7ce76aaa63f67d39b42d1
+
+PODFILE CHECKSUM: 9ce5a134fbe56b4360b3f7db09fbab71fe687591
+
+COCOAPODS: 1.7.3
