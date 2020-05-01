@@ -810,19 +810,19 @@ open class GRBootstrapElement : UIView {
     
     open class Column: UIView {
         
-        var cardSet:GRCardSet
+        open var cardSet:GRCardSet
         
-        var widthInPixels: CGFloat!
+        open var widthInPixels: CGFloat!
         
-        var colWidth:ColWidth
+        open var colWidth:ColWidth
         
-        func addRow(columns: [Column]) -> Column {
+        open func addRow(columns: [Column]) -> Column {
             let card = GRBootstrapElement()
             card.addRow(columns: columns, widthInPixels: self.widthInPixels)
             return self
         }
         
-        init(cardSet: GRCardSet, colWidth:ColWidth) {
+        public init(cardSet: GRCardSet, colWidth:ColWidth) {
             self.cardSet = cardSet
             self.colWidth = colWidth
                         
