@@ -50,7 +50,7 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
         fadedView.backgroundColor = .white
         fadedView.layer.opacity = 0.7
         
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.startAnimating()
         fadedView.addSubview(activityIndicator)
         activityIndicator.snp.makeConstraints { (make) in
@@ -115,19 +115,19 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
     }
     
     private func registerForKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardAppear(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardDisappear(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardAppear(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardDisappear(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     
     // Don't forget to unregister when done
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     
     @objc private func onKeyboardAppear(_ notification: NSNotification) {
         let info = notification.userInfo!
-        let rect: CGRect = info[UIKeyboardFrameBeginUserInfoKey] as! CGRect
+        let rect: CGRect = info[UIResponder.keyboardFrameBeginUserInfoKey] as! CGRect
         let kbSize = rect.size
         
         self.keyboardHeight = kbSize.height
@@ -154,12 +154,12 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
         self.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
     
-    private func textFieldDidBeginEditing(_ textField: UITextField) {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeField = textField
         self.containerView.activeField = self.activeField
     }
     
-    private func textFieldDidEndEditing(_ textField: UITextField) {
+    public func textFieldDidEndEditing(_ textField: UITextField) {
         self.activeField = nil
         self.containerView.activeField = self.activeField
     }
