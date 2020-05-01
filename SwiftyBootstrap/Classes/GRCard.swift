@@ -23,7 +23,7 @@ public extension UIView {
     }
 }
 
-public class Margin {
+open class Margin {
     
     fileprivate var bottomMargin:CGFloat? = 10.0
     fileprivate var topMargin:CGFloat? = 10.0
@@ -32,26 +32,26 @@ public class Margin {
     
     fileprivate var cardSet:GRCardSet
     
-    init(cardSet:GRCardSet) {
+    public init(cardSet:GRCardSet) {
         self.cardSet = cardSet
     }
     
-    func bottom(_ value:CGFloat) -> GRCardSet {
+    public func bottom(_ value:CGFloat) -> GRCardSet {
         self.bottomMargin = value
         return self.cardSet
     }
     
-    func top(_ value:CGFloat) -> GRCardSet {
+    public func top(_ value:CGFloat) -> GRCardSet {
         self.topMargin = value
         return self.cardSet
     }
     
-    func left(_ value:CGFloat) -> GRCardSet {
+    public func left(_ value:CGFloat) -> GRCardSet {
         self.leftMargin = value
         return self.cardSet
     }
     
-    func right(_ value:CGFloat) -> GRCardSet {
+    public func right(_ value:CGFloat) -> GRCardSet {
         self.rightMargin = value
         return self.cardSet
     }
@@ -74,16 +74,16 @@ public enum ColWidth:CGFloat {
 }
 
 
-public class GRCardSet {
+open class GRCardSet {
     
-    let content:UIView
+    public let content:UIView
     fileprivate var newLine:Bool
     private var isSquare:Bool
     fileprivate var height:CGFloat?
     
     // The margin is sure to be set in the initializer, but if we don't say that this value can be null than we can't assign the margin's card set to self since margin relies on self and you'll get an error saying trying to access self before all required properties are set
-    var margin:Margin!
-    var name:String?
+    open var margin:Margin!
+    open var name:String?
     
     /// Initialize the GRCardSet object
     ///
@@ -94,7 +94,7 @@ public class GRCardSet {
     ///   - newLine: Whether you want this card to appear on a new line or on the same line with the previous card
     ///   - shouldOverlay: Should you overlay this object to it's superview
     ///   - name: The name of the element, this is important if you need to debug, you can use this name to know which element is being looked at when debugging.
-    init(content: UIView, height:CGFloat? = nil, newLine: Bool = true, name: String? = nil, isSquare: Bool = false) {
+    public init(content: UIView, height:CGFloat? = nil, newLine: Bool = true, name: String? = nil, isSquare: Bool = false) {
         self.content = content
         self.height = height
         self.newLine = newLine
@@ -104,27 +104,27 @@ public class GRCardSet {
         self.margin = Margin(cardSet: self)
     }
     
-    func withHeight(_ height: CGFloat) -> GRCardSet {
+    open func withHeight(_ height: CGFloat) -> GRCardSet {
         self.height = height
         
         return self
     }
     
-    func isSquare (_ isSquare: Bool) -> GRCardSet {
+    open func isSquare (_ isSquare: Bool) -> GRCardSet {
         self.isSquare = isSquare
         return self
     }
     
-    func isNewLine (_ newLine: Bool) -> GRCardSet {
+    open func isNewLine (_ newLine: Bool) -> GRCardSet {
         self.newLine = newLine
         return self
     }
     
-    func getIsSquare () -> Bool {
+    open func getIsSquare () -> Bool {
         return self.isSquare
     }
     
-    func withName(_ name: String?) -> GRCardSet {
+    open func withName(_ name: String?) -> GRCardSet {
         self.name = name
         
         return self
@@ -144,25 +144,25 @@ public class GRCardSet {
     card.addElements(elements: [cardSet1, cardSet2])
     card.addToSuperview(superview: self.view, margin: Sizes.smallMargin.rawValue, viewAbove:nil, anchorToBottom:false)
  */
-public class GRBootstrapElement : UIView {
+open class GRBootstrapElement : UIView {
     
-    weak var header:UIView?
+    open weak var header:UIView?
     
     /// The top constraint of the card.
-    weak var topConstraint:Constraint?
+    open weak var topConstraint:Constraint?
     
-    weak var viewAbove: UIView?
+    open weak var viewAbove: UIView?
     
     /// Whether or not this card should be anchored to the bottom of it's superview
-    var anchorToBottom:Bool?
+    open var anchorToBottom:Bool?
     /// The elements that are shown on this card.
     internal var elements:[GRCardSet] = [GRCardSet]()
     
     /// Whether or line up the contents of this card horizontally
-    var horizontalLayout:Bool = false
+    open var horizontalLayout:Bool = false
     
     /// Whether to set the maximum width of this card to the width of the screen.  If this is set to **true** then cards that will go beyond the width of the screen will automatically be pushed to the next line.
-    var anchorWidthToScreenWidth:Bool
+    open var anchorWidthToScreenWidth:Bool
     
     /**
      Whether or not to anchor the last element in the elements array to the bottom of the card.
@@ -171,11 +171,11 @@ public class GRBootstrapElement : UIView {
      
      If you find that you have a scroll view with this card as the subview, and the card's horizontalLayout is set to true, and the last element's height is different than what you were expecting, it's probably because this value was set to true.
      */
-    var anchorLastElementToBottom:Bool = true
+    open var anchorLastElementToBottom:Bool = true
     
-    var rows:[Row] = [Row]()
+    open var rows:[Row] = [Row]()
     
-    init(color: UIColor? = .white, anchorWidthToScreenWidth:Bool = true) {
+    public init(color: UIColor? = .white, anchorWidthToScreenWidth:Bool = true) {
         self.anchorWidthToScreenWidth = anchorWidthToScreenWidth
         
         super.init(frame: .zero)
@@ -186,12 +186,12 @@ public class GRBootstrapElement : UIView {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         self.anchorWidthToScreenWidth = true
         super.init(coder: aDecoder)
     }
         
-    @discardableResult func addRow (columns:[Column], widthInPixels:CGFloat? = nil) -> GRBootstrapElement {
+    @discardableResult open func addRow (columns:[Column], widthInPixels:CGFloat? = nil) -> GRBootstrapElement {
         let row = Row()
         self.addSubview(row)
         row.snp.makeConstraints { (make) in
@@ -210,7 +210,7 @@ public class GRBootstrapElement : UIView {
         return self
     }
     
-    class func getCaptionHeaderView (title: String, subtitle: String, alignment: NSTextAlignment) -> (titleLabel: UILabel, subtitleLabel: UILabel, view: UIView) {
+    open class func getCaptionHeaderView (title: String, subtitle: String, alignment: NSTextAlignment) -> (titleLabel: UILabel, subtitleLabel: UILabel, view: UIView) {
         
         let titleLabel = Style.label(withText: title, fontName: .allBold, size: .medium, superview: nil, color: .black, numberOfLines: 0, textAlignment: alignment)
         let subtitleLabel = Style.label(withText: subtitle, fontName: .allBold, size: .small, superview: nil, color: .darkGray, numberOfLines: 0, textAlignment: alignment)
@@ -239,9 +239,9 @@ public class GRBootstrapElement : UIView {
     }
     
     // This is the constraint that attaches the last element to the bottom of the Card
-    var bottomConstraint:Constraint?
+    open var bottomConstraint:Constraint?
     
-    func slideDownAndRemove (superview: UIView) {
+    open func slideDownAndRemove (superview: UIView) {
         
         if let topConstraint = self.topConstraint {
             topConstraint.update(offset: 5000)
@@ -254,7 +254,7 @@ public class GRBootstrapElement : UIView {
         }
     }
     
-    func slideUpAndRemove (superview: UIView) {
+    open func slideUpAndRemove (superview: UIView) {
         
         if let topConstraint = self.topConstraint {
             topConstraint.update(offset: -5000)
@@ -272,7 +272,7 @@ public class GRBootstrapElement : UIView {
     /// - Parameters:
     ///   - superview: Add the card to this superview
     ///   - margin: The margins relative to the superview
-    func slideDown (superview:UIView, margin: CGFloat, forTimeInterval timeInterval: TimeInterval? = nil) {
+    open func slideDown (superview:UIView, margin: CGFloat, forTimeInterval timeInterval: TimeInterval? = nil) {
         
         if let timeInterval = timeInterval {
             let timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { (_) in
@@ -306,7 +306,7 @@ public class GRBootstrapElement : UIView {
     /// - Parameters:
     ///   - superview: Add the card to this superview
     ///   - margin: The margins relative to the superview
-    func slideUp (superview:UIView, margin: CGFloat) {
+    open func slideUp (superview:UIView, margin: CGFloat) {
         
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
@@ -336,7 +336,7 @@ public class GRBootstrapElement : UIView {
     ///   - margin: The margin for the view
     ///   - viewAbove: If there is a view you want this card to be below
     ///   - anchorToBottom: Whether the card should be anchored to the bottom of the view
-    func addToSuperview (superview: UIView, viewAbove: UIView? = nil, anchorToBottom:Bool = false, topMargin: Sizes? = nil, left:CGFloat? = nil, right:CGFloat? = nil, top:CGFloat? = nil, bottom:CGFloat? = nil) {
+    open func addToSuperview (superview: UIView, viewAbove: UIView? = nil, anchorToBottom:Bool = false, topMargin: Sizes? = nil, left:CGFloat? = nil, right:CGFloat? = nil, top:CGFloat? = nil, bottom:CGFloat? = nil) {
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
             make.left.equalTo(superview).offset(left ?? 0)
@@ -362,7 +362,7 @@ public class GRBootstrapElement : UIView {
     /// Adds a header to the card of type UILabel
     ///
     /// - Parameter label: The label to add as the header
-    func setHeader (header: String) {
+    open func setHeader (header: String) {
         
         let label = Style.label(withText: header, superview: self, color: .black);
         self.header = label;
@@ -375,7 +375,7 @@ public class GRBootstrapElement : UIView {
         label.text = header;
     }
     
-    func redraw () {
+    open func redraw () {
         guard
             let superview = self.superview
             else {
@@ -393,7 +393,7 @@ public class GRBootstrapElement : UIView {
             anchorToBottom: self.anchorToBottom ?? false)
     }
     
-    func removeElements () {
+    open func removeElements () {
         self.elements.forEach { (element) in
             element.content.removeFromSuperview()
         }
@@ -401,7 +401,7 @@ public class GRBootstrapElement : UIView {
         self.elements = []
     }
     
-    public func getElementNamed (_ name: String, superCardElements:[GRCardSet]? = nil) -> GRCardSet? {
+    open func getElementNamed (_ name: String, superCardElements:[GRCardSet]? = nil) -> GRCardSet? {
         return self.getOrRemoveItemWithName(name, elements: self.elements, superCardElements: superCardElements)
     }
     
@@ -457,7 +457,7 @@ public class GRBootstrapElement : UIView {
         return nil
     }
     
-    public func removeElementNamed (_ name: String) {
+    open func removeElementNamed (_ name: String) {
         self.getOrRemoveItemWithName(
             name,
             elements: self.elements,
@@ -470,7 +470,7 @@ public class GRBootstrapElement : UIView {
     /// If this card has already been added to a view than you will need to call the redraw() method
     ///
     /// - Parameter element: The element to add to the card
-    func addElement (element: GRCardSet, atIndex:Int? = nil) {
+    open func addElement (element: GRCardSet, atIndex:Int? = nil) {
         if let bottomConstraint = self.bottomConstraint {
             bottomConstraint.deactivate()
         }
@@ -492,7 +492,7 @@ public class GRBootstrapElement : UIView {
     ///   - superview: The view to add the card to
     /// - Returns: The card
     @discardableResult
-    class func showMessageCard (message: String, superview: UIView, isError:Bool, slideUpFromBottom:Bool, customCardBackgroundColor:UIColor? = nil, textColor:UIColor? = nil, addBlurView: Bool = true, showForTimeInterval:TimeInterval = 0, closeButtonText: String) -> GRBootstrapElement {
+    open class func showMessageCard (message: String, superview: UIView, isError:Bool, slideUpFromBottom:Bool, customCardBackgroundColor:UIColor? = nil, textColor:UIColor? = nil, addBlurView: Bool = true, showForTimeInterval:TimeInterval = 0, closeButtonText: String) -> GRBootstrapElement {
                 
         var cardBackgroundColor:UIColor!
         
@@ -578,7 +578,7 @@ public class GRBootstrapElement : UIView {
      
         - returns: An ActionCard object
      */
-    class func showActionCard (message: String, superview: UIView, isError:Bool, actionButtonText:String, slideUpFromBottom:Bool, closeButtonText:String, customCardBackgroundColor:UIColor = .black, textColor: UIColor = .white, showMargins:Bool = true, title:String? = nil, shouldShow:Bool = true) -> ActionCard {
+    open class func showActionCard (message: String, superview: UIView, isError:Bool, actionButtonText:String, slideUpFromBottom:Bool, closeButtonText:String, customCardBackgroundColor:UIColor = .black, textColor: UIColor = .white, showMargins:Bool = true, title:String? = nil, shouldShow:Bool = true) -> ActionCard {
         
         var cardBackgroundColor:UIColor!
         if isError {
@@ -642,24 +642,24 @@ public class GRBootstrapElement : UIView {
         return actionCard
     }
     
-    class ActionCard: GRBootstrapElement {
-        weak var actionButton:UIButton?
-        weak var cancelButton:UIButton?
+    open class ActionCard: GRBootstrapElement {
+        open weak var actionButton:UIButton?
+        open weak var cancelButton:UIButton?
     }
     
-    class Row: UIView {
+    open class Row: UIView {
         
         private var columns = [Column]()
         
-        var widthInPixels = UIScreen.main.bounds.size.width
+        open var widthInPixels = UIScreen.main.bounds.size.width
         
-        var anchorWidthToScreenWidth:Bool = true
+        open var anchorWidthToScreenWidth:Bool = true
         
-        var anchorLastElementToBottom = true
+        open var anchorLastElementToBottom = true
         
-        var horizontalLayout = true
+        open var horizontalLayout = true
         
-        var bottomConstraint:Constraint?
+        open var bottomConstraint:Constraint?
         
                         
 //        class func GetSpacer (height: CGFloat, color: UIColor = .clear) -> GRCardSet {
@@ -682,7 +682,7 @@ public class GRBootstrapElement : UIView {
          - parameter elements: The card sets to add to the card
          - returns: A GRCard object which can be ignored if desired
          */
-        func addColumns (columns: [Column]) {
+        open func addColumns (columns: [Column]) {
             var currentXPos:CGFloat = 0
             
             if columns.first == nil {
@@ -798,7 +798,7 @@ public class GRBootstrapElement : UIView {
             }
         }
         
-        func getWidth (width: CGFloat) -> CGFloat {
+        open func getWidth (width: CGFloat) -> CGFloat {
             let fullSizeWidth =  self.widthInPixels
             let screenColSize = fullSizeWidth / 12.0
                 
@@ -808,7 +808,7 @@ public class GRBootstrapElement : UIView {
         
     }
     
-    class Column: UIView {
+    open class Column: UIView {
         
         var cardSet:GRCardSet
         
@@ -837,7 +837,7 @@ public class GRBootstrapElement : UIView {
             }
         }
         
-        required init?(coder: NSCoder) {
+        required public init?(coder: NSCoder) {
             self.cardSet = GRCardSet(content: UIView())
             self.widthInPixels = 0
             self.colWidth = .One

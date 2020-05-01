@@ -11,10 +11,10 @@ import UIKit
 
 open class GRViewWithTableView : UIView {
     
-    weak var navBar:GRNavBar!
-    weak var tableView:UITableView!
+    open weak var navBar:GRNavBar!
+    open weak var tableView:UITableView!
     
-    @discardableResult func setup(withSuperview superview: UIView, header: String, rightNavBarButtonTitle: String) -> GRViewWithTableView {
+    @discardableResult open func setup(withSuperview superview: UIView, header: String, rightNavBarButtonTitle: String) -> GRViewWithTableView {
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
             make.edges.equalTo(superview)

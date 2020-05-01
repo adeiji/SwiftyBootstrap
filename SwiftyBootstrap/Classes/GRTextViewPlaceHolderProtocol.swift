@@ -21,7 +21,7 @@ public protocol GRTextViewPlaceHolderProtocol {
 
 extension GRTextViewPlaceHolderProtocol {
     
-    func beginEditing(_ textView: UITextView) {
+    public func beginEditing(_ textView: UITextView) {
         guard
             let textViewPlaceholder = textViewPlaceholder
         else {
@@ -34,7 +34,7 @@ extension GRTextViewPlaceHolderProtocol {
         }
     }
     
-    func endEditing(_ textView: UITextView) {
+    public func endEditing(_ textView: UITextView) {
         if textView.text == "" {
             textView.text = textViewPlaceholder
         }

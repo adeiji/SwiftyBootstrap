@@ -9,10 +9,10 @@
 import UIKit
 
 open class GRSimpleEntryView: UIView {
-    var textFields = [UITextField]()
-    var navBar:GRNavBar?
+    open var textFields = [UITextField]()
+    open var navBar:GRNavBar?
     
-    func setup (superview: UIView, numberOfTextFields:Int, header:String, placeholders:[String]? = nil, labelsText:[String]) {
+    open func setup (superview: UIView, numberOfTextFields:Int, header:String, placeholders:[String]? = nil, labelsText:[String]) {
         superview.addSubview(self)
         self.backgroundColor = .white
         self.snp.makeConstraints { (make) in

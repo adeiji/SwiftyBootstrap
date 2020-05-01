@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-public class GRNavBar:UIView {
-    @IBOutlet weak var leftButton:UIButton? {
+open class GRNavBar:UIView {
+    @IBOutlet open weak var leftButton:UIButton? {
         didSet {
             oldValue?.removeFromSuperview()
             guard let leftButton = self.leftButton, let header = self.header else { return }
@@ -23,7 +23,7 @@ public class GRNavBar:UIView {
             })
         }
     }
-    @IBOutlet weak var rightButton:UIButton? {
+    @IBOutlet open weak var rightButton:UIButton? {
         didSet {
             if let rightButton = self.rightButton, let header = self.header {
                 self.addSubview(rightButton)
@@ -37,14 +37,14 @@ public class GRNavBar:UIView {
         }
     }
     
-    weak var thirdRightButton:UIButton?
+    open weak var thirdRightButton:UIButton?
     
-    @IBOutlet weak var secondRightButton:UIButton?
+    @IBOutlet open weak var secondRightButton:UIButton?
     
-    @IBOutlet weak var secondLeftButton:UIButton?
-    weak var subheading:UILabel?
-    weak var header:UILabel?
-    weak var backButton:UIButton? {
+    @IBOutlet open weak var secondLeftButton:UIButton?
+    open weak var subheading:UILabel?
+    open weak var header:UILabel?
+    open weak var backButton:UIButton? {
         didSet {
             if let backButton = self.backButton, let header = self.header {
                 self.addSubview(backButton)
@@ -59,7 +59,7 @@ public class GRNavBar:UIView {
         }
     }
     /// The height of this nav bar
-    var height:Int? {
+    open var height:Int? {
         didSet {
             guard
                 let superview = self.superview,
@@ -77,7 +77,7 @@ public class GRNavBar:UIView {
     }
     
     /// The offset of the header top from the centerY of the navbar
-    var headerOffset:Int? {
+    open var headerOffset:Int? {
         didSet {
             guard let offset = self.headerOffset else { return }
             guard let superview = self.superview else { return }

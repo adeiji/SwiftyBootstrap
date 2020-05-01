@@ -17,7 +17,7 @@ open class GRSelectorCell: UITableViewCell {
     private weak var label: UILabel?
     
     // Whether this cell is selected or not
-    var isUserSelected:Bool = false {
+    open var isUserSelected:Bool = false {
         didSet {
             self.redrawSelector()
         }
@@ -29,7 +29,7 @@ open class GRSelectorCell: UITableViewCell {
      - parameter labelText: The text to show on the main label for the cell
      - parameter showSelector: Whether to show the selector for this cell
      */
-    public func setup (labelText: String, showSelector: Bool) {
+    open func setup (labelText: String, showSelector: Bool) {
         let selector = self.addSelector(showSelector: showSelector)
         self.addLabel(text: labelText, selector: selector)
         

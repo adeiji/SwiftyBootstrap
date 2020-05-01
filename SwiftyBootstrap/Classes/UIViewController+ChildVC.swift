@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
 
-    func addChildViewControllerWithView(_ childViewController: UIViewController, toView view: UIView? = nil) {
+    open func addChildViewControllerWithView(_ childViewController: UIViewController, toView view: UIView? = nil) {
         let view: UIView = view ?? self.view
 
         childViewController.removeFromParent()
@@ -22,7 +22,7 @@ extension UIViewController {
         view.layoutIfNeeded()
     }
 
-    func removeChildViewController(_ childViewController: UIViewController) {
+    open func removeChildViewController(_ childViewController: UIViewController) {
         childViewController.removeFromParent()
         childViewController.willMove(toParent: nil)
         childViewController.removeFromParent()
@@ -32,13 +32,13 @@ extension UIViewController {
         view.layoutIfNeeded()
     }
 
-    func hideKeyboardWhenTappedAround() {
+    open func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
 
-    @objc func dismissKeyboard() {
+    @objc open func dismissKeyboard() {
         view.endEditing(true)
     }
 }

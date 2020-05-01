@@ -101,7 +101,7 @@ class Animation : UIView {
     func hide () {}
 }
 
-public class ButtonRow: UIView {
+open class ButtonRow: UIView {
     
     var buttons = [UIButton]()
     weak var rightButton:UIButton?
@@ -112,17 +112,17 @@ public class ButtonRow: UIView {
     /// Stores all the buttons with the key being their title, this way we can retrieve them at will
     internal var buttonStorage:[String:UIButton] = [String:UIButton]()
     
-    init(numberOfButtons: Int) {
+    public init(numberOfButtons: Int) {
         self.numberOfButtons = numberOfButtons
         super.init(frame: .zero)
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         self.numberOfButtons = 3
         super.init(coder: coder)
     }
     
-    func addButton (button: UIButton, key:String? = nil, height: CGFloat? = nil) {
+    open func addButton (button: UIButton, key:String? = nil, height: CGFloat? = nil) {
         self.addSubview(button)
         if type == .Instagram {
             button.snp.makeConstraints { (make) in
@@ -177,7 +177,7 @@ public class ButtonRow: UIView {
         button.alignImageAndTitleVertically()
     }
     
-    func addRightButton (button: UIButton) {
+    open func addRightButton (button: UIButton) {
         self.addSubview(button)
         self.rightButton = button
         button.snp.makeConstraints { (make) in
@@ -193,7 +193,7 @@ open class Style {
 
     
     /// Returns a random color that is within our Pinterest color scheme
-    class func getPinterestColor () -> UIColor {
+    open class func getPinterestColor () -> UIColor {
         
         let pinterestColors = [
             UIColor.Pinterest.aquaBlue,
@@ -210,7 +210,7 @@ open class Style {
     }
     
     /// Show any image really fast on the screen that indicates that an action was just taken successfully
-    class func showActionBadge (view: UIView?, imageNamed: String) {
+    open class func showActionBadge (view: UIView?, imageNamed: String) {
         guard let view = view else { return }
         let imageView = UIImageView(image: UIImage(named: imageNamed))
         view.addSubview(imageView)
@@ -227,7 +227,7 @@ open class Style {
         })
     }
     
-    class func showAndGetPostingIndicator () -> UIView? {
+    open class func showAndGetPostingIndicator () -> UIView? {
         guard let window = UIApplication.shared.keyWindow else { return nil }
         guard let postingView = UINib(nibName: "PostingIndicatorView", bundle: nil).instantiate(withOwner: nil, options: nil).first as? UIView else { return nil }
         window.addSubview(postingView)
@@ -241,7 +241,7 @@ open class Style {
         return postingView
     }
     
-    class func addButton (belowView view: UIView, withSuperview superview:UIView, height:CGFloat, width:CGFloat, backgroundColor: UIColor, textColor: UIColor, title: String, cornerRadius: CGFloat, fontSize: FontSizes) -> UIButton {
+    open class func addButton (belowView view: UIView, withSuperview superview:UIView, height:CGFloat, width:CGFloat, backgroundColor: UIColor, textColor: UIColor, title: String, cornerRadius: CGFloat, fontSize: FontSizes) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
         superview.addSubview(button)
@@ -259,7 +259,7 @@ open class Style {
         return button
     }
     
-    @discardableResult class func viewStack (withSuperview superview:UIView, align: NSTextAlignment, views: [UIView], eachViewHeight:Int? = nil) -> UIView {
+    @discardableResult open class func viewStack (withSuperview superview:UIView, align: NSTextAlignment, views: [UIView], eachViewHeight:Int? = nil) -> UIView {
         let stackView = UIView()
         superview.addSubview(stackView)
         
@@ -291,7 +291,7 @@ open class Style {
         return stackView
     }
     
-    class func tableView (withSuperview superview:UIView, viewAbove:UIView!, offset: CGFloat, viewBelow:UIView? = nil) -> UITableView {
+    open class func tableView (withSuperview superview:UIView, viewAbove:UIView!, offset: CGFloat, viewBelow:UIView? = nil) -> UITableView {
         let tableView = UITableView()
         tableView.showsVerticalScrollIndicator = false
         superview.addSubview(tableView)
@@ -311,7 +311,7 @@ open class Style {
         return tableView
     }
     
-    class func tableViewWithBottomConstraint (withSuperview superview:UIView, viewAbove:UIView!, offset: CGFloat, viewBelow:UIView? = nil) -> (tableView: UITableView, bottomConstraint: Constraint?) {
+    open class func tableViewWithBottomConstraint (withSuperview superview:UIView, viewAbove:UIView!, offset: CGFloat, viewBelow:UIView? = nil) -> (tableView: UITableView, bottomConstraint: Constraint?) {
         let tableView = UITableView()
         var constraint:Constraint?
         
@@ -332,7 +332,7 @@ open class Style {
         return (tableView: tableView, bottomConstraint: constraint)
     }
     
-    class func leftBottomCornerButton (withSuperview superview:UIView, type: GRButtonType) -> GRButton {
+    open class func leftBottomCornerButton (withSuperview superview:UIView, type: GRButtonType) -> GRButton {
         let button = GRButton(type: type)
         superview.addSubview(button)
         button.snp.makeConstraints { (make) in
@@ -345,7 +345,7 @@ open class Style {
         return button
     }
     
-    class func rightBottomCornerButton (withSuperview superview:UIView, type: GRButtonType) -> GRButton {
+    open class func rightBottomCornerButton (withSuperview superview:UIView, type: GRButtonType) -> GRButton {
         let button = GRButton(type: type)
         superview.addSubview(button)
         button.snp.makeConstraints { (make) in
@@ -358,7 +358,7 @@ open class Style {
         return button
     }
     
-    class func progressView (withSuperview superview: UIView) -> UIProgressView {
+    open class func progressView (withSuperview superview: UIView) -> UIProgressView {
         let progressView = UIProgressView()
         progressView.tintColor = .white
         progressView.trackTintColor = .green
@@ -373,7 +373,7 @@ open class Style {
         return progressView
     }
     
-    class func finishedTaskView (withSuperview superview: UIView, withTitle title: String) -> (view: UIView, button: UIButton) {
+    open class func finishedTaskView (withSuperview superview: UIView, withTitle title: String) -> (view: UIView, button: UIButton) {
         let progressViewContainer = UIView()
         superview.addSubview(progressViewContainer)
         progressViewContainer.backgroundColor = .black
@@ -404,7 +404,7 @@ open class Style {
         return (view: progressViewContainer, button: button)
     }
     
-    class func isIPhoneX () -> Bool {
+    open class func isIPhoneX () -> Bool {
         if(UIDevice.current.userInterfaceIdiom == .phone) {
             switch (UIScreen.main.nativeBounds.size.height) {
             case 1136:
@@ -435,7 +435,7 @@ open class Style {
      * - Parameter rightButton The button which will show on the right side of the navBar
      * - Returns a UIView
      */
-    class func navBar (withHeader header: String!,
+    open class func navBar (withHeader header: String!,
                        superview: UIView,
                        leftButton: UIButton!,
                        rightButton: UIButton!,
@@ -598,7 +598,7 @@ open class Style {
      - returns:
         UIImageView - An instance of UIImageView added as a subview to the given superview with constraints added if desired
      */
-    class func imageView (withSuperview superview: UIView?, isRound: Bool, width: CGFloat!, height: CGFloat!, useDefaultConstraints:Bool = true) -> UIImageView {
+    open class func imageView (withSuperview superview: UIView?, isRound: Bool, width: CGFloat!, height: CGFloat!, useDefaultConstraints:Bool = true) -> UIImageView {
         let imageView = UIImageView()
         
         if let superview = superview {
@@ -631,7 +631,7 @@ open class Style {
         return imageView
     }
     
-    class func userView (withSuperview superview: UIView, username: String, location: String?, profileImageUrl: String!, profileImage: UIImage!, viewLeft:UIView? = nil, viewRight:UIView? = nil) -> TagHeaderView {
+    open class func userView (withSuperview superview: UIView, username: String, location: String?, profileImageUrl: String!, profileImage: UIImage!, viewLeft:UIView? = nil, viewRight:UIView? = nil) -> TagHeaderView {
         let userView = TagHeaderView()
         superview.addSubview(userView)
         userView.snp.makeConstraints { (make) in
@@ -676,7 +676,7 @@ open class Style {
     /**
      Gets a label with no constraints added, but if a superview is provided it will be added to the superview
      */
-    class func label (withText: String, fontName: FontNames = .all, size:FontSizes = .small, superview: UIView!, color: UIColor, numberOfLines:Int = 0, textAlignment: NSTextAlignment = .left, backgroundColor: UIColor? = nil) -> UILabel {
+    open class func label (withText: String, fontName: FontNames = .all, size:FontSizes = .small, superview: UIView!, color: UIColor, numberOfLines:Int = 0, textAlignment: NSTextAlignment = .left, backgroundColor: UIColor? = nil) -> UILabel {
         let font = UIFont.init(name: fontName.rawValue, size: size.rawValue)
         let label = UILabel()
         label.text = withText
@@ -694,7 +694,7 @@ open class Style {
         return label
     }
     
-    class func wideTextField (withPlaceholder: String, superview: UIView?, color: UIColor, autocorrection: UITextAutocorrectionType = UITextAutocorrectionType.no) -> UITextField {
+    open class func wideTextField (withPlaceholder: String, superview: UIView?, color: UIColor, autocorrection: UITextAutocorrectionType = UITextAutocorrectionType.no) -> UITextField {
         let font = UIFont.init(name: FontNames.all.rawValue, size: FontSizes.small.rawValue)
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: withPlaceholder,
@@ -709,7 +709,7 @@ open class Style {
         return textField
     }
     
-    class func clearButton (with title: String, superview: UIView!, fontSize: FontSizes = .small, color: UIColor = UIColor.white, font: FontNames? = .all, borderWidth:CGFloat? = nil, borderColor:UIColor? = nil, backgroundColor:UIColor? = nil, cornerRadius:CGFloat = 0 ) -> UIButton {
+    open class func clearButton (with title: String, superview: UIView!, fontSize: FontSizes = .small, color: UIColor = UIColor.white, font: FontNames? = .all, borderWidth:CGFloat? = nil, borderColor:UIColor? = nil, backgroundColor:UIColor? = nil, cornerRadius:CGFloat = 0 ) -> UIButton {
         let button = UIButton()
         button.titleLabel?.font = UIFont.init(name: FontNames.all.rawValue, size: fontSize.rawValue)
         if let font = font {
@@ -738,10 +738,8 @@ open class Style {
         return button;
     }
     
-    class func largeButton (with title: String, superview: UIView? = nil, backgroundColor:UIColor? = nil, borderColor:UIColor? = nil, fontColor:UIColor? = nil, imageName:String? = nil) -> UIButton {
-        
-        
-        
+    open class func largeButton (with title: String, superview: UIView? = nil, backgroundColor:UIColor? = nil, borderColor:UIColor? = nil, fontColor:UIColor? = nil, imageName:String? = nil) -> UIButton {
+                        
         let button = UIButton()
         
         if let imageName = imageName {

@@ -33,19 +33,19 @@ public enum GRButtonType {
     case SprayCan
 }
 
-public class GRButton : UIButton {
+open class GRButton : UIButton {
     
-    var type: GRButtonType
-    var userSelected = false
+    open var type: GRButtonType
+    open var userSelected = false
     
-    init(type: GRButtonType) {
+    public init(type: GRButtonType) {
         self.type = type
         super.init(frame: .zero)
         self.contentEdgeInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
         self.titleLabel?.font = UIFont(name: FontNames.allBold.rawValue, size: FontSizes.small.rawValue)
     }        
     
-    func setBackgroundColor (number: Int? = nil) {
+    open func setBackgroundColor (number: Int? = nil) {
         var num = number
         if num == nil {
             num = Int(arc4random_uniform(10))
@@ -77,7 +77,7 @@ public class GRButton : UIButton {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         self.type = .None
         super.init(coder: aDecoder)
     }

@@ -10,14 +10,14 @@ import UIKit
 
 open class DEBaseLoginView: UIView {
 
-    var textFields = [UITextField]()
-    var buttons = [UIButton]()
-    weak var errorLabel:UILabel?
+    open var textFields = [UITextField]()
+    open var buttons = [UIButton]()
+    open weak var errorLabel:UILabel?
     
-    var kSideMargin = 30
-    var kHeight = 45
+    open var kSideMargin = 30
+    open var kHeight = 45
     
-    func setup (superview: UIView, shouldShowLogo: Bool, textFieldsPlaceholders: [String], buttonTitles: [String], labelLogoText: String?, shouldShowSignUp: Bool) {
+    open func setup (superview: UIView, shouldShowLogo: Bool, textFieldsPlaceholders: [String], buttonTitles: [String], labelLogoText: String?, shouldShowSignUp: Bool) {
         superview.addSubview(self)
         self.backgroundColor = .white
         self.snp.makeConstraints { (make) in

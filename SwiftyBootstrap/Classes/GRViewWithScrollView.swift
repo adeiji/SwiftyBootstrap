@@ -11,7 +11,7 @@ import UIKit
 
 open class GRContainerView : UIView {
     
-    weak var activeField:UITextField?
+    open weak var activeField:UITextField?
     
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.activeField?.resignFirstResponder()
@@ -20,20 +20,20 @@ open class GRContainerView : UIView {
 
 open class GRViewWithScrollView : UIView, UITextFieldDelegate {
     
-    weak var navBar:GRNavBar!
-    weak var scrollView:UIScrollView!
-    weak var containerView:GRContainerView!
-    weak var activeField:UITextField?
-    weak var loadingView:UIView?
+    open weak var navBar:GRNavBar!
+    open weak var scrollView:UIScrollView!
+    open weak var containerView:GRContainerView!
+    open weak var activeField:UITextField?
+    open weak var loadingView:UIView?
     
-    var keyboardHeight:CGFloat?
+    open var keyboardHeight:CGFloat?
     
     // When a text field is clicked and the keyboard shows and the scroll view scrolls in order to show the text field
     // this is the amount extra or less than you want the scroll view to scroll
-    var scrollWhenTextFieldClickedOffset:CGFloat = 0
+    open var scrollWhenTextFieldClickedOffset:CGFloat = 0
     
     /// Show a white faded screen with a spinner in the middle indicating that there is a action in progress
-    func showLoading (superview: UIView? = nil) {
+    open func showLoading (superview: UIView? = nil) {
         
         let fadedView = UIView()
         
@@ -61,7 +61,7 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
     }
         
     /// Remove the white faded screen showing the action in progress is done
-    func hideLoading () {
+    open func hideLoading () {
         self.loadingView?.removeFromSuperview()
     }
     
@@ -94,7 +94,7 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
     ///
     /// - Returns: The ConferenceMainPageView
     @discardableResult
-    func setup (superview: UIView, navBarHeaderText:String = "Graffiti") -> GRViewWithScrollView {
+    open func setup (superview: UIView, navBarHeaderText:String = "Graffiti") -> GRViewWithScrollView {
         superview.addSubview(self)
         self.registerForKeyboardNotifications()
         self.navBar = Style.navBar(withHeader: navBarHeaderText, superview: self, leftButton: nil, rightButton: nil);
@@ -110,7 +110,7 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
         return self;
     }
     
-    func updateScrollViewContentSize () {
+    open func updateScrollViewContentSize () {
         self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: self.containerView.bounds.size.height)
     }
     
