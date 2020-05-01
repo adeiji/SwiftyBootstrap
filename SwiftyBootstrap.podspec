@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootstrap'
-  s.version          = '1.0.93'
+  s.version          = '1.0.94'
   s.summary          = 'Bootstrap for Swift.'
   s.swift_versions   = ['5.0']
 
@@ -33,9 +33,9 @@ My own version of Bootstrap written for Swift and iOS.
 
   s.source_files = 'SwiftyBootstrap/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'SwiftyBootstrap' => ['SwiftyBootstrap/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'SwiftyBootstrap' => ['SwiftyBootstrap/Assets/*.png']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
