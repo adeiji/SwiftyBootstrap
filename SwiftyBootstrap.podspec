@@ -34,7 +34,7 @@ My own version of Bootstrap written for Swift and iOS.
   s.source_files = 'SwiftyBootstrap/Classes/**/*'
   
   s.resource_bundles = {
-    'SwiftyBootstrap' => ['SwiftyBootstrap/Assets/*.png']
+    'SwiftyBootstrap' => ['SwiftyBootstrap/Assets/*.xcassets']
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
