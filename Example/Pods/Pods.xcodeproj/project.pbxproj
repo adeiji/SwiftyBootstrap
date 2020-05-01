@@ -67,6 +67,7 @@
 		F428522C245BF87400C381DE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4285213245BF67E00C381DE /* UIColor.swift */; };
 		F428522D245BF87400C381DE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428520E245BF67D00C381DE /* UIImage.swift */; };
 		F428522E245BF87400C381DE /* UIViewController+ChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4285209245BF67C00C381DE /* UIViewController+ChildVC.swift */; };
+		F4285274245C2D0700C381DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4285273245C2D0700C381DE /* Assets.xcassets */; };
 		F6C7F81AA5BBC4042A3A78D5EA8E62A4 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5902768DE34E1627B020F4B2FB7BBBE /* ConstraintLayoutSupportDSL.swift */; };
 		FD9CAA19B6371F6ADEE790F07156DFD0 /* SwiftyBootstrap-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9229133DB621FA2521FDCF9B86E6FD92 /* SwiftyBootstrap-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF0E3F8B3FB568ACBB1BC433D67ED093 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F902CDA99715ADA3EC010544308DA63A /* ConstraintMakerExtendable.swift */; };
@@ -177,6 +178,7 @@
 		F4285211245BF67D00C381DE /* GRViewWithTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRViewWithTableView.swift; path = SwiftyBootstrap/Classes/GRViewWithTableView.swift; sourceTree = "<group>"; };
 		F4285212245BF67E00C381DE /* GRViewWithScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRViewWithScrollView.swift; path = SwiftyBootstrap/Classes/GRViewWithScrollView.swift; sourceTree = "<group>"; };
 		F4285213245BF67E00C381DE /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = SwiftyBootstrap/Classes/UIColor.swift; sourceTree = "<group>"; };
+		F4285273245C2D0700C381DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = SwiftyBootstrap/Assets/Assets.xcassets; sourceTree = "<group>"; };
 		F5C9D6FEF48994711991A348A7B0B99A /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Source/ConstraintView.swift; sourceTree = "<group>"; };
 		F63DC83113A26BB1DB9ED37E0EE3F512 /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Source/ConstraintDSL.swift; sourceTree = "<group>"; };
 		F902CDA99715ADA3EC010544308DA63A /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Source/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		55ED146360F9D12584B01E1A24190035 /* SwiftyBootstrap */ = {
 			isa = PBXGroup;
 			children = (
+				F4285273245C2D0700C381DE /* Assets.xcassets */,
 				F4285206245BF67B00C381DE /* Array+RemoveDuplicates.swift */,
 				F4285210245BF67D00C381DE /* DateTime+ToString.swift */,
 				F428520B245BF67C00C381DE /* DEBaseLoginView.swift */,
@@ -548,6 +551,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4285274245C2D0700C381DE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
