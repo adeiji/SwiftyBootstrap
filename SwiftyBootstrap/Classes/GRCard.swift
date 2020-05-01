@@ -175,9 +175,19 @@ open class GRBootstrapElement : UIView {
     
     open var rows:[Row] = [Row]()
     
-    public init(color: UIColor? = .white, anchorWidthToScreenWidth:Bool = true) {
+    public struct Margin {
+        var left:CGFloat? = 20
+        var top:CGFloat? = 20
+        var right:CGFloat? = 20
+        var bottom:CGFloat? = 20
+    }
+    
+    /// The margin of the card when it's added to the superview
+    public let margin:BootstrapMargin
+    
+    public init(color: UIColor? = .white, anchorWidthToScreenWidth:Bool = true, margin:BootstrapMargin? = nil) {
         self.anchorWidthToScreenWidth = anchorWidthToScreenWidth
-        
+        self.margin = margin ?? BootstrapMargin()
         super.init(frame: .zero)
         if let color = color {
             self.backgroundColor = color;
@@ -188,6 +198,7 @@ open class GRBootstrapElement : UIView {
     
     required public init?(coder aDecoder: NSCoder) {
         self.anchorWidthToScreenWidth = true
+        self.margin = BootstrapMargin()
         super.init(coder: aDecoder)
     }
         
@@ -204,7 +215,7 @@ open class GRBootstrapElement : UIView {
             row.widthInPixels = widthInPixels
         }
         
-        row.addColumns(columns: columns)
+        row.addColumns(columns: columns, margin: self.margin)
         self.rows.append(row)
         
         return self
@@ -336,21 +347,21 @@ open class GRBootstrapElement : UIView {
     ///   - margin: The margin for the view
     ///   - viewAbove: If there is a view you want this card to be below
     ///   - anchorToBottom: Whether the card should be anchored to the bottom of the view
-    open func addToSuperview (superview: UIView, viewAbove: UIView? = nil, anchorToBottom:Bool = false, topMargin: Sizes? = nil, left:CGFloat? = nil, right:CGFloat? = nil, top:CGFloat? = nil, bottom:CGFloat? = nil) {
+    open func addToSuperview (superview: UIView, viewAbove: UIView? = nil, anchorToBottom:Bool = false) {
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
-            make.left.equalTo(superview).offset(left ?? 0)
-            make.right.equalTo(superview).offset(-(right ?? 0))
-            make.width.equalTo(UIScreen.main.bounds.size.width - (left ?? 0) - (right ?? 0))
+            make.left.equalTo(superview).offset(self.margin.left ?? 0)
+            make.right.equalTo(superview).offset(-(self.margin.right ?? 0))
+            make.width.equalTo(UIScreen.main.bounds.size.width - (self.margin.left ?? 0) - (self.margin.right ?? 0))
             
             if let viewAbove = viewAbove {
-                self.topConstraint = make.top.equalTo(viewAbove.snp.bottom).offset(top ?? topMargin?.rawValue ?? 0).constraint
+                self.topConstraint = make.top.equalTo(viewAbove.snp.bottom).offset(self.margin.top ?? 0).constraint
             } else {
-                self.topConstraint = make.top.equalTo(superview).offset(top ?? topMargin?.rawValue ?? 0).constraint
+                self.topConstraint = make.top.equalTo(superview).offset(self.margin.top ?? 0).constraint
             }
             
             if anchorToBottom {
-                make.bottom.equalTo(superview).offset(-(bottom ?? 0))
+                make.bottom.equalTo(superview).offset(-(self.margin.bottom ?? 0))
             }
         }
         
@@ -661,20 +672,7 @@ open class GRBootstrapElement : UIView {
         
         open var bottomConstraint:Constraint?
         
-                        
-//        class func GetSpacer (height: CGFloat, color: UIColor = .clear) -> GRCardSet {
-//            let view = UIView()
-//            view.backgroundColor = color
-//
-//            return GRCardSet(content: view, height: height, newLine: true, showMargins: showMargins)
-//        }
-//
-//        class func GetSeperator (color: UIColor) -> GRCardSet {
-//            let view = UIView()
-//            view.backgroundColor = color
-//            let seperator = GRCardSet(content: view, height: 0.5, newLine: true, showMargins: showMargins, name: nil)
-//            return seperator
-//        }
+        open var margin:BootstrapMargin?
         
         /**
          Add a list of elements to the Card.  This should only be called once.  If there are already elements in this Card than instead use the addElement function which will only add 1 element
@@ -682,7 +680,9 @@ open class GRBootstrapElement : UIView {
          - parameter elements: The card sets to add to the card
          - returns: A GRCard object which can be ignored if desired
          */
-        open func addColumns (columns: [Column]) {
+        open func addColumns (columns: [Column], margin: Margin?) {
+            self.margin = margin
+            
             var currentXPos:CGFloat = 0
             
             if columns.first == nil {
@@ -799,7 +799,7 @@ open class GRBootstrapElement : UIView {
         }
         
         open func getWidth (width: CGFloat) -> CGFloat {
-            let fullSizeWidth =  self.widthInPixels
+            let fullSizeWidth =  self.widthInPixels - (self.margin?.left ?? 0) - (self.margin?.right ?? 0)
             let screenColSize = fullSizeWidth / 12.0
                 
             return width * screenColSize;
@@ -847,3 +847,4 @@ open class GRBootstrapElement : UIView {
 }
 
 public typealias Column = GRBootstrapElement.Column
+public typealias BootstrapMargin = GRBootstrapElement.Margin
