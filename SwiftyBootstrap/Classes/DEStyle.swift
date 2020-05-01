@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-enum FontBook:String {
+public enum FontBook:String {
 //    case logo = "Gill Sans"
     case header = "Avenir-Medium"
     case all = "Avenir"
@@ -23,7 +23,7 @@ enum FontBook:String {
     
 }
 
-enum FontSizes:CGFloat {
+public enum FontSizes:CGFloat {
     case verySmall = 11.0
     case small = 15.0
     case medium = 20.0
@@ -32,7 +32,7 @@ enum FontSizes:CGFloat {
     case logo = 38.0
 }
 
-enum Sizes:CGFloat {
+public enum Sizes:CGFloat {
     case smallMargin = 10.0
     case MinimalLargeMargin = 15.0
     case smallButton = 40.0
@@ -41,7 +41,7 @@ enum Sizes:CGFloat {
     case ButtonWithText = 120.0
 }
 
-enum FontNames:String {
+public enum FontNames:String {
 //    case logo = "Gill Sans"
     case header = "Avenir-Medium"
     case all = "Avenir"
@@ -101,7 +101,7 @@ class Animation : UIView {
     func hide () {}
 }
 
-class ButtonRow: UIView {
+public class ButtonRow: UIView {
     
     var buttons = [UIButton]()
     weak var rightButton:UIButton?
@@ -189,7 +189,7 @@ class ButtonRow: UIView {
     }
 }
 
-class Style {
+open class Style {
 
     
     /// Returns a random color that is within our Pinterest color scheme
@@ -775,9 +775,9 @@ class Style {
 }
 
 // Enable the ability to use a closure for the UIButton target
-typealias UIButtonTargetClosure = (UIButton) -> ()
+public typealias UIButtonTargetClosure = (UIButton) -> ()
 
-extension UIButton {
+public extension UIButton {
     
     private struct AssociatedKeys {
         static var targetClosure = "targetClosure"
@@ -805,7 +805,7 @@ extension UIButton {
     }
 }
 
-class ClosureWrapper: NSObject {
+public class ClosureWrapper: NSObject {
     let closure: UIButtonTargetClosure
     
     init(_ closure: @escaping UIButtonTargetClosure) {
@@ -814,7 +814,7 @@ class ClosureWrapper: NSObject {
     
 }
 
-class TagHeaderView: UIView {
+public class TagHeaderView: UIView {
     weak var mainLabel:UILabel!
     weak var imageView:UIImageView!
     weak var descriptorLabel:UILabel!

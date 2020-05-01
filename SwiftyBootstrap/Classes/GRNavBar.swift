@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GRNavBar:UIView {
+public class GRNavBar:UIView {
     @IBOutlet weak var leftButton:UIButton? {
         didSet {
             oldValue?.removeFromSuperview()

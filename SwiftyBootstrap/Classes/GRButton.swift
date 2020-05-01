@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum GRButtonType {
+public enum GRButtonType {
     case RedMapMarker
     case AddPlusSign
     case MessageBubble
@@ -33,7 +33,7 @@ enum GRButtonType {
     case SprayCan
 }
 
-class GRButton : UIButton {
+public class GRButton : UIButton {
     
     var type: GRButtonType
     var userSelected = false
@@ -82,7 +82,7 @@ class GRButton : UIButton {
         super.init(coder: aDecoder)
     }
     
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         self.clearsContextBeforeDrawing = false
         self.showsTouchWhenHighlighted = true
         if self.type == .AddPlusSign {

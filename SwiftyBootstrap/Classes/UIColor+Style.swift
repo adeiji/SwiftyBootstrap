@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     struct Style {
         // Hashtag Backgrounds
         static var htPeach: UIColor  { return UIColor(red: 253/255, green: 170/255, blue: 146/255, alpha: 1) }

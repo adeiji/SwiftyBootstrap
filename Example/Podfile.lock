@@ -1,16 +1,24 @@
 PODS:
-  - SwiftyBootstrap (0.1.0)
+  - SnapKit (4.2.0)
+  - SwiftyBootstrap (1.0.3):
+    - SnapKit
 
 DEPENDENCIES:
+  - SnapKit
   - SwiftyBootstrap (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SnapKit
 
 EXTERNAL SOURCES:
   SwiftyBootstrap:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SwiftyBootstrap: b7674ad7ad654b38d7e7ce76aaa63f67d39b42d1
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SwiftyBootstrap: 8eb4b006238a4e8c6e64dead72587b4dbfcff1bf
 
-PODFILE CHECKSUM: 9ce5a134fbe56b4360b3f7db09fbab71fe687591
+PODFILE CHECKSUM: 81139c0c2a2be9d4fa6b252849bf324c04159372
 
 COCOAPODS: 1.7.3
