@@ -846,4 +846,4 @@ open class GRBootstrapElement : UIView {
     }
 }
 
-typealias Column = GRBootstrapElement.Column
+public typealias Column = GRBootstrapElement.Column
