@@ -202,13 +202,17 @@ open class GRBootstrapElement : UIView {
         super.init(coder: aDecoder)
     }
         
-    @discardableResult open func addRow (columns:[Column], widthInPixels:CGFloat? = nil) -> GRBootstrapElement {
+    @discardableResult open func addRow (columns:[Column], widthInPixels:CGFloat? = nil, anchorToBottom:Bool = false) -> GRBootstrapElement {
         let row = Row()
         self.addSubview(row)
         row.snp.makeConstraints { (make) in
             make.left.equalTo(self)
             make.right.equalTo(self)
             make.top.equalTo(self.rows.last?.snp.bottom ?? self)
+            
+            if (anchorToBottom) {
+                make.bottom.equalTo(self)
+            }
         }
         
         if let widthInPixels = widthInPixels {
