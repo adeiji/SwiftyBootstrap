@@ -7,8 +7,6 @@
 
 import Foundation
 import UIKit
-import SnapKit
-import SwiftyBootstrap
 
 enum ButtonRowType {
     case Instagram

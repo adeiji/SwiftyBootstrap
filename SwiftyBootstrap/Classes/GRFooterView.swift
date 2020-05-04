@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SwiftyBootstrap
 
 open class GRFooterView: ButtonRow {
             

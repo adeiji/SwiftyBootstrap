@@ -68,13 +68,9 @@
 		F428522D245BF87400C381DE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F428520E245BF67D00C381DE /* UIImage.swift */; };
 		F428522E245BF87400C381DE /* UIViewController+ChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4285209245BF67C00C381DE /* UIViewController+ChildVC.swift */; };
 		F4285274245C2D0700C381DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4285273245C2D0700C381DE /* Assets.xcassets */; };
-		F48E65E8245FF85600CA56FE /* BootstrapMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48E65E7245FF85500CA56FE /* BootstrapMargin.swift */; };
 		F48E65E9245FF85600CA56FE /* BootstrapMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48E65E7245FF85500CA56FE /* BootstrapMargin.swift */; };
-		F4F53787246026540009D3DC /* GRTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F53786246026540009D3DC /* GRTabController.swift */; };
 		F4F53788246026540009D3DC /* GRTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F53786246026540009D3DC /* GRTabController.swift */; };
-		F4F5378A246027460009D3DC /* GRFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F53789246027460009D3DC /* GRFooterView.swift */; };
 		F4F5378B246027460009D3DC /* GRFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F53789246027460009D3DC /* GRFooterView.swift */; };
-		F4F5378D2460290E0009D3DC /* ButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F5378C2460290E0009D3DC /* ButtonRow.swift */; };
 		F4F5378E2460290E0009D3DC /* ButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F5378C2460290E0009D3DC /* ButtonRow.swift */; };
 		F6C7F81AA5BBC4042A3A78D5EA8E62A4 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5902768DE34E1627B020F4B2FB7BBBE /* ConstraintLayoutSupportDSL.swift */; };
 		FD9CAA19B6371F6ADEE790F07156DFD0 /* SwiftyBootstrap-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9229133DB621FA2521FDCF9B86E6FD92 /* SwiftyBootstrap-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -578,11 +574,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4F5378A246027460009D3DC /* GRFooterView.swift in Sources */,
-				F48E65E8245FF85600CA56FE /* BootstrapMargin.swift in Sources */,
-				F4F53787246026540009D3DC /* GRTabController.swift in Sources */,
 				DB42A3F321BA6401462AC44F294FE05A /* Pods-SwiftyBootstrap_Tests-dummy.m in Sources */,
-				F4F5378D2460290E0009D3DC /* ButtonRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
