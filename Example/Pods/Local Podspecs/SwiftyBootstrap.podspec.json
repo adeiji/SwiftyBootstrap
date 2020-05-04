@@ -1,7 +1,10 @@
 {
   "name": "SwiftyBootstrap",
-  "version": "1.0.3",
+  "version": "1.0.9993",
   "summary": "Bootstrap for Swift.",
+  "swift_versions": [
+    "5.0"
+  ],
   "description": "My own version of Bootstrap written for Swift and iOS.",
   "homepage": "https://github.com/adeiji/SwiftyBootstrap",
   "license": {
@@ -13,15 +16,24 @@
   },
   "source": {
     "git": "https://github.com/adeiji/SwiftyBootstrap.git",
-    "tag": "1.0.3"
+    "tag": "1.0.9993"
   },
   "platforms": {
     "ios": "11.0"
   },
   "source_files": "SwiftyBootstrap/Classes/**/*",
+  "resource_bundles": {
+    "SwiftyBootstrap": [
+      "SwiftyBootstrap/Assets/*.xcassets"
+    ]
+  },
   "dependencies": {
     "SnapKit": [
 
+    ],
+    "NVActivityIndicatorView": [
+
     ]
-  }
+  },
+  "swift_version": "5.0"
 }
