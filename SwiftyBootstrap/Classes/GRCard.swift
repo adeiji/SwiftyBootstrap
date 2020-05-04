@@ -131,6 +131,8 @@ open class GRCardSet {
     }
 }
 
+
+
 /// A GRCard is a basically a container that contains elements organized in a very specific way
 /// They can be stacked horizontally or vertically
 /// A GRCard differs from a Stack View in that a Stack View is used to split a view into equal sizes whereas a GRCard can have elements of all sizes
@@ -174,13 +176,6 @@ open class GRBootstrapElement : UIView {
     open var anchorLastElementToBottom:Bool = true
     
     open var rows:[Row] = [Row]()
-    
-    public struct Margin {
-        var left:CGFloat? = 20
-        var top:CGFloat? = 20
-        var right:CGFloat? = 20
-        var bottom:CGFloat? = 20
-    }
     
     /// The margin of the card when it's added to the superview
     public let margin:BootstrapMargin
@@ -684,7 +679,7 @@ open class GRBootstrapElement : UIView {
          - parameter elements: The card sets to add to the card
          - returns: A GRCard object which can be ignored if desired
          */
-        open func addColumns (columns: [Column], margin: Margin?) {
+        open func addColumns (columns: [Column], margin: BootstrapMargin?) {
             self.margin = margin
             
             var currentXPos:CGFloat = 0
@@ -851,4 +846,3 @@ open class GRBootstrapElement : UIView {
 }
 
 public typealias Column = GRBootstrapElement.Column
-public typealias BootstrapMargin = GRBootstrapElement.Margin
