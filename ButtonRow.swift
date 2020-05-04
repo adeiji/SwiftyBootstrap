@@ -8,11 +8,10 @@
 import Foundation
 import UIKit
 
-enum ButtonRowType {
+public enum ButtonRowType {
     case Instagram
     case EqualWidths
 }
-
 
 open class ButtonRow: UIView {
     
