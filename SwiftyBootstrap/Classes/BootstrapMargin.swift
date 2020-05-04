@@ -16,7 +16,7 @@ public struct BootstrapMargin {
     let right:CGFloat
     let bottom:CGFloat
     
-    public init (left:CGFloat? = 20, top:CGFloat? = 20, right:CGFloat? = 20, bottom:CGFloat? = 20) {
+    public init (left:CGFloat = 20, top:CGFloat = 20, right:CGFloat = 20, bottom:CGFloat = 20) {
         self.left = left
         self.top = top
         self.right = right
