@@ -17,7 +17,7 @@ public enum FontBook:String {
     case allBold = "Avenir-Heavy"
     case allLight = "Avenir-Light"
     
-    func of(size: FontSizes) -> UIFont {
+    public func of(size: FontSizes) -> UIFont {
         return UIFont(name: self.rawValue, size: size.rawValue) ?? UIFont.systemFont(ofSize: size.rawValue)
     }
     
