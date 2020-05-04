@@ -31,12 +31,12 @@ open class GRTabController: UIViewController {
      
      - returns: The footer object with all buttons added
      */
-    func addFooter () -> GRFooterView? {
+    open func addFooter () -> GRFooterView? {
         let footer = GRFooterView(superview: self.view, height: GRTabController.barHeight, numberOfButtons: self.numberOfButtons)
         return footer
     }
     
-    func addMainView () -> UIView {
+    open func addMainView () -> UIView {
         let view = UIView()
         self.view.addSubview(view)
         view.snp.makeConstraints { (make) in
@@ -53,7 +53,7 @@ open class GRTabController: UIViewController {
         self.view.backgroundColor = .white
     }
     
-    init(numberOfButtons:Int) {
+    public init(numberOfButtons:Int) {
         self.numberOfButtons = numberOfButtons
         super.init(nibName: nil, bundle: nil)
         self.footer = self.addFooter()
