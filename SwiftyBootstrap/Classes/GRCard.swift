@@ -349,18 +349,18 @@ open class GRBootstrapElement : UIView {
     open func addToSuperview (superview: UIView, viewAbove: UIView? = nil, anchorToBottom:Bool = false) {
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
-            make.left.equalTo(superview).offset(self.margin.left ?? 0)
-            make.right.equalTo(superview).offset(-(self.margin.right ?? 0))
-            make.width.equalTo(UIScreen.main.bounds.size.width - (self.margin.left ?? 0) - (self.margin.right ?? 0))
+            make.left.equalTo(superview).offset(self.margin.left)
+            make.right.equalTo(superview).offset(-(self.margin.right))
+            make.width.equalTo(UIScreen.main.bounds.size.width - (self.margin.left) - (self.margin.right))
             
             if let viewAbove = viewAbove {
-                self.topConstraint = make.top.equalTo(viewAbove.snp.bottom).offset(self.margin.top ?? 0).constraint
+                self.topConstraint = make.top.equalTo(viewAbove.snp.bottom).offset(self.margin.top).constraint
             } else {
-                self.topConstraint = make.top.equalTo(superview).offset(self.margin.top ?? 0).constraint
+                self.topConstraint = make.top.equalTo(superview).offset(self.margin.top).constraint
             }
             
             if anchorToBottom {
-                make.bottom.equalTo(superview).offset(-(self.margin.bottom ?? 0))
+                make.bottom.equalTo(superview).offset(-(self.margin.bottom))
             }
         }
         
@@ -394,7 +394,6 @@ open class GRBootstrapElement : UIView {
         }
         
         self.removeFromSuperview()
-        let elements = self.elements
         self.elements = [GRCardSet]()
 
         self.addToSuperview(
@@ -556,12 +555,12 @@ open class GRBootstrapElement : UIView {
         }
         
         if showForTimeInterval > 0 {
-            let timer = Timer.scheduledTimer(withTimeInterval: showForTimeInterval, repeats: false) { (_) in
-            if (slideUpFromBottom) {
-                messageCard.slideDownAndRemove(superview: superview)
-            } else {
-                messageCard.slideUpAndRemove(superview: superview)
-            }
+            let _ = Timer.scheduledTimer(withTimeInterval: showForTimeInterval, repeats: false) { (_) in
+                if (slideUpFromBottom) {
+                    messageCard.slideDownAndRemove(superview: superview)
+                } else {
+                    messageCard.slideUpAndRemove(superview: superview)
+                }
             }
         }
         

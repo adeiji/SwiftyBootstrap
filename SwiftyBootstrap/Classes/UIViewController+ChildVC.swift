@@ -8,9 +8,9 @@
 
 import UIKit
 
-extension UIViewController {
+public extension UIViewController {
 
-    open func addChildViewControllerWithView(_ childViewController: UIViewController, toView view: UIView? = nil) {
+    func addChildViewControllerWithView(_ childViewController: UIViewController, toView view: UIView? = nil) {
         let view: UIView = view ?? self.view
 
         childViewController.removeFromParent()
@@ -22,7 +22,7 @@ extension UIViewController {
         view.layoutIfNeeded()
     }
 
-    open func removeChildViewController(_ childViewController: UIViewController) {
+    func removeChildViewController(_ childViewController: UIViewController) {
         childViewController.removeFromParent()
         childViewController.willMove(toParent: nil)
         childViewController.removeFromParent()
@@ -32,13 +32,13 @@ extension UIViewController {
         view.layoutIfNeeded()
     }
 
-    open func hideKeyboardWhenTappedAround() {
+    func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
 
-    @objc open func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
 }

@@ -11,7 +11,7 @@ import Foundation
 public extension Date {
     
     // Returns just the time as a string of a date
-    public func toTimeString () -> String {
+    func toTimeString () -> String {
         let df = DateFormatter()
         df.timeStyle = .short
         df.dateStyle = .none
