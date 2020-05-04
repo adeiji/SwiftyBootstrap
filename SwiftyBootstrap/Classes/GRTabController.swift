@@ -106,10 +106,10 @@ open class GRTabController: UIViewController {
             let mainNavigationViewController = UINavigationController(rootViewController: viewController);
             mainNavigationViewController.navigationBar.isHidden = true
                                     
-            self.addChildViewControllerWithView(mainNavigationViewController)
+            self.addChildViewControllerWithView(mainNavigationViewController, toView: self.mainView)
         } else { // If view controller is a UINavigationController than just add it as a child view controller
             (viewController as? UINavigationController)?.popToRootViewController(animated: true)
-            self.addChildViewControllerWithView(viewController)
+            self.addChildViewControllerWithView(viewController, toView: self.mainView)
         }
     }
     

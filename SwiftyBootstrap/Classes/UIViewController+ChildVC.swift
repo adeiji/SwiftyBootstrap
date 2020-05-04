@@ -18,6 +18,11 @@ public extension UIViewController {
         addChild(childViewController)
         childViewController.didMove(toParent: self)
         view.addSubview(childViewController.view)
+        
+        childViewController.view.snp.makeConstraints { (make) in
+            make.edges.equalTo(view)
+        }
+        
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }
