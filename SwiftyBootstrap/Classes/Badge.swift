@@ -9,15 +9,15 @@
 import Foundation
 import UIKit
 
-class Badge: UIView {
+open class Badge: UIView {
     
     private weak var badgeLabel:UILabel?
     
-    var badge:String?
+    open var badge:String?
     
-    var textColor:UIColor?
+    open var textColor:UIColor?
     
-    func setup(badge:String?, textColor:UIColor = .white, backgroundColor:UIColor = .red) {
+    open func setup(badge:String?, textColor:UIColor = .white, backgroundColor:UIColor = .red) {
         self.badge = badge
         self.textColor = textColor
         self.backgroundColor = backgroundColor
@@ -29,9 +29,9 @@ class Badge: UIView {
     }
 }
 
-class FocusIndicator: UIView {
+open class FocusIndicator: UIView {
     
-    func setup () {
+    open func setup () {
         self.backgroundColor = UIColor.green.withAlphaComponent(0.5)
     }
 }

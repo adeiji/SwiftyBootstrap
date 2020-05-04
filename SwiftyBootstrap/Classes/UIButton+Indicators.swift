@@ -11,7 +11,7 @@ import UIKit
 import SnapKit
 import NVActivityIndicatorView
 
-extension UIButton {
+public extension UIButton {
     func addBadge (badge: Badge) {
         self.addSubview(badge)
         badge.snp.makeConstraints { (make) in
@@ -25,7 +25,7 @@ extension UIButton {
     }
 }
 
-extension UIView {
+public extension UIView {
     
     func showLoadingNVActivityIndicatorView (color: UIColor? = nil) -> NVActivityIndicatorView {
         let activityIndicator = NVActivityIndicatorView(frame: .zero)
