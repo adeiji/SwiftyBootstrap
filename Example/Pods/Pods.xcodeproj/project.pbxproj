@@ -71,7 +71,7 @@
 		F48E65E9245FF85600CA56FE /* BootstrapMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48E65E7245FF85500CA56FE /* BootstrapMargin.swift */; };
 		F4F53788246026540009D3DC /* GRTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F53786246026540009D3DC /* GRTabController.swift */; };
 		F4F5378B246027460009D3DC /* GRFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F53789246027460009D3DC /* GRFooterView.swift */; };
-		F4F5378E2460290E0009D3DC /* ButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F5378C2460290E0009D3DC /* ButtonRow.swift */; };
+		F4F53791246060B60009D3DC /* ButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F5378F246060B60009D3DC /* ButtonRow.swift */; };
 		F6C7F81AA5BBC4042A3A78D5EA8E62A4 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5902768DE34E1627B020F4B2FB7BBBE /* ConstraintLayoutSupportDSL.swift */; };
 		FD9CAA19B6371F6ADEE790F07156DFD0 /* SwiftyBootstrap-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9229133DB621FA2521FDCF9B86E6FD92 /* SwiftyBootstrap-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF0E3F8B3FB568ACBB1BC433D67ED093 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F902CDA99715ADA3EC010544308DA63A /* ConstraintMakerExtendable.swift */; };
@@ -186,7 +186,7 @@
 		F48E65E7245FF85500CA56FE /* BootstrapMargin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BootstrapMargin.swift; path = SwiftyBootstrap/Classes/BootstrapMargin.swift; sourceTree = "<group>"; };
 		F4F53786246026540009D3DC /* GRTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRTabController.swift; path = SwiftyBootstrap/Classes/GRTabController.swift; sourceTree = "<group>"; };
 		F4F53789246027460009D3DC /* GRFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRFooterView.swift; path = SwiftyBootstrap/Classes/GRFooterView.swift; sourceTree = "<group>"; };
-		F4F5378C2460290E0009D3DC /* ButtonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRow.swift; sourceTree = "<group>"; };
+		F4F5378F246060B60009D3DC /* ButtonRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonRow.swift; path = SwiftyBootstrap/Classes/ButtonRow.swift; sourceTree = "<group>"; };
 		F5C9D6FEF48994711991A348A7B0B99A /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Source/ConstraintView.swift; sourceTree = "<group>"; };
 		F63DC83113A26BB1DB9ED37E0EE3F512 /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Source/ConstraintDSL.swift; sourceTree = "<group>"; };
 		F902CDA99715ADA3EC010544308DA63A /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Source/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
@@ -258,6 +258,7 @@
 		55ED146360F9D12584B01E1A24190035 /* SwiftyBootstrap */ = {
 			isa = PBXGroup;
 			children = (
+				F4F5378F246060B60009D3DC /* ButtonRow.swift */,
 				F4F53789246027460009D3DC /* GRFooterView.swift */,
 				F4F53786246026540009D3DC /* GRTabController.swift */,
 				F4285273245C2D0700C381DE /* Assets.xcassets */,
@@ -284,7 +285,6 @@
 				4FB9D22D6B47C532FC1288D6CFA4D439 /* Pod */,
 				3DA191C35DC53B9DA442D0F76171F27E /* Support Files */,
 				F48E65E7245FF85500CA56FE /* BootstrapMargin.swift */,
-				F4F5378C2460290E0009D3DC /* ButtonRow.swift */,
 			);
 			name = SwiftyBootstrap;
 			path = ../..;
@@ -648,7 +648,7 @@
 				F4285229245BF87400C381DE /* GRUser.swift in Sources */,
 				F48E65E9245FF85600CA56FE /* BootstrapMargin.swift in Sources */,
 				F428522E245BF87400C381DE /* UIViewController+ChildVC.swift in Sources */,
-				F4F5378E2460290E0009D3DC /* ButtonRow.swift in Sources */,
+				F4F53791246060B60009D3DC /* ButtonRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
