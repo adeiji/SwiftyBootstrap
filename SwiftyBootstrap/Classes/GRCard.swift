@@ -763,7 +763,7 @@ open class GRBootstrapElement : UIView {
         private func setHeight (column: Column, make:ConstraintMaker) {
             // If element is a text field than give it a specific height
             if (column.cardSet.content.isKind(of: UITextField.self)) {
-                make.height.equalTo(50)
+                make.height.equalTo(column.cardSet.height ?? 50)
             } else if column.cardSet.getIsSquare() {
                 make.height.equalTo(column.cardSet.content.snp.width)
             } else if let height = column.cardSet.height {
