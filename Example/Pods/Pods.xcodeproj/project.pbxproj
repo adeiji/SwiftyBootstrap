@@ -120,6 +120,7 @@
 		F4AB070792FBEFFBFAA96D2EA18BD3E1 /* NVActivityIndicatorAnimationBallDoubleBounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63ADC6CE1C07F201E65D368034F2D3C /* NVActivityIndicatorAnimationBallDoubleBounce.swift */; };
 		F4BB119FEB4BFD882B8EF716CC2CEF01 /* UIColor+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657AA3029FF7B87AAC0BB284AE01590 /* UIColor+Style.swift */; };
 		F4F53797246078CE0009D3DC /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F53796246078CE0009D3DC /* Badge.swift */; };
+		F4F537D52461BB500009D3DC /* String+AddLineSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F537D42461BB500009D3DC /* String+AddLineSpacing.swift */; };
 		F6C7F81AA5BBC4042A3A78D5EA8E62A4 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED3FCA4F623886F57E997C65D092BC /* ConstraintLayoutSupportDSL.swift */; };
 		FC424F3BE1C5E3258FE456F6D35391D1 /* NVActivityIndicatorAnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C588E6CE32777EB60018A11E06899E0 /* NVActivityIndicatorAnimationDelegate.swift */; };
 		FF0E3F8B3FB568ACBB1BC433D67ED093 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B135B8F91F803B7D774A04CBC2B566F0 /* ConstraintMakerExtendable.swift */; };
@@ -309,6 +310,7 @@
 		E7AC1275B0E0D45827EC44D5BB4FD1ED /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Source/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
 		F38B2456019A22346B5C971EF0A7ED2F /* NVActivityIndicatorAnimationCubeTransition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationCubeTransition.swift; path = Source/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationCubeTransition.swift; sourceTree = "<group>"; };
 		F4F53796246078CE0009D3DC /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Badge.swift; path = SwiftyBootstrap/Classes/Badge.swift; sourceTree = "<group>"; };
+		F4F537D42461BB500009D3DC /* String+AddLineSpacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+AddLineSpacing.swift"; path = "SwiftyBootstrap/Classes/String+AddLineSpacing.swift"; sourceTree = "<group>"; };
 		F8921DC68D72C84915FE08D8FFB011D1 /* ConstraintLayoutSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupport.swift; path = Source/ConstraintLayoutSupport.swift; sourceTree = "<group>"; };
 		F89904E2BEF8230185A0E500E03BF170 /* NVActivityIndicatorView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NVActivityIndicatorView-umbrella.h"; sourceTree = "<group>"; };
 		FA6220AB7388E17F256E0584DCC1675A /* NVActivityIndicatorAnimationBallGridBeat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationBallGridBeat.swift; path = Source/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationBallGridBeat.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 		A601CB1931789C7FB1CEBDD455AAC286 /* SwiftyBootstrap */ = {
 			isa = PBXGroup;
 			children = (
+				F4F537D42461BB500009D3DC /* String+AddLineSpacing.swift */,
 				F4F53796246078CE0009D3DC /* Badge.swift */,
 				A5D15BC020BDB89C91A65E80C01E77F7 /* Array+RemoveDuplicates.swift */,
 				6B45339B052965CD5E2D533EBC534FB9 /* BootstrapMargin.swift */,
@@ -954,6 +957,7 @@
 				517568298381E38C9C73DD37BA3ADF78 /* DateTime+ToString.swift in Sources */,
 				4786350A6A095EC04EEFA4F928F94765 /* DEBaseLoginView.swift in Sources */,
 				5C33E5B7CF08D51B719FAD9E5BACCA4D /* DEStyle.swift in Sources */,
+				F4F537D52461BB500009D3DC /* String+AddLineSpacing.swift in Sources */,
 				16CC60174EFEF705B9CF884CAB0C4E98 /* GraffitiStyle.swift in Sources */,
 				F4F53797246078CE0009D3DC /* Badge.swift in Sources */,
 				4022B33F830B45CB39F34FD451A3992F /* GRButton.swift in Sources */,
