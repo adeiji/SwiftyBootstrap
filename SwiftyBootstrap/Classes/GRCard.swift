@@ -521,11 +521,18 @@ open class GRBootstrapElement : UIView {
         if isError {
             closeButton.backgroundColor = .black
         }
-        
-//        messageCard.addElements(elements: [
-//            GRCardSet(content: Style.label(withText: message, fontName: .all, size: .small, superview: nil, color: textColor ?? .white), width: .Eleven, height: nil, newLine: true, showMargins: true),
-//            GRCardSet(content: Style.label(withText: "", fontName: .all, size: .small, superview: nil, color: textColor ?? .white), width: .Twelve, height: 10.0),
-//            GRCardSet(content: closeButton, width: .Five, height: 44.0, newLine: true, showMargins: true)])
+
+        messageCard.addRow(columns: [
+            Column(cardSet: Style.label(withText: message, size: .small, superview: nil, color: textColor ?? .white)
+                .toCardSet(),
+                   colWidth: .Eleven)
+            ]).addRow(columns: [
+                Column(cardSet: closeButton
+                    .toCardSet()
+                    .margin.top(40)
+                    .withHeight(70.0),
+                       colWidth: .Five)
+            ], anchorToBottom: true)
         
         if slideUpFromBottom {
             messageCard.slideUp(superview: superview, margin: Sizes.smallMargin.rawValue)
