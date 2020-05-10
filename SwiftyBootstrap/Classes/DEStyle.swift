@@ -107,10 +107,15 @@ open class Style {
 
     // The sizes class will handle the sizing of the device/interface
     public enum DeviceSizes {
+        /// iPhone width or slim view of the iPad
         case xs
+        /// less than iPad full width or half of screen in landscape
         case sm
+        /// Portrait of an iPad
         case md
+        /// It's either a normal iPad landscape, or iPad Pro 12.9inch portrait
         case lg
+        /// iPad Pro 12.9 inch landscape
         case xl
     }
     
@@ -127,7 +132,7 @@ open class Style {
             return .md
         case let x where x >= 1024 && x < 1366: // It's either a normal iPad landscape, or iPad Pro 12.9inch portrait
             return .lg
-        default: // iPad Pro 12.9inch landscale
+        default: // iPad Pro 12.9inch landscape
             return .xl
         }
     }

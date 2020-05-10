@@ -723,12 +723,16 @@ open class GRBootstrapElement : UIView {
          - returns: A GRCard object which can be ignored if desired
          */
         open func addColumns (columns: [Column], margin: BootstrapMargin?) {
+            
+            // Store this margin for later, we'll need it when we need to redraw the elements on a screen resize
             self.margin = margin
             
+            // If there's no columns than exit out this function.
             if columns.first == nil {
                 return
             }
             
+            // Store the columns so that we can redraw them later if necessary
             if (self.columns.count == 0) {
                 self.columns.append(contentsOf: columns)
             }
@@ -757,21 +761,61 @@ open class GRBootstrapElement : UIView {
             }
         }
         
+        /**
+         We only want to have the user enter size classes up to the largest one without having to enter size classes for all classes in between
+         What I mean is this...
+         
+         If the user wants the .sm and .xs size classes to use a column of .Six, than they should only need to set .Six for .sm, not for
+         .sm and .xs.  We'll automatically apply the same size class to .xs if a value for .xs has not been entered
+         
+         If a value of .Two is entered for .sm and .Four for .lg then the value of .Two will be applied to .sm and .xs and the value of
+         .Four will be applied to .lg and .md
+         */
+        private func getCorrectSizeClass (column: Column) -> ColWidth {
+            let sizeClass = GRCurrentDevice.shared.size
+            switch sizeClass {
+            case .xl:
+                return column.columnWidthForClassSizes[sizeClass]
+                    ?? column.columnWidthForClassSizes[.lg]
+                    ?? column.columnWidthForClassSizes[.md]
+                    ?? column.columnWidthForClassSizes[.sm]
+                    ?? column.columnWidthForClassSizes[.xs]
+                    ?? column.colWidth
+            case .lg:
+                return column.columnWidthForClassSizes[sizeClass]
+                ?? column.columnWidthForClassSizes[.md]
+                ?? column.columnWidthForClassSizes[.sm]
+                ?? column.columnWidthForClassSizes[.xs]
+                ?? column.colWidth
+            case .md:
+                return column.columnWidthForClassSizes[sizeClass]
+                ?? column.columnWidthForClassSizes[.sm]
+                ?? column.columnWidthForClassSizes[.xs]
+                ?? column.colWidth
+            case .sm:
+                return column.columnWidthForClassSizes[sizeClass]
+                ?? column.columnWidthForClassSizes[.xs]
+                ?? column.colWidth
+            default:
+                return column.columnWidthForClassSizes[sizeClass]
+                ?? column.colWidth
+            }
+        }
+        
         private func addColumnConstraints (column: Column, index:Int, columnAbove: inout Column, currentXPos: inout CGFloat) {
              
-            // We know that the first element is set because the elements array has a count of more than zero
-//            column.cardSet.content.snp.removeConstraints()
+            let colWidth = self.getCorrectSizeClass(column: column)
             
-            let sizeClass = GRCurrentDevice.shared.size
-            
-            let colWidth = column.columnWidthForClassSizes[sizeClass] ?? column.colWidth
+            let width = self.getWidth(width: colWidth.rawValue)
+            column.widthInPixels = width
             
             // If this element is not to span across the entire screen, than we need to check to see if this element is going to go past the screen on the right side
             // and if so, set the elements newLine property to true so that it will display on a new line...
             if colWidth != .Twelve {
-                let width = self.getWidth(width: colWidth.rawValue)
-                column.widthInPixels = width
                 
+                // If when drawn initially this column was set to draw on a new line, we want to reset it because it might not need to depending
+                // on the current size of the screen
+                column.cardSet.newLine = false
                 if currentXPos + width > self.widthInPixels {
                     column.cardSet.newLine = true
                     currentXPos = 0
