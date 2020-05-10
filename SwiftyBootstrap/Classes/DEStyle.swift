@@ -10,6 +10,13 @@ import Foundation
 import UIKit
 import SnapKit
 
+open class GRCurrentDevice: UIViewController {
+    
+    public static let shared = GRCurrentDevice()
+    public var size:Style.DeviceSizes = Style.getScreenSize()
+    
+}
+
 public enum FontBook:String {
 //    case logo = "Gill Sans"
     case header = "Avenir-Medium"
@@ -100,17 +107,28 @@ open class Style {
 
     // The sizes class will handle the sizing of the device/interface
     public enum DeviceSizes {
+        case xs
         case sm
+        case md
         case lg
+        case xl
     }
     
     /** Get what the current screen size is, ex large, small, very large etc.  Currently on returns small or large */
     open class func getScreenSize () -> DeviceSizes {
-        switch UIScreen.main.bounds.width {
-        case let x where x < 450:
+        let width = UIApplication.shared.keyWindow?.rootViewController?.view.bounds.width ?? UIApplication.shared.windows.first?.bounds.width ?? UIScreen.main.bounds.width
+        
+        switch width {
+        case let x where x <= 450: // iPhone Width or the slim view of the iPad
+            return .xs
+        case let x where x < 768: // less than iPad full width so half of screen in landscape
             return .sm
-        default:
+        case let x where x > 768 && x < 1024: // It's the portrait of an iPad
+            return .md
+        case let x where x >= 1024 && x < 1366: // It's either a normal iPad landscape, or iPad Pro 12.9inch portrait
             return .lg
+        default: // iPad Pro 12.9inch landscale
+            return .xl
         }
     }
 
@@ -119,24 +137,10 @@ open class Style {
     /// need to use the height value since in landscape width is always greater than height
     /// This works vice versa for portrait
     open class func getCorrectWidth () -> CGFloat {
+                        
+        let width = UIApplication.shared.keyWindow?.rootViewController?.view.bounds.width ??  UIApplication.shared.windows.first?.bounds.width ?? UIScreen.main.bounds.width
         
-        let height = UIScreen.main.bounds.height
-        let width = UIScreen.main.bounds.width
-        
-        if UIApplication.shared.statusBarOrientation == .landscapeRight || UIApplication.shared.statusBarOrientation == .landscapeLeft {
-            if (height > width) {
-                return height
-            }
-            
-            return width
-        } else { // Portrait Mode
-            if (height < width) {
-                return height
-            }
-            
-            return width
-        }
-        
+        return width
     }
     
     /// Returns a random color that is within our Pinterest color scheme

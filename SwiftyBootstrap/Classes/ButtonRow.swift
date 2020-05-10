@@ -26,7 +26,6 @@ open class ButtonRow: UIView {
     public init(numberOfButtons: Int) {
         self.numberOfButtons = numberOfButtons
         super.init(frame: .zero)
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     required public init?(coder: NSCoder) {
@@ -34,7 +33,8 @@ open class ButtonRow: UIView {
         super.init(coder: coder)
     }
     
-    @objc func rotated () {
+    open override func layoutSubviews() {
+        super.layoutSubviews()
         self.draw()
     }
     

@@ -108,17 +108,19 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
         }
         
         self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: self.containerView.bounds.size.height)
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         return self;
     }
     
-    @objc private func rotated () {
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        
         self.containerView.snp.remakeConstraints { (make) in
             make.edges.equalTo(self.scrollView)
-            make.width.equalTo(Style.getCorrectWidth())        
+            make.width.equalTo(Style.getCorrectWidth())
         }
     }
+    
     
     open func updateScrollViewContentSize () {
         self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: self.containerView.bounds.size.height)

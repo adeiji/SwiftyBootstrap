@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 
+
 public extension UIView {
     
     /// Creates a card set from a UIView object.  This card set can then be used to add to a GRCard for clean,
@@ -126,6 +127,16 @@ open class GRCardSet {
     private var isSquare:Bool
     fileprivate var height:CGFloat?
     
+    /**
+     This contains the different column widths for the different class sizes ie xs, sm, lg etc.
+     
+     Set these using the for size functions like so...
+     forSize(.xs, .Two)
+     
+     ...etc.
+     */
+    fileprivate var columnWidthForClassSizes:[Style.DeviceSizes:ColWidth] = [:]
+    
     // The margin is sure to be set in the initializer, but if we don't say that this value can be null than we can't assign the margin's card set to self since margin relies on self and you'll get an error saying trying to access self before all required properties are set
     open var margin:Margin!
     open var name:String?
@@ -147,6 +158,11 @@ open class GRCardSet {
         self.isSquare = isSquare
         
         self.margin = Margin(cardSet: self)
+    }
+    
+    open func forSize(_ sizeClass:Style.DeviceSizes, _ colWidth:ColWidth) -> GRCardSet {
+        self.columnWidthForClassSizes[sizeClass] = colWidth
+        return self
     }
     
     open func withHeight(_ height: CGFloat) -> GRCardSet {
@@ -225,6 +241,8 @@ open class GRBootstrapElement : UIView {
     /// The margin of the card when it's added to the superview
     public let margin:BootstrapMargin
     
+    /// This is the view that this view will be a subview of. Set this value if you want this object to have it's width based off the width
+    /// of the superview.  This is not needed if the width of this card/element is the width of the screen
     private let customSuperview:UIView?
     
     public init(color: UIColor? = .white, anchorWidthToScreenWidth:Bool = true, margin:BootstrapMargin? = nil, superview: UIView? = nil) {
@@ -240,13 +258,14 @@ open class GRBootstrapElement : UIView {
             self.backgroundColor = .white
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
-    @objc private func rotated () {
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        GRCurrentDevice.shared.size = Style.getScreenSize()
         self.redoConstraints()
     }
-    
+        
     required public init?(coder aDecoder: NSCoder) {
         self.anchorWidthToScreenWidth = true
         self.margin = BootstrapMargin()
@@ -286,7 +305,10 @@ open class GRBootstrapElement : UIView {
             row.widthInPixels = superview.bounds.width
         }
         
-        row.widthInPixels = row.widthInPixels - self.margin.left - self.margin.right
+        let leftMargin = BootstrapMargin.getMarginInPixels(self.margin.left)
+        let rightMargin = BootstrapMargin.getMarginInPixels(self.margin.right)
+        
+        row.widthInPixels = row.widthInPixels - leftMargin - rightMargin
         row.addColumns(columns: columns, margin: self.margin)
         self.rows.append(row)
         
@@ -422,18 +444,23 @@ open class GRBootstrapElement : UIView {
     open func addToSuperview (superview: UIView, viewAbove: UIView? = nil, anchorToBottom:Bool = false) {
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
-            make.left.equalTo(superview).offset(self.margin.left)
-            make.right.equalTo(superview).offset(-(self.margin.right))
-//            make.width.equalTo(UIScreen.main.bounds.size.width - (self.margin.left) - (self.margin.right))
+            
+            let leftMargin = BootstrapMargin.getMarginInPixels(self.margin.left)
+            let rightMargin = BootstrapMargin.getMarginInPixels(self.margin.right)
+            
+            make.left.equalTo(superview).offset(leftMargin)
+            make.right.equalTo(superview).offset(-(rightMargin))
             
             if let viewAbove = viewAbove {
-                self.topConstraint = make.top.equalTo(viewAbove.snp.bottom).offset(self.margin.top).constraint
+                self.topConstraint = make.top.equalTo(viewAbove.snp.bottom).offset(BootstrapMargin.getMarginInPixels(self.margin.top)).constraint
             } else {
-                self.topConstraint = make.top.equalTo(superview).offset(self.margin.top).constraint
+                let topMargin = BootstrapMargin.getMarginInPixels(self.margin.top)
+                self.topConstraint = make.top.equalTo(superview).offset(topMargin).constraint
             }
             
             if anchorToBottom {
-                make.bottom.equalTo(superview).offset(-(self.margin.bottom))
+                let bottomMargin = BootstrapMargin.getMarginInPixels(self.margin.bottom)
+                make.bottom.equalTo(superview).offset(-(bottomMargin))
             }
         }
         
@@ -648,83 +675,6 @@ open class GRBootstrapElement : UIView {
         return messageCard
     }
     
-    /**
-     Show a card at the bottom of the screen or top, that allows a user to take a specific action.  It's very similar to a UIAlertController but more customizable.  Make sure to add the target to the Action button.  The cancel button's default action is to simply remove the view from the screen
-     
-    For more information look at the ActionCard object
-    
-     - parameters:
-        - message: The message to show the user
-        - superview: The view to add this view as the subview for
-        - isError: Whether or not this is being shown as the result of an error, if yes the card will be red
-        - actionButtonText: The text to show on the button responsible for executing the action
-        - slidUpFromButton: Whether to slide up from the bottom or the top
-        - closeButtonText: The text to show for the close button.
-        - customCardBackgroundColor: The color you want the background of this card to be, defaults to black
-        - textColor: The color you want the card text to be, defaults to white.  This does not affect the color of the button text labels
-        - showMargins: Whether you want to show margins around this card or you want it to be attached to the sides of the screen
-        - shouldShow: Whether to show the card.  If no, than it will not be added to the superview
-     
-        - returns: An ActionCard object
-     */
-    open class func showActionCard (message: String, superview: UIView, isError:Bool, actionButtonText:String, slideUpFromBottom:Bool, closeButtonText:String, customCardBackgroundColor:UIColor = .black, textColor: UIColor = .white, showMargins:Bool = true, title:String? = nil, shouldShow:Bool = true) -> ActionCard {
-        
-        var cardBackgroundColor:UIColor!
-        if isError {
-            cardBackgroundColor = UIColor.Style.htRedish
-        } else {
-            cardBackgroundColor = customCardBackgroundColor
-        }
-        
-        let actionCard = ActionCard(color: cardBackgroundColor)
-        actionCard.anchorWidthToScreenWidth = true
-        let actionButton = Style.largeButton(with: actionButtonText, superview: nil, backgroundColor: UIColor.Style.htBlueish)
-        actionButton.titleLabel?.font = UIFont(name: FontNames.allBold.rawValue, size: FontSizes.small.rawValue)
-        let closeButton = Style.largeButton(with: closeButtonText, superview: nil, backgroundColor: .red)
-        closeButton.titleLabel?.font = UIFont(name: FontNames.allBold.rawValue, size: FontSizes.small.rawValue)
-        
-        actionButton.showsTouchWhenHighlighted = true
-        closeButton.showsTouchWhenHighlighted = true
-        
-        actionButton.layer.cornerRadius = 25
-        closeButton.layer.cornerRadius = 25
-        
-        if let title = title {
-            actionCard.addElement(element: GRCardSet(content:
-                Style.label(withText: title,
-                            fontName: .allBold,
-                            size: .medium,
-                            superview: nil,
-                            color: textColor,
-                            textAlignment: .center),
-                     height: nil,
-                     newLine: true), atIndex: 0)
-        }
-        
-        if shouldShow {
-            if slideUpFromBottom {
-                actionCard.slideUp(superview: superview, margin: showMargins ? Sizes.smallMargin.rawValue : 0)
-            } else {
-                actionCard.slideDown(superview: superview, margin: showMargins ? Sizes.smallMargin.rawValue : 0)
-            }
-        }
-        
-        actionCard.actionButton = actionButton
-        actionCard.cancelButton = closeButton
-        closeButton.addTargetClosure { (_) in
-            
-            if slideUpFromBottom {
-                actionCard.slideDownAndRemove(superview: superview)
-            } else {
-                actionCard.slideUpAndRemove(superview: superview)
-            }
-        }
-                
-        actionCard.layer.zPosition = 100
-        
-        return actionCard
-    }
-    
     open class ActionCard: GRBootstrapElement {
         open weak var actionButton:UIButton?
         open weak var cancelButton:UIButton?
@@ -812,17 +762,21 @@ open class GRBootstrapElement : UIView {
             // We know that the first element is set because the elements array has a count of more than zero
 //            column.cardSet.content.snp.removeConstraints()
             
+            let sizeClass = GRCurrentDevice.shared.size
+            
+            let colWidth = column.columnWidthForClassSizes[sizeClass] ?? column.colWidth
+            
             // If this element is not to span across the entire screen, than we need to check to see if this element is going to go past the screen on the right side
             // and if so, set the elements newLine property to true so that it will display on a new line...
-            if column.colWidth != .Twelve {
-                let width = self.getWidth(width: column.colWidth.rawValue)
+            if colWidth != .Twelve {
+                let width = self.getWidth(width: colWidth.rawValue)
                 column.widthInPixels = width
                 
                 if currentXPos + width > self.widthInPixels {
                     column.cardSet.newLine = true
                     currentXPos = 0
                 }
-            } else if (column.colWidth == .Twelve) {
+            } else if (colWidth == .Twelve) {
                 column.cardSet.newLine = true
             }
             
@@ -880,6 +834,7 @@ open class GRBootstrapElement : UIView {
         }
         
         private func setCardSetsTopConstraint (column: Column, columnAbove:inout Column, index: Int, make:ConstraintMaker, currentXPos:inout CGFloat) {
+                                    
             if (column.cardSet.content == columns.first?.cardSet.content) {
                 // Set the top of this element relative to the card's top
                 make.top.equalTo(self).offset((column.cardSet.margin.topMargin ?? 0))
@@ -922,7 +877,11 @@ open class GRBootstrapElement : UIView {
         
         open var colWidth:ColWidth
         
-        /** Whether or not to anchor this specific column to the very bottom of the row.
+        /// The column width based off of the different size classes
+        private (set) var columnWidthForClassSizes:[Style.DeviceSizes:ColWidth] = [:]
+        
+        /**
+         Whether or not to anchor this specific column to the very bottom of the row.
          - important: If there are other elements that will display beneath this one and you set this to true it can cause layout issues.  You typically only want to set this on the last
          column in a row
         */
@@ -936,6 +895,7 @@ open class GRBootstrapElement : UIView {
         
         public init(cardSet: GRCardSet, colWidth:ColWidth, anchorToBottom:Bool = false) {
             self.cardSet = cardSet
+            self.columnWidthForClassSizes = cardSet.columnWidthForClassSizes
             self.colWidth = colWidth
             self.anchorToBottom = anchorToBottom
             super.init(frame: .zero)
