@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-open class GRCurrentDevice: UIViewController {
+public class GRCurrentDevice: UIViewController {
     
     public static let shared = GRCurrentDevice()
     public var size:Style.DeviceSizes = Style.getScreenSize()

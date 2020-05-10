@@ -127,15 +127,7 @@ open class GRCardSet {
     private var isSquare:Bool
     fileprivate var height:CGFloat?
     
-    /**
-     This contains the different column widths for the different class sizes ie xs, sm, lg etc.
-     
-     Set these using the for size functions like so...
-     forSize(.xs, .Two)
-     
-     ...etc.
-     */
-    fileprivate var columnWidthForClassSizes:[Style.DeviceSizes:ColWidth] = [:]
+
     
     // The margin is sure to be set in the initializer, but if we don't say that this value can be null than we can't assign the margin's card set to self since margin relies on self and you'll get an error saying trying to access self before all required properties are set
     open var margin:Margin!
@@ -158,11 +150,6 @@ open class GRCardSet {
         self.isSquare = isSquare
         
         self.margin = Margin(cardSet: self)
-    }
-    
-    open func forSize(_ sizeClass:Style.DeviceSizes, _ colWidth:ColWidth) -> GRCardSet {
-        self.columnWidthForClassSizes[sizeClass] = colWidth
-        return self
     }
     
     open func withHeight(_ height: CGFloat) -> GRCardSet {
@@ -625,13 +612,13 @@ open class GRBootstrapElement : UIView {
         messageCard.addRow(columns: [
             Column(cardSet: Style.label(withText: message, size: .small, superview: nil, color: textColor ?? .white)
                 .toCardSet(),
-                   colWidth: .Eleven)
+                   xsColWidth: .Eleven)
             ]).addRow(columns: [
                 Column(cardSet: closeButton
                     .toCardSet()
                     .margin.top(40)
                     .withHeight(70.0),
-                       colWidth: .Five)
+                       xsColWidth: .Five)
             ], anchorToBottom: true)
         
         if slideUpFromBottom {
@@ -779,26 +766,26 @@ open class GRBootstrapElement : UIView {
                     ?? column.columnWidthForClassSizes[.lg]
                     ?? column.columnWidthForClassSizes[.md]
                     ?? column.columnWidthForClassSizes[.sm]
-                    ?? column.columnWidthForClassSizes[.xs]
-                    ?? column.colWidth
+                    // We unwrap here because the default value is xs which always has a default value of .Twelve if no value is given to it
+                    ?? column.columnWidthForClassSizes[.xs]!
             case .lg:
                 return column.columnWidthForClassSizes[sizeClass]
                 ?? column.columnWidthForClassSizes[.md]
                 ?? column.columnWidthForClassSizes[.sm]
-                ?? column.columnWidthForClassSizes[.xs]
-                ?? column.colWidth
+                // We unwrap here because the default value is xs which always has a default value of .Twelve if no value is given to it
+                ?? column.columnWidthForClassSizes[.xs]!
             case .md:
                 return column.columnWidthForClassSizes[sizeClass]
                 ?? column.columnWidthForClassSizes[.sm]
-                ?? column.columnWidthForClassSizes[.xs]
-                ?? column.colWidth
+                // We unwrap here because the default value is xs which always has a default value of .Twelve if no value is given to it
+                ?? column.columnWidthForClassSizes[.xs]!
             case .sm:
                 return column.columnWidthForClassSizes[sizeClass]
-                ?? column.columnWidthForClassSizes[.xs]
-                ?? column.colWidth
+                // We unwrap here because the default value is xs which always has a default value of .Twelve if no value is given to it
+                ?? column.columnWidthForClassSizes[.xs]!
             default:
-                return column.columnWidthForClassSizes[sizeClass]
-                ?? column.colWidth
+                // We unwrap here because the default value is xs which always has a default value of .Twelve if no value is given to it
+                return column.columnWidthForClassSizes[.xs]!
             }
         }
         
@@ -834,7 +821,7 @@ open class GRBootstrapElement : UIView {
                 self.setCardSetsTopConstraint(column: column, columnAbove: &columnAbove, index: index, make: make, currentXPos: &currentXPos)
                 self.setCardSetsLeftConstraint(column: column, index: index, make: make, currentXPos: &currentXPos)
                 self.setHeight(column: column, make: make)
-                self.setWidthOrRightConstraint(column: column, make: make, currentXPos: &currentXPos)
+                self.setWidthOrRightConstraint(column: column, make: make, colWidth: colWidth, currentXPos: &currentXPos)
                 self.setBottomConstraint(column: column, make: make)
             })
         }
@@ -846,17 +833,17 @@ open class GRBootstrapElement : UIView {
             }
         }
         
-        private func setWidthOrRightConstraint (column: Column, make:ConstraintMaker, currentXPos:inout CGFloat) {
+        private func setWidthOrRightConstraint (column: Column, make:ConstraintMaker, colWidth:ColWidth, currentXPos:inout CGFloat) {
             // WIDTH OR RIGHT CONSTRAINT
             // Set the right contraint or the width.  If the element is full screen and we want to show the margins than we set the right constraint, otherwise we set the elements width
-            if (self.horizontalLayout && column.colWidth != .Twelve) {
+            if (self.horizontalLayout && colWidth != .Twelve) {
                 make.width.equalTo(column.widthInPixels)
                 currentXPos += column.widthInPixels
             }
-            else if (column.colWidth == .Twelve) {
+            else if (colWidth == .Twelve) {
                 make.right.equalTo(self)
             } else {
-                if column.colWidth != .Twelve {
+                if colWidth != .Twelve {
                     make.width.equalTo(column.widthInPixels)
                     currentXPos += column.widthInPixels
                 } else {
@@ -918,11 +905,15 @@ open class GRBootstrapElement : UIView {
         open var cardSet:GRCardSet
         
         open var widthInPixels: CGFloat!
-        
-        open var colWidth:ColWidth
-        
-        /// The column width based off of the different size classes
-        private (set) var columnWidthForClassSizes:[Style.DeviceSizes:ColWidth] = [:]
+        /**
+         This contains the different column widths for the different class sizes ie xs, sm, lg etc.
+         
+         Set these using the for size functions like so...
+         forSize(.xs, .Two)
+         
+         ...etc.
+         */
+        private (set) var columnWidthForClassSizes:[Style.DeviceSizes:ColWidth] = [.xs:.Twelve]
         
         /**
          Whether or not to anchor this specific column to the very bottom of the row.
@@ -931,16 +922,20 @@ open class GRBootstrapElement : UIView {
         */
         public let anchorToBottom:Bool
         
+        open func forSize(_ sizeClass:Style.DeviceSizes, _ colWidth:ColWidth) -> Column {
+            self.columnWidthForClassSizes[sizeClass] = colWidth
+            return self
+        }
+        
         open func addRow(columns: [Column], anchorToBottom:Bool = false) -> Column {
             let card = GRBootstrapElement()
             card.addRow(columns: columns, widthInPixels: self.widthInPixels, anchorToBottom: anchorToBottom)
             return self
         }
         
-        public init(cardSet: GRCardSet, colWidth:ColWidth, anchorToBottom:Bool = false) {
+        public init(cardSet: GRCardSet, xsColWidth:ColWidth, anchorToBottom:Bool = false) {
             self.cardSet = cardSet
-            self.columnWidthForClassSizes = cardSet.columnWidthForClassSizes
-            self.colWidth = colWidth
+            self.columnWidthForClassSizes[.xs] = xsColWidth
             self.anchorToBottom = anchorToBottom
             super.init(frame: .zero)
             self.addSubview(cardSet.content)
@@ -962,7 +957,6 @@ open class GRBootstrapElement : UIView {
         required public init?(coder: NSCoder) {
             self.cardSet = GRCardSet(content: UIView())
             self.widthInPixels = 0
-            self.colWidth = .One
             self.anchorToBottom = false
             super.init(coder: coder)
         }
