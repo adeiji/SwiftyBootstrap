@@ -17,8 +17,8 @@ open class GRTabController: UIViewController {
     /// The current view being displayed on the screen
     open weak var mainView:UIView?
         
-    /// The hieght of this bar
-    static let barHeight:CGFloat = Style.isIPhoneX() ? 75 :  50
+    /// The height of this bar
+    static let barHeight:CGFloat = Style.getScreenSize() == .sm ? ( Style.isIPhoneX() ? 75 : 50) : 75
     
     /// The number of buttons displayed on the footer view
     public let numberOfButtons:Int

@@ -18,7 +18,6 @@ open class ButtonRow: UIView {
     open var buttons = [UIButton]()
     open weak var rightButton:UIButton?
     open var kMargin = 5
-    var type:ButtonRowType = .Instagram
     public let numberOfButtons:Int
     
     /// Stores all the buttons with the key being their title, this way we can retrieve them at will
@@ -27,6 +26,7 @@ open class ButtonRow: UIView {
     public init(numberOfButtons: Int) {
         self.numberOfButtons = numberOfButtons
         super.init(frame: .zero)
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     required public init?(coder: NSCoder) {
@@ -34,21 +34,13 @@ open class ButtonRow: UIView {
         super.init(coder: coder)
     }
     
-    open func addButton (button: UIButton, key:String? = nil, height: CGFloat? = nil) {
+    @objc func rotated () {
+        self.draw()
+    }
+    
+    open func addButton (button: UIButton, key:String? = nil) {
         self.addSubview(button)
-        if type == .Instagram {
-            button.snp.makeConstraints { (make) in
-                if buttons.count > 0 {
-                    make.left.equalTo((buttons.last?.snp.right)!)
-                } else {
-                    make.left.equalTo(self)
-                }
-                
-                make.top.equalTo(self)
-                make.width.equalTo(Sizes.smallButton.rawValue)
-                make.height.equalTo(height ?? Sizes.smallButton.rawValue)
-            }
-        }
+
         self.buttons.append(button)
         
         // If the user has set a key for this button, then store it in the dictionary
@@ -56,37 +48,38 @@ open class ButtonRow: UIView {
             self.buttonStorage[key] = button
         }
         
-        if type == .EqualWidths {
-            var counter = 0
-            var previousButton:UIButton!
-            for button in self.buttons {
-                button.snp.remakeConstraints({ (make) in
-                    if button == buttons.first {
-                        make.left.equalTo(self)
-                    } else {
-                        make.left.equalTo(previousButton.snp.right)
-                    }
-                    
-                    let width = UIScreen.main.bounds.width / CGFloat(integerLiteral: self.numberOfButtons)
-                    make.width.equalTo(width)
-                    
-                    if button == buttons.last {
-                        make.right.equalTo(self)
-                    } else {
-                        make.right.equalTo(self.buttons[counter + 1].snp.left)
-                    }
-                    
-                    make.top.equalTo(self)
-                    make.bottom.equalTo(self)
-                })
-                
-                previousButton = button
-                counter = counter + 1
-            }
-        }
-        
+        self.draw()
         button.layoutIfNeeded()
         button.alignImageAndTitleVertically()
+    }
+    
+    private func draw () {
+        var counter = 0
+        var previousButton:UIButton!
+        for button in self.buttons {
+            button.snp.remakeConstraints({ (make) in
+                if button == buttons.first {
+                    make.left.equalTo(self)
+                } else {
+                    make.left.equalTo(previousButton.snp.right)
+                }
+                
+                let width = Style.getCorrectWidth() / CGFloat(integerLiteral: self.numberOfButtons)
+                make.width.equalTo(width)
+                
+                if button == buttons.last {
+                    make.right.equalTo(self)
+                } else {
+                    make.right.equalTo(self.buttons[counter + 1].snp.left)
+                }
+                
+                make.top.equalTo(self)
+                make.bottom.equalTo(self)
+            })
+            
+            previousButton = button
+            counter = counter + 1
+        }
     }
     
     open func addRightButton (button: UIButton) {

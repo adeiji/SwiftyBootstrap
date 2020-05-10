@@ -98,6 +98,46 @@ class Animation : UIView {
 
 open class Style {
 
+    // The sizes class will handle the sizing of the device/interface
+    public enum DeviceSizes {
+        case sm
+        case lg
+    }
+    
+    /** Get what the current screen size is, ex large, small, very large etc.  Currently on returns small or large */
+    open class func getScreenSize () -> DeviceSizes {
+        switch UIScreen.main.bounds.width {
+        case let x where x < 450:
+            return .sm
+        default:
+            return .lg
+        }
+    }
+
+    /// If in landscape mode we need the width to be whatever the highest dimension is since unfortunately sometimes the height and
+    /// the width values are switched.  So for example, in landscape if the height is reading as 1134 and the width 865, we know that we
+    /// need to use the height value since in landscape width is always greater than height
+    /// This works vice versa for portrait
+    open class func getCorrectWidth () -> CGFloat {
+        
+        let height = UIScreen.main.bounds.height
+        let width = UIScreen.main.bounds.width
+        
+        if UIApplication.shared.statusBarOrientation == .landscapeRight || UIApplication.shared.statusBarOrientation == .landscapeLeft {
+            if (height > width) {
+                return height
+            }
+            
+            return width
+        } else { // Portrait Mode
+            if (height < width) {
+                return height
+            }
+            
+            return width
+        }
+        
+    }
     
     /// Returns a random color that is within our Pinterest color scheme
     open class func getPinterestColor () -> UIColor {

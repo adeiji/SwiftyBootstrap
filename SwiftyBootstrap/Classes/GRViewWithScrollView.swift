@@ -90,6 +90,8 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
         self.containerView = containerView
     }
     
+    
+    
     /// Creates the ConferenceMainPageView UI Elements and layouts
     ///
     /// - Returns: The ConferenceMainPageView
@@ -106,8 +108,16 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
         }
         
         self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: self.containerView.bounds.size.height)
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         return self;
+    }
+    
+    @objc private func rotated () {
+        self.containerView.snp.remakeConstraints { (make) in
+            make.edges.equalTo(self.scrollView)
+            make.width.equalTo(Style.getCorrectWidth())        
+        }
     }
     
     open func updateScrollViewContentSize () {
