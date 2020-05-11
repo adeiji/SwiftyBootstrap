@@ -27,7 +27,7 @@ open class GRFooterView: ButtonRow {
         let button = Style.clearButton(
             with: title, superview: nil,
             fontSize: Style.getScreenSize() == .xs ? .verySmall : .small,
-            color: UIColor.Style.darkBlueGrey)
+            color: UIColor.Style.darkBlueGrey.dark(.lightGray))
         button.tintColor = .gray
         button.setImage(UIImage(named: imageName), for: .normal)
         

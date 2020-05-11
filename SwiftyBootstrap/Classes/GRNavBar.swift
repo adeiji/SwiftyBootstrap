@@ -54,8 +54,7 @@ open class GRNavBar:UIView {
                     make.width.equalTo(50)
                     make.height.equalTo(50)
                 }
-            }
-            
+            }            
         }
     }
     /// The height of this nav bar

@@ -26,6 +26,12 @@ open class GRTabController: UIViewController {
     /// All the view controllers that are controlled by this controller
     open var viewControllers = [String:UIViewController]()
     
+    /// The color of the footer buttons when not selected
+    private let buttonsBackgroundColor:UIColor
+    
+    /// The color of the footer buttons when selected
+    private let buttonSelectedColor:UIColor
+    
     /**
      Adds the footer to the current view
      
@@ -33,6 +39,7 @@ open class GRTabController: UIViewController {
      */
     open func addFooter () -> GRFooterView? {
         let footer = GRFooterView(superview: self.view, height: GRTabController.barHeight, numberOfButtons: self.numberOfButtons)
+        footer.backgroundColor = self.buttonsBackgroundColor
         return footer
     }
     
@@ -50,18 +57,23 @@ open class GRTabController: UIViewController {
     }
     
     override open func viewDidLoad() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = self.buttonsBackgroundColor
     }
     
-    public init(numberOfButtons:Int) {
+    public init(numberOfButtons:Int, buttonsBackgroundColor:UIColor = .white, buttonSelectedColor:UIColor = UIColor.Style.lightGray) {
         self.numberOfButtons = numberOfButtons
+        self.buttonsBackgroundColor = buttonsBackgroundColor
+        self.buttonSelectedColor = buttonSelectedColor
         super.init(nibName: nil, bundle: nil)
         self.footer = self.addFooter()
         self.mainView = self.addMainView()
+        
     }
     
     required public init?(coder: NSCoder) {
         self.numberOfButtons = 3
+        self.buttonsBackgroundColor = .white
+        self.buttonSelectedColor = UIColor.Style.lightGray
         super.init(coder: coder)
     }
     
@@ -77,6 +89,7 @@ open class GRTabController: UIViewController {
     open func addFooterButton (title: String, imageName: String, viewControllerToShow: UIViewController, addDefaultTargetClosure: Bool = true) {
         self.viewControllers[title] = viewControllerToShow
         let footerButton = GRFooterView.getFooterButton(title: title, imageName: imageName)
+        footerButton.backgroundColor = self.buttonsBackgroundColor
         self.footer?.addButton(button: footerButton, key: title)
         
         if addDefaultTargetClosure {
@@ -108,7 +121,7 @@ open class GRTabController: UIViewController {
                                     
             self.addChildViewControllerWithView(mainNavigationViewController, toView: self.mainView)
         } else { // If view controller is a UINavigationController than just add it as a child view controller
-            (viewController as? UINavigationController)?.popToRootViewController(animated: true)
+//            (viewController as? UINavigationController)?.popToRootViewController(animated: true)
             self.addChildViewControllerWithView(viewController, toView: self.mainView)
         }
     }
@@ -120,10 +133,10 @@ open class GRTabController: UIViewController {
      */
     open func highlightButton (key: String) {
         self.viewControllers.keys.forEach { [weak self] (key) in
-            self?.footer?.getButtonByKey(key: key)?.backgroundColor = .white
+            self?.footer?.getButtonByKey(key: key)?.backgroundColor = self?.buttonsBackgroundColor
         }
         
-        self.footer?.getButtonByKey(key: key)?.backgroundColor = UIColor.Style.lightGray
+        self.footer?.getButtonByKey(key: key)?.backgroundColor = self.buttonSelectedColor
     }
     
 }

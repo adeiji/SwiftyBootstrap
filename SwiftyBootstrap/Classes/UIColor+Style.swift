@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 public extension UIColor {
+    
     struct Style {
         // Hashtag Backgrounds
         public static var htPeach: UIColor  { return UIColor(red: 253/255, green: 170/255, blue: 146/255, alpha: 1) }
@@ -49,5 +50,19 @@ public extension UIColor {
         public static var lightYellow: UIColor { return UIColor(red: 249/255, green: 235/255, blue: 193/255, alpha: 1) }
         public static var lightPink: UIColor { return UIColor(red: 249/255, green: 193/255, blue: 183/255, alpha: 1) }
         public static var darkerPink: UIColor { return UIColor(red: 249/255, green: 147/255, blue: 159/255, alpha: 1) }
+    }
+    
+    /// Return the given color if dark mode, otherwise return the original color
+    func dark (_ color: UIColor) -> UIColor {
+        if #available(iOS 12.0, *) {
+            if UIScreen.main.traitCollection.userInterfaceStyle == .dark {
+                return color
+            }
+        } else {
+            // Fallback on earlier versions
+            return self
+        }
+        
+        return self
     }
 }

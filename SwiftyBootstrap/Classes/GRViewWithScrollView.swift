@@ -84,7 +84,7 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
         self.scrollView.addSubview(containerView)
         containerView.snp.makeConstraints { (make) in
             make.edges.equalTo(scrollView)
-            make.width.equalTo(UIScreen.main.bounds.width)
+            make.width.equalTo(self.superview?.bounds.width ?? UIScreen.main.bounds.width)
         }
         
         self.containerView = containerView
@@ -107,7 +107,7 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
             make.edges.equalTo(superview)
         }
         
-        self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: self.containerView.bounds.size.height)
+        self.scrollView.contentSize = CGSize(width: superview.bounds.width, height: self.containerView.bounds.size.height)
         
         return self;
     }
@@ -117,13 +117,13 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
         
         self.containerView.snp.remakeConstraints { (make) in
             make.edges.equalTo(self.scrollView)
-            make.width.equalTo(Style.getCorrectWidth())
+            make.width.equalTo(self.superview?.bounds.width ?? Style.getCorrectWidth())
         }
     }
     
     
     open func updateScrollViewContentSize () {
-        self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: self.containerView.bounds.size.height)
+        self.scrollView.contentSize = CGSize(width: self.superview?.bounds.width ?? UIScreen.main.bounds.width, height: self.containerView.bounds.size.height)
     }
     
     private func registerForKeyboardNotifications() {

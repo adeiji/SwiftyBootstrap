@@ -402,7 +402,7 @@ open class Style {
                        subheadingText:String? = nil,
                        height:CGFloat? = nil) -> GRNavBar {
         let navBar = GRNavBar()
-        navBar.backgroundColor = .white
+        navBar.backgroundColor = UIColor.white.dark(.black)
         navBar.layer.borderWidth = 0
         navBar.layer.borderColor = UIColor.Style.blueGrey.cgColor
         superview.addSubview(navBar)
