@@ -34,6 +34,10 @@ public struct BootstrapMargin {
         
     }
     
+    public static func noMargins () -> BootstrapMargin {
+        return BootstrapMargin(left: .Zero, top: .Zero, right: .Zero, bottom: .Zero)
+    }
+    
     /**
      Returns what the margin will be in pixels for the size class and the margin given
      */
@@ -66,15 +70,15 @@ public struct BootstrapMargin {
         case .Zero:
             return 0
         case .One:
-            return interval * 1
-        case .Two:
             return interval * 2
-        case .Three:
-            return interval * 3
-        case .Four:
+        case .Two:
             return interval * 4
+        case .Three:
+            return interval * 6
+        case .Four:
+            return interval * 8
         default:
-            return interval * 5
+            return interval * 10
         }
     }
 }

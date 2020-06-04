@@ -105,6 +105,7 @@ open class Margin {
 }
 
 public enum ColWidth:CGFloat {
+    case Zero = 0.0 // Don't add to the superview
     case One = 1.0
     case Two = 2.0
     case Three = 3.0
@@ -123,11 +124,11 @@ public enum ColWidth:CGFloat {
 open class GRCardSet {
     
     public let content:UIView
+    /// Newline is calculated in the addColumns method of the Row class. It is the indicator for whether to put this card (column) on a new line or not.  You should never have to set this manually.  If you want a column/card to be on a new line then use the addRow(column: []) function of the GRBootstrapElement class
     fileprivate var newLine:Bool
     private var isSquare:Bool
     fileprivate var height:CGFloat?
-    
-
+    fileprivate var anchorToViewAbove:Bool?
     
     // The margin is sure to be set in the initializer, but if we don't say that this value can be null than we can't assign the margin's card set to self since margin relies on self and you'll get an error saying trying to access self before all required properties are set
     open var margin:Margin!
@@ -163,11 +164,6 @@ open class GRCardSet {
         return self
     }
     
-    open func isNewLine (_ newLine: Bool) -> GRCardSet {
-        self.newLine = newLine
-        return self
-    }
-    
     open func getIsSquare () -> Bool {
         return self.isSquare
     }
@@ -175,6 +171,11 @@ open class GRCardSet {
     open func withName(_ name: String?) -> GRCardSet {
         self.name = name
         
+        return self
+    }
+    
+    open func anchorToViewAbove (_ shouldAnchor: Bool) -> GRCardSet {
+        self.anchorToViewAbove = shouldAnchor
         return self
     }
 }
@@ -232,12 +233,13 @@ open class GRBootstrapElement : UIView {
     /// of the superview.  This is not needed if the width of this card/element is the width of the screen
     private let customSuperview:UIView?
     
+    private var touchPoint:CGPoint?
+    
     public init(color: UIColor? = .white, anchorWidthToScreenWidth:Bool = true, margin:BootstrapMargin? = nil, superview: UIView? = nil) {
         self.anchorWidthToScreenWidth = anchorWidthToScreenWidth
         self.margin = margin ?? BootstrapMargin()
         self.customSuperview = superview
         self.customSuperview?.layoutIfNeeded()
-        
         super.init(frame: .zero)
         if let color = color {
             self.backgroundColor = color;
@@ -265,12 +267,26 @@ open class GRBootstrapElement : UIView {
      This should typically be called when the orientation of the device changes
      */
     private func redoConstraints () {
-        print("Screen Height - \(UIScreen.main.bounds.height)")
         self.rows.forEach { [weak self] (row) in
-            guard let _ = self else { return }                        
-            row.widthInPixels = Style.getCorrectWidth() * row.getWidthRatio()
+            guard let self = self else { return }
+            row.widthInPixels = self.customSuperview?.bounds.width ?? (Style.getCorrectWidth() * row.getWidthRatio())
             row.redraw()
         }
+    }
+    
+    override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+
+        let view = super.hitTest(point, with: event)
+        
+        if view == self {
+            return nil
+        }
+        
+        if view is UILabel || view is UIImageView {
+            return nil
+        }
+
+        return view
     }
         
     @discardableResult open func addRow (columns:[Column], widthInPixels:CGFloat? = nil, anchorToBottom myAnchorToBottom:Bool = false) -> GRBootstrapElement {
@@ -364,7 +380,7 @@ open class GRBootstrapElement : UIView {
     /// - Parameters:
     ///   - superview: Add the card to this superview
     ///   - margin: The margins relative to the superview
-    open func slideDown (superview:UIView, margin: CGFloat, forTimeInterval timeInterval: TimeInterval? = nil) {
+    open func slideDown (superview:UIView, margin: CGFloat, width: CGFloat? = nil, forTimeInterval timeInterval: TimeInterval? = nil) {
         
         if let timeInterval = timeInterval {
             let timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { (_) in
@@ -374,16 +390,29 @@ open class GRBootstrapElement : UIView {
         
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
-            make.left.equalTo(superview).offset(margin)
-            make.right.equalTo(superview).offset(-margin)
+            
+            if let width = width {
+                make.width.equalTo(width)
+                make.centerX.equalTo(superview)
+            } else {
+                make.left.equalTo(superview).offset(margin)
+                make.right.equalTo(superview).offset(-margin)
+            }
+            
             make.bottom.equalTo(superview.snp.top)
         }
         
         superview.layoutIfNeeded()
         
         self.snp.remakeConstraints { (make) in
-            make.left.equalTo(superview).offset(margin)
-            make.right.equalTo(superview).offset(-margin)
+            if let width = width {
+                make.width.equalTo(width)
+                make.centerX.equalTo(superview)
+            } else {
+                make.left.equalTo(superview).offset(margin)
+                make.right.equalTo(superview).offset(-margin)
+            }
+            
             self.topConstraint = make.top.equalTo(superview).offset((Sizes.smallMargin.rawValue * 3.0) + margin).constraint
         }
         
@@ -398,20 +427,39 @@ open class GRBootstrapElement : UIView {
     /// - Parameters:
     ///   - superview: Add the card to this superview
     ///   - margin: The margins relative to the superview
-    open func slideUp (superview:UIView, margin: CGFloat) {
+    ///   - width: If you want this to have a unique width, than set this value yourself.
+    open func slideUp (superview:UIView, margin: CGFloat = 0, width: CGFloat? = nil, timeInterval: TimeInterval? = nil) {
+        
+        if let timeInterval = timeInterval {
+            let timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { (_) in
+                self.slideDownAndRemove(superview: superview)
+            }
+        }
         
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
-            make.left.equalTo(superview).offset(margin)
-            make.right.equalTo(superview).offset(-margin)
+            
+            if let width = width {
+                make.width.equalTo(width)
+                make.centerX.equalTo(superview)
+            } else {
+                make.left.equalTo(superview).offset(margin)
+                make.right.equalTo(superview).offset(-margin)
+            }
+                        
             make.top.equalTo(superview.snp.bottom)
         }
         
         superview.layoutIfNeeded()
         
         self.snp.remakeConstraints { (make) in
-            make.left.equalTo(superview).offset(margin)
-            make.right.equalTo(superview).offset(-margin)
+            if let width = width {
+                make.width.equalTo(width)
+                make.centerX.equalTo(superview)
+            } else {
+                make.left.equalTo(superview).offset(margin)
+                make.right.equalTo(superview).offset(-margin)
+            }
             self.topConstraint = make.bottom.equalTo(superview).offset(-margin).constraint
         }
         
@@ -702,6 +750,21 @@ open class GRBootstrapElement : UIView {
         open func getWidthRatio () -> CGFloat {
             return self.widthRatio
         }
+                        
+        open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+
+            let view = super.hitTest(point, with: event)
+            
+            if view == self {
+                return nil
+            }
+            
+            if view is UILabel || view is UIImageView {
+                return nil
+            }
+
+            return view
+        }
         
         /**
          Add a list of elements to the Card.  This should only be called once.  If there are already elements in this Card than instead use the addElement function which will only add 1 element
@@ -714,6 +777,8 @@ open class GRBootstrapElement : UIView {
             // Store this margin for later, we'll need it when we need to redraw the elements on a screen resize
             self.margin = margin
             
+            var columns = columns
+            
             // If there's no columns than exit out this function.
             if columns.first == nil {
                 return
@@ -723,6 +788,11 @@ open class GRBootstrapElement : UIView {
             if (self.columns.count == 0) {
                 self.columns.append(contentsOf: columns)
             }
+            // If the column is set to zero for the current size class, than we don't want to add it to the superview and process it's constraints
+            // right now.  The reason this method comes after we've assigned it to the self.columns property is because we still need to keep
+            // a reference to this column because later if the screen size is changed, than we have to have access to this column in order to
+            // draw it, or to remove it again
+            columns.removeAll(where: { self.getCorrectSizeClass(column: $0) == .Zero })
             
             var columnAbove = columns.first!
             var currentXPos:CGFloat = 0
@@ -731,6 +801,10 @@ open class GRBootstrapElement : UIView {
                 // Make sure that the content hasn't accidentally been added to a view already, if so, remove the column it's a subview of
                 columns[index].cardSet.content.superview?.removeFromSuperview()
                 let column = columns[index]
+                if self.getCorrectSizeClass(column: column) == .Zero {
+                    continue
+                }
+                
                 self.addSubview(column)
                 self.addColumnConstraints(column: column, index: index, columnAbove: &columnAbove, currentXPos: &currentXPos)
             }
@@ -744,6 +818,23 @@ open class GRBootstrapElement : UIView {
             
             for index in 0...columns.count - 1 {
                 let column = self.columns[index]
+                
+                // If when drawn initially, (before a change of size class) this column was set to draw on a new line, we want to reset it because it might not need to depending on the current size of the screen.  ie, if the screen size has changed then perhaps this element used to be added to a new line, but now it will be on the same line as it's previous column
+                column.cardSet.newLine = false
+                
+                if self.getCorrectSizeClass(column: column) == .Zero {
+                    continue
+                }
+                // Since there are times where a column will have a width of .Zero, or basically shouldn't be added for a specific size, we must
+                // check to see if each column is actually added and if not then we add it now
+                if column.superview == nil {
+                    self.addSubview(column)
+                }
+                
+                if index > 0 && self.getCorrectSizeClass(column: self.columns[index - 1]) == .Twelve {
+                    column.cardSet.newLine = true
+                }
+                
                 self.addColumnConstraints(column: column, index: index, columnAbove: &columnAbove, currentXPos: &currentXPos)
             }
         }
@@ -799,10 +890,7 @@ open class GRBootstrapElement : UIView {
             // If this element is not to span across the entire screen, than we need to check to see if this element is going to go past the screen on the right side
             // and if so, set the elements newLine property to true so that it will display on a new line...
             if colWidth != .Twelve {
-                
-                // If when drawn initially this column was set to draw on a new line, we want to reset it because it might not need to depending
-                // on the current size of the screen
-                column.cardSet.newLine = false
+                                                
                 if currentXPos + width > self.widthInPixels {
                     column.cardSet.newLine = true
                     currentXPos = 0
@@ -865,7 +953,11 @@ open class GRBootstrapElement : UIView {
         }
         
         private func setCardSetsTopConstraint (column: Column, columnAbove:inout Column, index: Int, make:ConstraintMaker, currentXPos:inout CGFloat) {
-                                    
+                          
+            if (column.cardSet.anchorToViewAbove == false) {
+                return
+            }
+            
             if (column.cardSet.content == columns.first?.cardSet.content) {
                 // Set the top of this element relative to the card's top
                 make.top.equalTo(self).offset((column.cardSet.margin.topMargin ?? 0))
@@ -921,6 +1013,21 @@ open class GRBootstrapElement : UIView {
          column in a row
         */
         public let anchorToBottom:Bool
+                        
+        open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+
+            let view = super.hitTest(point, with: event)
+            
+            if view == self {
+                return nil
+            }
+            
+            if view is UILabel || view is UIImageView {
+                return nil
+            }
+
+            return view
+        }
         
         open func forSize(_ sizeClass:Style.DeviceSizes, _ colWidth:ColWidth) -> Column {
             self.columnWidthForClassSizes[sizeClass] = colWidth
@@ -933,7 +1040,7 @@ open class GRBootstrapElement : UIView {
             return self
         }
         
-        public init(cardSet: GRCardSet, xsColWidth:ColWidth, anchorToBottom:Bool = false) {
+        public init(cardSet: GRCardSet, xsColWidth:ColWidth, anchorToBottom:Bool = false, centeredHeight:CGFloat? = nil) {
             self.cardSet = cardSet
             self.columnWidthForClassSizes[.xs] = xsColWidth
             self.anchorToBottom = anchorToBottom
@@ -948,8 +1055,15 @@ open class GRBootstrapElement : UIView {
                 // The top and bottom margins will be added when the columns are added to the view because they're relative to other columns and not itself
                 make.left.equalTo(self).offset((cardSet.margin.leftMargin ?? 0))
                 make.right.equalTo(self).offset((cardSet.margin.rightMargin ?? 0) * -1)
-                make.top.equalTo(self)
-                make.bottom.equalTo(self)
+                
+                if let centeredHeight = centeredHeight {
+                    make.height.equalTo(centeredHeight)
+                    make.centerY.equalTo(self)
+                } else {
+                    make.top.equalTo(self)
+                    make.bottom.equalTo(self)
+                }
+                
             }
                         
         }

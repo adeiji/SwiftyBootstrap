@@ -20,7 +20,7 @@ open class GRContainerView : UIView {
 
 open class GRViewWithScrollView : UIView, UITextFieldDelegate {
     
-    open weak var navBar:GRNavBar!
+    open weak var navBar:GRNavBar?
     open weak var scrollView:UIScrollView!
     open weak var containerView:GRContainerView!
     open weak var activeField:UITextField?
@@ -74,7 +74,7 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
         scrollView.alwaysBounceVertical = true
         scrollView.snp.makeConstraints { (make) in
             make.left.equalTo(self)
-            make.top.equalTo(self.navBar.snp.bottom)
+            make.top.equalTo(self.navBar?.snp.bottom ?? self)
             make.right.equalTo(self)
             make.bottom.equalTo(self)
         }
@@ -96,11 +96,14 @@ open class GRViewWithScrollView : UIView, UITextFieldDelegate {
     ///
     /// - Returns: The ConferenceMainPageView
     @discardableResult
-    open func setup (superview: UIView, navBarHeaderText:String = "Graffiti") -> GRViewWithScrollView {
+    open func setup (superview: UIView, showNavBar:Bool = false, navBarHeaderText:String = "") -> GRViewWithScrollView {
         superview.addSubview(self)
         self.registerForKeyboardNotifications()
-        self.navBar = Style.navBar(withHeader: navBarHeaderText, superview: self, leftButton: nil, rightButton: nil);
-
+        
+        if showNavBar {
+            self.navBar = Style.navBar(withHeader: navBarHeaderText, superview: self, leftButton: nil, rightButton: nil);
+        }
+                
         self.addScrollViewAndContainerView()
         self.backgroundColor = .white;
         self.snp.makeConstraints { (make) in

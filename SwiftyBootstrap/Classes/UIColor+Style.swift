@@ -52,7 +52,8 @@ public extension UIColor {
         public static var darkerPink: UIColor { return UIColor(red: 249/255, green: 147/255, blue: 159/255, alpha: 1) }
     }
     
-    /// Return the given color if dark mode, otherwise return the original color
+    /// Return the given color if dark mode, otherwise return the original color.  If the iOS version is less than 12.0 than simply returns
+    /// self
     func dark (_ color: UIColor) -> UIColor {
         if #available(iOS 12.0, *) {
             if UIScreen.main.traitCollection.userInterfaceStyle == .dark {

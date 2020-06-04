@@ -32,6 +32,35 @@ open class GRTabController: UIViewController {
     /// The color of the footer buttons when selected
     private let buttonSelectedColor:UIColor
     
+    open override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand(input: "1", modifierFlags: .command, action: #selector(showNotificationsViewController)),
+            UIKeyCommand(input: "2", modifierFlags: .command, action: #selector(showScheduleViewController)),
+            UIKeyCommand(input: "3", modifierFlags: .command, action: #selector(showReaderViewController)),
+        ]
+    }
+    
+     @objc open func showNotificationsViewController () {
+        guard let viewController = self.viewControllers["Notifications"] else { return }
+        
+        self.highlightButton(key: "Notifications")
+        self.setChildViewController(viewController: viewController)
+    }
+    
+    @objc open func showScheduleViewController () {
+        guard let viewController = self.viewControllers["Schedule"] else { return }
+        
+        self.highlightButton(key: "Schedule")
+        self.setChildViewController(viewController: viewController)
+    }
+    
+    @objc open func showReaderViewController () {
+        guard let viewController = self.viewControllers["Reader"] else { return }
+        
+        self.highlightButton(key: "Reader")
+        self.setChildViewController(viewController: viewController)
+    }
+    
     /**
      Adds the footer to the current view
      

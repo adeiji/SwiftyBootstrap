@@ -13,7 +13,27 @@ import SnapKit
 public class GRCurrentDevice: UIViewController {
     
     public static let shared = GRCurrentDevice()
+    
+    /**
+     This will change with every change of layout within the app.  My meaning is, that if the user goes from say portrait to landscape, then if on a phone, that change will be going from .xs to .sm and that change will be reflected here.
+     
+     Any time you need to recieve the current size class then retrieve it here
+     */
     public var size:Style.DeviceSizes = Style.getScreenSize()
+    
+    public func getTopController () -> UIViewController? {
+        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+
+        if var topController = keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            
+            return topController
+        }
+        
+        return nil
+    }
     
 }
 
@@ -103,10 +123,55 @@ class Animation : UIView {
     func hide () {}
 }
 
+open class GRDevice {
+    
+    open class func smallerThan (_ size: Style.DeviceSizes) -> Bool {
+        let currentSize = GRCurrentDevice.shared.size
+        switch size {
+        case .sm:
+            return currentSize == .xs
+        case .md:
+            return currentSize == .xs || currentSize == .sm
+        case .lg:
+            return currentSize == .md || currentSize == .xs || currentSize == .sm
+        case .xl:
+            return currentSize == .lg || currentSize == .md || currentSize == .xs || currentSize == .sm
+        default:
+            return false
+        }
+    }
+    
+}
+
 open class Style {
 
+    public static func getTopViewController () -> UIViewController? {
+        
+        if #available(iOS 13, *) {
+            let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+
+            if var topController = keyWindow?.rootViewController {
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
+                }
+                
+                return topController
+            }
+        }
+        
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+
+            return topController
+        }
+        
+        return nil
+    }
+    
     // The sizes class will handle the sizing of the device/interface
-    public enum DeviceSizes {
+    public enum DeviceSizes: CaseIterable {
         /// iPhone width or slim view of the iPad
         case xs
         /// less than iPad full width or half of screen in landscape
@@ -724,6 +789,9 @@ open class Style {
         if let superview = superview {
             superview.addSubview(button)
         }
+        
+        button.showsTouchWhenHighlighted = true
+        
         return button;
     }
 }

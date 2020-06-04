@@ -27,10 +27,11 @@ public extension UIButton {
 
 public extension UIView {
     
+    @discardableResult
     func showLoadingNVActivityIndicatorView (color: UIColor? = nil) -> NVActivityIndicatorView {
         let activityIndicator = NVActivityIndicatorView(frame: .zero)
         activityIndicator.type = .ballClipRotate
-        activityIndicator.color = color ?? UIColor.Style.darkBlueGrey
+        activityIndicator.color = color ?? UIColor.Style.darkBlueGrey.dark(.white)
         activityIndicator.layer.zPosition = 5
         activityIndicator.startAnimating()
         self.superview?.addSubview(activityIndicator)
@@ -45,8 +46,7 @@ public extension UIView {
         
         return activityIndicator
     }
-    
-    /// Stop animation the given activityIndicatorView and remove it from the view
+        
     func showFinishedLoadingNVActivityIndicatorView (activityIndicatorView: NVActivityIndicatorView?) {
         guard
             let activityIndicatorView = activityIndicatorView
@@ -55,6 +55,17 @@ public extension UIView {
         }
         activityIndicatorView.stopAnimating()
         activityIndicatorView.removeFromSuperview()
+        self.isHidden = false
+    }
+    
+    /// Stop animation the given activityIndicatorView and remove it from the view
+    func showFinishedLoadingNVActivityIndicatorView () {
+                
+        let activityIndicatorView = self.superview?.subviews.filter({ $0 is NVActivityIndicatorView }).first as? NVActivityIndicatorView
+        
+        activityIndicatorView?.stopAnimating()
+        activityIndicatorView?.removeFromSuperview()
+        
         self.isHidden = false
     }
     
