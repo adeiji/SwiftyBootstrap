@@ -11,6 +11,35 @@ import UIKit
 
 public extension UIColor {
     
+    /// Creates a color object that generates its color data dynamically using the specified colors. For early SDKs creates light color.
+    /// - Parameters:
+    ///   - light: The color for light mode.
+    ///   - dark: The color for dark mode.
+    convenience init(light: UIColor, dark: UIColor) {
+        if #available(iOS 13.0, tvOS 13.0, *) {
+            self.init { traitCollection in
+                if traitCollection.userInterfaceStyle == .dark {
+                    return dark
+                }
+                return light
+            }
+        }
+        else {
+            self.init(cgColor: light.cgColor)
+        }
+    }
+            
+    var coreImageColor: CIColor {
+         return CIColor(color: self)
+     }
+    
+    var hex: UInt {
+        let red = UInt(coreImageColor.red * 255 + 0.5)
+        let green = UInt(coreImageColor.green * 255 + 0.5)
+        let blue = UInt(coreImageColor.blue * 255 + 0.5)
+        return (red << 16) | (green << 8) | blue
+    }
+    
     struct Style {
         // Hashtag Backgrounds
         public static var htPeach: UIColor  { return UIColor(red: 253/255, green: 170/255, blue: 146/255, alpha: 1) }
@@ -54,16 +83,8 @@ public extension UIColor {
     
     /// Return the given color if dark mode, otherwise return the original color.  If the iOS version is less than 12.0 than simply returns
     /// self
-    func dark (_ color: UIColor) -> UIColor {
-        if #available(iOS 12.0, *) {
-            if UIScreen.main.traitCollection.userInterfaceStyle == .dark {
-                return color
-            }
-        } else {
-            // Fallback on earlier versions
-            return self
-        }
-        
-        return self
+    func dark (_ darkColor: UIColor) -> UIColor {
+        return UIColor(light: self, dark: darkColor)
     }
 }
+

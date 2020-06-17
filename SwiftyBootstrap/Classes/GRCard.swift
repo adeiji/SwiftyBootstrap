@@ -195,7 +195,7 @@ open class GRCardSet {
     card.addElements(elements: [cardSet1, cardSet2])
     card.addToSuperview(superview: self.view, margin: Sizes.smallMargin.rawValue, viewAbove:nil, anchorToBottom:false)
  */
-open class GRBootstrapElement : UIView {
+open class GRBootstrapElement: UIView {
     
     open weak var header:UIView?
     

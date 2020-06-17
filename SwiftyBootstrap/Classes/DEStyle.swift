@@ -10,6 +10,39 @@ import Foundation
 import UIKit
 import SnapKit
 
+let kInterfaceStyle = "interfaceStyle"
+
+extension Notification.Name {
+    public static let ScreenSizeChanged = NSNotification.Name("ScreenSizeChanged")
+    public static let UserInterfaceStyleChanged = NSNotification.Name("UserInterfaceStyleChanged")
+}
+
+@available(iOS 12.0, *)
+open class GRBootstrapViewController: UIViewController {
+    
+    var userInterfaceStyle:UIUserInterfaceStyle? {
+        didSet {
+            if oldValue != self.userInterfaceStyle {
+                self.sendUserInterfaceStyleChangedNotification()
+            }
+        }
+    }
+    
+    open override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+                
+        self.userInterfaceStyle = UIScreen.main.traitCollection.userInterfaceStyle
+    }
+    
+    private func sendUserInterfaceStyleChangedNotification () {
+        if UIScreen.main.traitCollection.userInterfaceStyle == .light {
+            NotificationCenter.default.post(name: .UserInterfaceStyleChanged, object: nil, userInfo: [kInterfaceStyle: UIUserInterfaceStyle.light])
+        } else {
+            NotificationCenter.default.post(name: .UserInterfaceStyleChanged, object: nil, userInfo: [kInterfaceStyle: UIUserInterfaceStyle.dark])
+        }
+    }
+}
+
 public class GRCurrentDevice: UIViewController {
     
     public static let shared = GRCurrentDevice()
@@ -19,7 +52,13 @@ public class GRCurrentDevice: UIViewController {
      
      Any time you need to recieve the current size class then retrieve it here
      */
-    public var size:Style.DeviceSizes = Style.getScreenSize()
+    public var size:Style.DeviceSizes = Style.getScreenSize() {
+        didSet {
+            if oldValue != self.size {
+                NotificationCenter.default.post(name: .ScreenSizeChanged, object: nil)
+            }
+        }
+    }
     
     public func getTopController () -> UIViewController? {
         let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
@@ -191,7 +230,7 @@ open class Style {
         switch width {
         case let x where x <= 450: // iPhone Width or the slim view of the iPad
             return .xs
-        case let x where x < 768: // less than iPad full width so half of screen in landscape
+        case let x where x <= 768: // less than iPad full width so half of screen in landscape if on an iPad Pro 12.9inch, on the normal size iPad this is portrait mode
             return .sm
         case let x where x > 768 && x < 1024: // It's the portrait of an iPad
             return .md
