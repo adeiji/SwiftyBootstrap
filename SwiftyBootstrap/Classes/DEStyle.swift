@@ -552,22 +552,6 @@ open class Style {
         }
         navBar.addSubview(myRightButton!)
         
-        if let rightButton = rightButton as? GRButton {
-            rightButton.snp.makeConstraints({ (make) in
-                make.right.equalTo(navBar)
-                make.centerY.equalTo(headerLabel)
-                make.width.equalTo(60)
-                make.height.equalTo(60)
-            })
-        } else {
-            myRightButton!.snp.makeConstraints({ (make) in
-                make.right.equalTo(navBar).offset(-Sizes.smallMargin.rawValue)
-                make.centerY.equalTo(headerLabel)
-                make.width.equalTo(65)
-                make.height.equalTo(50)
-            })
-        }
-        
         if let addRightButton = addRightButton {
             navBar.addSubview(addRightButton)
             addRightButton.snp.makeConstraints({ (make) in

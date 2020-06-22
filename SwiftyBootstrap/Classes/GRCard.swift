@@ -180,7 +180,27 @@ open class GRCardSet {
     }
 }
 
-
+fileprivate struct SnapkitMargins {
+    /// The left margin for this card
+    var left:Constraint?
+    
+    /// The right margin for this card
+    var right:Constraint?
+    
+    /// The top margin for this card
+    var top:Constraint?
+    
+    /// The bottom margin for this card
+    var bottom:Constraint?
+    
+    /// The margin constants will be reset based off of the current screen size
+    func recalculateMarginUsingBootstrapMargin (_ bootstrapMargin: BootstrapMargin) {
+        self.left?.update(offset: BootstrapMargin.getMarginInPixels(bootstrapMargin.left))
+        self.right?.update(offset: -BootstrapMargin.getMarginInPixels(bootstrapMargin.right))
+        self.top?.update(offset: BootstrapMargin.getMarginInPixels(bootstrapMargin.top))
+        self.bottom?.update(offset: -BootstrapMargin.getMarginInPixels(bootstrapMargin.bottom))
+    }
+}
 
 /// A GRCard is a basically a container that contains elements organized in a very specific way
 /// They can be stacked horizontally or vertically
@@ -235,6 +255,9 @@ open class GRBootstrapElement: UIView {
     
     private var touchPoint:CGPoint?
     
+    /// Store the margin snapkit constraints for this bootstrap element.  We store this value so that we can update it later in case there is a screen size change
+    private var snapkitMargins:SnapkitMargins?
+            
     public init(color: UIColor? = .white, anchorWidthToScreenWidth:Bool = true, margin:BootstrapMargin? = nil, superview: UIView? = nil) {
         self.anchorWidthToScreenWidth = anchorWidthToScreenWidth
         self.margin = margin ?? BootstrapMargin()
@@ -246,7 +269,6 @@ open class GRBootstrapElement: UIView {
         } else {
             self.backgroundColor = .white
         }
-        
     }
     
     open override func layoutSubviews() {
@@ -261,12 +283,13 @@ open class GRBootstrapElement: UIView {
         self.customSuperview = nil
         super.init(coder: aDecoder)
     }
-    
+            
     /**
-     Redo all the constraints
+     Redo all the constraints for this element and all it's rows and each row's columns
      This should typically be called when the orientation of the device changes
      */
     private func redoConstraints () {
+        self.snapkitMargins?.recalculateMarginUsingBootstrapMargin(self.margin)
         self.rows.forEach { [weak self] (row) in
             guard let self = self else { return }
             row.widthInPixels = self.customSuperview?.bounds.width ?? (Style.getCorrectWidth() * row.getWidthRatio())
@@ -480,14 +503,17 @@ open class GRBootstrapElement: UIView {
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
             
+            self.snapkitMargins = SnapkitMargins()
+            
             let leftMargin = BootstrapMargin.getMarginInPixels(self.margin.left)
             let rightMargin = BootstrapMargin.getMarginInPixels(self.margin.right)
             
-            make.left.equalTo(superview).offset(leftMargin)
-            make.right.equalTo(superview).offset(-(rightMargin))
+            self.snapkitMargins?.left = make.left.equalTo(superview).offset(leftMargin).constraint
+            self.snapkitMargins?.right = make.right.equalTo(superview).offset(-(rightMargin)).constraint
             
             if let viewAbove = viewAbove {
                 self.topConstraint = make.top.equalTo(viewAbove.snp.bottom).offset(BootstrapMargin.getMarginInPixels(self.margin.top)).constraint
+                self.snapkitMargins?.top = self.topConstraint
             } else {
                 let topMargin = BootstrapMargin.getMarginInPixels(self.margin.top)
                 self.topConstraint = make.top.equalTo(superview).offset(topMargin).constraint
@@ -495,7 +521,7 @@ open class GRBootstrapElement: UIView {
             
             if anchorToBottom {
                 let bottomMargin = BootstrapMargin.getMarginInPixels(self.margin.bottom)
-                make.bottom.equalTo(superview).offset(-(bottomMargin))
+                self.snapkitMargins?.bottom = make.bottom.equalTo(superview).offset(-(bottomMargin)).constraint
             }
         }
         

@@ -55,18 +55,20 @@ open class ButtonRow: UIView {
     
     private func draw () {
         var counter = 0
+        
         var previousButton:UIButton!
         for button in self.buttons {
             button.snp.remakeConstraints({ (make) in
+                
+                let width = Style.getCorrectWidth() / CGFloat(integerLiteral: self.numberOfButtons)
+                                
                 if button == buttons.first {
                     make.left.equalTo(self)
                 } else {
                     make.left.equalTo(previousButton.snp.right)
+                    make.width.equalTo(buttons.first ?? width)
                 }
-                
-                let width = Style.getCorrectWidth() / CGFloat(integerLiteral: self.numberOfButtons)
-                make.width.equalTo(width)
-                
+                                                
                 if button == buttons.last {
                     make.right.equalTo(self)
                 } else {
