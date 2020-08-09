@@ -18,7 +18,7 @@ extension Notification.Name {
 }
 
 @available(iOS 12.0, *)
-open class GRBootstrapViewController: UIViewController {
+open class GRBootstrapViewController: GRTutorialViewController {
     
     var userInterfaceStyle:UIUserInterfaceStyle? {
         didSet {
@@ -30,7 +30,6 @@ open class GRBootstrapViewController: UIViewController {
     
     open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-                
         self.userInterfaceStyle = UIScreen.main.traitCollection.userInterfaceStyle
     }
     
@@ -41,6 +40,7 @@ open class GRBootstrapViewController: UIViewController {
             NotificationCenter.default.post(name: .UserInterfaceStyleChanged, object: nil, userInfo: [kInterfaceStyle: UIUserInterfaceStyle.dark])
         }
     }
+
 }
 
 public class GRCurrentDevice: UIViewController {

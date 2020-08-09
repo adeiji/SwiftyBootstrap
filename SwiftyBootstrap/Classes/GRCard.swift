@@ -1066,7 +1066,7 @@ open class GRBootstrapElement: UIView {
             return self
         }
         
-        public init(cardSet: GRCardSet, xsColWidth:ColWidth, anchorToBottom:Bool = false, centeredHeight:CGFloat? = nil) {
+        public init(cardSet: GRCardSet, xsColWidth:ColWidth, anchorToBottom:Bool = false, centeredHeight:CGFloat? = nil, centeredWidth:CGFloat? = nil) {
             self.cardSet = cardSet
             self.columnWidthForClassSizes[.xs] = xsColWidth
             self.anchorToBottom = anchorToBottom
@@ -1078,10 +1078,15 @@ open class GRBootstrapElement: UIView {
                 // If we added margins to the Columns than it would in a sense increase the size of the columns and cause issues with the grid layout.
                 // Look at the documentation for leftMargin and rightMargin in the Margin class for more information
                 
-                // The top and bottom margins will be added when the columns are added to the view because they're relative to other columns and not itself
-                make.left.equalTo(self).offset((cardSet.margin.leftMargin ?? 0))
-                make.right.equalTo(self).offset((cardSet.margin.rightMargin ?? 0) * -1)
-                
+                if let centeredWidth = centeredWidth {
+                    make.width.equalTo(centeredWidth)
+                    make.centerX.equalTo(self)
+                } else {
+                    // The top and bottom margins will be added when the columns are added to the view because they're relative to other columns and not itself
+                    make.left.equalTo(self).offset((cardSet.margin.leftMargin ?? 0))
+                    make.right.equalTo(self).offset((cardSet.margin.rightMargin ?? 0) * -1)
+                }
+                                
                 if let centeredHeight = centeredHeight {
                     make.height.equalTo(centeredHeight)
                     make.centerY.equalTo(self)

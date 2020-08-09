@@ -3,5 +3,6 @@ target 'SwiftyBootstrap_Tests' do
   pod 'SwiftyBootstrap', :path => '../'
 
   pod 'SnapKit'
+  pod 'PodAsset'
   
 end
