@@ -717,6 +717,20 @@ open class Style {
         return userView
     }
     
+    open class func label (withAttributedText attributedText: NSAttributedString, fontName: FontNames = .all, size:FontSizes = .small, color: UIColor, textAlignment: NSTextAlignment = .left) -> UILabel {
+        let label = self.label(withText: "", fontName: fontName, size: size, superview: nil, color: color)
+        label.attributedText = attributedText
+        
+        return label
+    }
+    
+    open class func label (withLocalizedText localizedText: String, localizedComment: String, fontName: FontNames = .all, size:FontSizes = .small, color: UIColor, textAlignment: NSTextAlignment = .left) -> UILabel {
+        let localizedString = NSLocalizedString(localizedText, comment: localizedComment)
+        print("NSLocalizedString(\"\(localizedText)\", comment: \"\(localizedComment)\")")
+        let label = self.label(withText: localizedString, fontName: fontName, size: size, superview: nil, color: color)
+        return label
+    }
+    
     /**
      Gets a label with no constraints added, but if a superview is provided it will be added to the superview
      */

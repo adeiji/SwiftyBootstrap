@@ -15,7 +15,7 @@ open class GRTutorialViewController: UIViewController, GRTutorial {
     
     public var currentTutorialPosition: Int = 0
     
-    weak var tutorialView:UIView?
+    public weak var tutorialView:UIView?
     
     public var tutorialMode:Bool = false
     

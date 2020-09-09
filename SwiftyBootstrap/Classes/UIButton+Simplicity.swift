@@ -11,6 +11,7 @@ import UIKit
 
 public extension UIButton {
     
+    @discardableResult
     func image (_ name: String) -> UIButton {
         self.setImage(UIImage(named: name), for: .normal)
         return self
