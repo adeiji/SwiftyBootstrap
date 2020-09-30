@@ -335,6 +335,7 @@ open class GRBootstrapElement: UIView {
         let rightMargin = BootstrapMargin.getMarginInPixels(self.margin.right)
         
         row.widthInPixels = row.widthInPixels - leftMargin - rightMargin
+        row.anchorWidthToScreenWidth = self.anchorWidthToScreenWidth
         row.addColumns(columns: columns, margin: self.margin)
         self.rows.append(row)
         
@@ -858,7 +859,9 @@ open class GRBootstrapElement: UIView {
                 }
                 
                 if index > 0 && self.getCorrectSizeClass(column: self.columns[index - 1]) == .Twelve {
-                    column.cardSet.newLine = true
+                    if (self.anchorWidthToScreenWidth == true) {
+                        column.cardSet.newLine = true
+                    }
                 }
                 
                 self.addColumnConstraints(column: column, index: index, columnAbove: &columnAbove, currentXPos: &currentXPos)
@@ -916,9 +919,11 @@ open class GRBootstrapElement: UIView {
             // If this element is not to span across the entire screen, than we need to check to see if this element is going to go past the screen on the right side
             // and if so, set the elements newLine property to true so that it will display on a new line...
             if colWidth != .Twelve {
-                                                
                 if currentXPos + width > self.widthInPixels {
-                    column.cardSet.newLine = true
+                    if (self.anchorWidthToScreenWidth) {
+                        column.cardSet.newLine = true
+                    }
+                    
                     currentXPos = 0
                 }
             } else if (colWidth == .Twelve) {
@@ -941,8 +946,10 @@ open class GRBootstrapElement: UIView {
         }
         
         private func setBottomConstraint (column:Column, make:ConstraintMaker) {
-            // Set the bottom element
-            if ((column.cardSet.content == columns.last?.cardSet.content && self.anchorLastElementToBottom == true) || column.anchorToBottom == true) {
+            
+            if (self.anchorWidthToScreenWidth == false) {
+                self.bottomConstraint = make.bottom.equalTo(self).offset((column.cardSet.margin.bottomMargin ?? 0) * -1).constraint
+            } else if ((column.cardSet.content == columns.last?.cardSet.content && self.anchorLastElementToBottom == true) || column.anchorToBottom == true) {
                 self.bottomConstraint = make.bottom.equalTo(self).offset((column.cardSet.margin.bottomMargin ?? 0) * -1).constraint
             }
         }
@@ -950,9 +957,15 @@ open class GRBootstrapElement: UIView {
         private func setWidthOrRightConstraint (column: Column, make:ConstraintMaker, colWidth:ColWidth, currentXPos:inout CGFloat) {
             // WIDTH OR RIGHT CONSTRAINT
             // Set the right contraint or the width.  If the element is full screen and we want to show the margins than we set the right constraint, otherwise we set the elements width
+            
             if (self.horizontalLayout && colWidth != .Twelve) {
                 make.width.equalTo(column.widthInPixels)
                 currentXPos += column.widthInPixels
+                
+                if (anchorWidthToScreenWidth == false && column == self.columns.last) {
+                    make.right.equalTo(self)
+                    return
+                }
             }
             else if (colWidth == .Twelve) {
                 make.right.equalTo(self)
