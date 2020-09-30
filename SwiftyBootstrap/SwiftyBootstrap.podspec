@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootstrap'
-  s.version          = '1.024.0'
+  s.version          = '1.025.2'
   s.summary          = 'Bootstrap for Swift.'
   s.swift_versions   = ['5.0']
 
@@ -41,5 +41,6 @@ My own version of Bootstrap written for Swift and iOS.
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
   s.dependency 'SnapKit'
+  s.dependency 'PodAsset'
   s.dependency 'NVActivityIndicatorView'
 end

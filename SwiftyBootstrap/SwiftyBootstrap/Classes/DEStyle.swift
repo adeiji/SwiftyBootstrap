@@ -18,7 +18,7 @@ extension Notification.Name {
 }
 
 @available(iOS 12.0, *)
-open class GRBootstrapViewController: UIViewController {
+open class GRBootstrapViewController: GRTutorialViewController {
     
     var userInterfaceStyle:UIUserInterfaceStyle? {
         didSet {
@@ -30,7 +30,6 @@ open class GRBootstrapViewController: UIViewController {
     
     open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-                
         self.userInterfaceStyle = UIScreen.main.traitCollection.userInterfaceStyle
     }
     
@@ -41,6 +40,7 @@ open class GRBootstrapViewController: UIViewController {
             NotificationCenter.default.post(name: .UserInterfaceStyleChanged, object: nil, userInfo: [kInterfaceStyle: UIUserInterfaceStyle.dark])
         }
     }
+
 }
 
 public class GRCurrentDevice: UIViewController {
@@ -715,6 +715,20 @@ open class Style {
         userView.imageView = imageView
         
         return userView
+    }
+    
+    open class func label (withAttributedText attributedText: NSAttributedString, fontName: FontNames = .all, size:FontSizes = .small, color: UIColor, textAlignment: NSTextAlignment = .left) -> UILabel {
+        let label = self.label(withText: "", fontName: fontName, size: size, superview: nil, color: color)
+        label.attributedText = attributedText
+        
+        return label
+    }
+    
+    open class func label (withLocalizedText localizedText: String, localizedComment: String, fontName: FontNames = .all, size:FontSizes = .small, color: UIColor, textAlignment: NSTextAlignment = .left) -> UILabel {
+        let localizedString = NSLocalizedString(localizedText, comment: localizedComment)
+        print("NSLocalizedString(\"\(localizedText)\", comment: \"\(localizedComment)\")")
+        let label = self.label(withText: localizedString, fontName: fontName, size: size, superview: nil, color: color)
+        return label
     }
     
     /**
