@@ -1,8 +1,20 @@
 use_frameworks!
 target 'SwiftyBootstrap_Tests' do
+  
   pod 'SwiftyBootstrap', :path => '../'
-
   pod 'SnapKit'
   pod 'PodAsset'
   
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+         target.build_configurations.each do |config|
+             config.build_settings['CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF'] = 'NO'
+             config.build_settings['DEBUG_INFORMATION_FORMAT'] = 'dwarf-with-dsym'
+             config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+         end
+    end
+  end
+  
 end
+
+

@@ -1,6 +1,6 @@
 {
   "name": "SwiftyBootstrap",
-  "version": "1.024.0",
+  "version": "1.025.2",
   "summary": "Bootstrap for Swift.",
   "swift_versions": [
     "5.0"
@@ -16,7 +16,7 @@
   },
   "source": {
     "git": "https://github.com/adeiji/SwiftyBootstrap.git",
-    "tag": "1.024.0"
+    "tag": "1.025.2"
   },
   "platforms": {
     "ios": "11.0"
