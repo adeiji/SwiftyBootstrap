@@ -3,7 +3,7 @@ PODS:
     - NVActivityIndicatorView/Presenter (= 4.8.0)
   - NVActivityIndicatorView/Presenter (4.8.0)
   - PodAsset (1.0.0)
-  - SnapKit (4.2.0)
+  - SnapKit (5.0.1)
   - SwiftyBootstrap (1.025.2):
     - NVActivityIndicatorView
     - PodAsset
@@ -17,6 +17,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - NVActivityIndicatorView
+  trunk:
     - PodAsset
     - SnapKit
 
@@ -27,7 +28,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
   PodAsset: c2c2b20013c1edf698fea2bacba6e75a638537a2
-  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyBootstrap: ef8850a401b16c2d49e813e18636cb31eb9c672b
 
 PODFILE CHECKSUM: 095af04d1603dd33d0cf11266d65b73cc0716eb4
