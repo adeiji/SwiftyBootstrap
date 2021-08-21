@@ -407,7 +407,7 @@ open class GRBootstrapElement: UIView {
     open func slideDown (superview:UIView, margin: CGFloat, width: CGFloat? = nil, forTimeInterval timeInterval: TimeInterval? = nil) {
         
         if let timeInterval = timeInterval {
-            let timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { (_) in
+            Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { (_) in
                 self.slideUpAndRemove(superview: superview)
             }
         }
@@ -455,7 +455,7 @@ open class GRBootstrapElement: UIView {
     open func slideUp (superview:UIView, margin: CGFloat = 0, width: CGFloat? = nil, timeInterval: TimeInterval? = nil) {
         
         if let timeInterval = timeInterval {
-            let timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { (_) in
+            Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { (_) in
                 self.slideDownAndRemove(superview: superview)
             }
         }
