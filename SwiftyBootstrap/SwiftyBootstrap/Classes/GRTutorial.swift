@@ -19,27 +19,37 @@ public enum TutorialMessageLocation {
 public struct TutorialStep {
     
     /// The element to highlight
-    let element:UIView?
+    public let element:UIView?
     
     /// The text to display to the user
-    let message:String
+    public let message:NSMutableAttributedString
     
     /// Where to display the message relative to the element
-    let messageLocation:TutorialMessageLocation
+    public let messageLocation:TutorialMessageLocation
     
-    var showNavButtons:Bool = false
+    /**
+     Whether or not to show a navigation button for this step
+     
+     Currently the nav button is only a next button, but in future releases it will also be a back button
+     */
+    public var showNavButtons:Bool = false
     
-    var fullWidth:Bool = false
+    // Whether this step should be shown full width on the screen
+    public var fullWidth:Bool = false
     
-    var highlightContent:Bool = false
+    // Are we highlighting content, for example the button
+    public var highlightContent:Bool = false
     
-    var customButtonAction:TutorialButtonAction = nil
+    // What custom action do you want to have happen when they press the button
+    public var customButtonAction:TutorialButtonAction = nil
     
-    var showOnTop:Bool = false
+    // Should the tutorial be shown at the top of the screen?
+    public var showOnTop:Bool = false
     
-    var showArrow:Bool = true
+    // Should you show an arrow prompting the user to move forward?
+    public var showArrow:Bool = true
     
-    public init(element: UIView?, message:String, messageLocation: TutorialMessageLocation, showNavButtons:Bool = false, fullWidth: Bool = false, highlightContent:Bool = false, customButtonAction:TutorialButtonAction = nil, showOnTop:Bool = false, showArrow:Bool = false) {
+    public init(element: UIView?, message:NSMutableAttributedString, messageLocation: TutorialMessageLocation, showNavButtons:Bool = false, fullWidth: Bool = false, highlightContent:Bool = false, customButtonAction:TutorialButtonAction = nil, showOnTop:Bool = false, showArrow:Bool = false) {
         self.element = element
         self.message = message
         self.messageLocation = messageLocation
@@ -50,7 +60,6 @@ public struct TutorialStep {
         self.showOnTop = showOnTop
         self.showArrow = showArrow
     }
-    
 }
 
 public typealias TutorialButtonAction = (() -> Void)?
@@ -70,7 +79,8 @@ public protocol GRTutorial: GRTutorialViewController {
 
 public extension GRTutorial {
     
-    private func showStep (_ step: TutorialStep, superview:UIView? = nil) {
+    @discardableResult
+    func showStep (_ step: TutorialStep, superview:UIView? = nil) -> TutorialStepView {
         
         let transparentView = TutorialStepView(fullWidthMask: step.fullWidth)
         transparentView.transparentHoleView = step.element
@@ -134,13 +144,15 @@ public extension GRTutorial {
                 }
             }
         }
+        
+        return transparentView
     }
     
     func showTutorial (_ superview: UIView? = nil) {
         guard let step = self.tutorialSteps.first else { return }
         self.showStep(step)
     }
-    
+        
     func addTutorialStep (_ step: TutorialStep) {
         self.tutorialSteps.append(step)
     }
@@ -149,11 +161,39 @@ public extension GRTutorial {
 
 public class TutorialStepView: UIView {
     
+    /**
+     This is the view that acts as the hole on the transparent view
+     
+     On this view, there is typically only one area that does not display an overlay, and that is the element that you want pressed.  This view is the actual view that acts as the hole so to speak.
+     
+     *See the draw() method of this class to see how it works.*
+     */
     @IBOutlet weak var transparentHoleView: UIView!
     
-    var maskElement:UIView?
+    /**
+     The element that you want to reveal to the user to prompt them to press it
+     */
+    open var maskElement:UIView?
     
+    /**
+     Whether or not the user should be able to view the entire step view without any partially transparent black view in front
+     
+     The mask is used to reveal what we want the user to press typically. For example, if you want the user to press a specific button, than everything will have a overlay view over it except for the button you want to have pressed.
+     */
     let fullWidthMask:Bool
+    
+    /**
+     
+     The next button that allows the user to go to the next step of the tutorial.
+     
+     This is wrapped inside of a GRBootstrapElement, so make sure that you compensate for that if you're doing any UI adjustments or working with AutoLayout
+        
+     *This button should be the bottom most element on the screen.  If it isn't, please update this documentation.*
+     */
+    open weak var nextButton:UIImageView?
+    
+    /** Reponsible for showing the main message to the user */
+    open weak var messageLabel:UILabel?
     
     init(fullWidthMask: Bool = false) {
         self.fullWidthMask = fullWidthMask
@@ -161,7 +201,6 @@ public class TutorialStepView: UIView {
     }
     
     func addNavButtons (infoCard: GRBootstrapElement, location: TutorialMessageLocation) -> TutorialButtons {
-        
         let nextButton = Style.clearButton(with: "", superview: nil, backgroundColor: UIColor.Style.htDarkPurple).image("next")
         nextButton.layer.borderWidth = 0.0
         
@@ -173,8 +212,11 @@ public class TutorialStepView: UIView {
     }
     
     private func showStepWithNoHighlightedElement (infoCard: GRBootstrapElement, step:TutorialStep) -> TutorialButtons? {
+        let messageLabel = Style.label(withText: "", size: .medium, superview: nil, color: .white, textAlignment: .center)
+        messageLabel.text = step.message.string
+        
         infoCard.addRow(columns: [
-            Column(cardSet: Style.label(withText: step.message, size: .medium, superview: nil, color: .white, textAlignment: .center).toCardSet(), xsColWidth: .Twelve)
+            Column(cardSet: messageLabel.toCardSet(), xsColWidth: .Twelve)
         ], anchorToBottom: step.showNavButtons == false)
         
         self.addSubview(infoCard)
@@ -195,11 +237,15 @@ public class TutorialStepView: UIView {
             return self.addNavButtons(infoCard: infoCard, location: step.messageLocation)
         }
         
+        self.messageLabel = messageLabel
+        
         return nil
     }
     
     private func showStepOnBottomWithHighlightedElement (infoCard: GRBootstrapElement, step: TutorialStep) -> TutorialButtons? {
         let imageView = UIImageView(image: UIImage(named: "up-arrow"))
+        let messageLabel = Style.label(withText: "", size: .medium, superview: nil, color: .white, textAlignment: .center)
+        messageLabel.attributedText = step.message
         
         if step.showArrow {
             infoCard.addRow(columns: [
@@ -208,7 +254,7 @@ public class TutorialStepView: UIView {
         }
         
         infoCard.addRow(columns: [
-            Column(cardSet: Style.label(withText: step.message, size: .medium, superview: nil, color: .white, textAlignment: .center).toCardSet(), xsColWidth: .Twelve)
+            Column(cardSet: messageLabel.toCardSet(), xsColWidth: .Twelve)
         ], anchorToBottom: step.showNavButtons == false)
         
         infoCard.addToSuperview(superview: self, viewAbove: self.maskElement)
@@ -216,6 +262,8 @@ public class TutorialStepView: UIView {
         if step.showNavButtons {
             return self.addNavButtons(infoCard: infoCard, location: step.messageLocation)
         }
+        
+        self.messageLabel = messageLabel
         
         return nil
     }
@@ -226,8 +274,11 @@ public class TutorialStepView: UIView {
         imageView.transform = CGAffineTransform(rotationAngle: degrees * CGFloat(Double.pi)/180);
         infoCard.backgroundColor = .clear
         
+        let messageLabel = Style.label(withText: "", size: .medium, superview: nil, color: .white, textAlignment: .center)
+        messageLabel.attributedText = step.message
+        
         infoCard.addRow(columns: [
-            Column(cardSet: Style.label(withText: step.message, size: .medium, superview: nil, color: .white, textAlignment: .center).toCardSet(), xsColWidth: .Twelve),
+            Column(cardSet: messageLabel.toCardSet(), xsColWidth: .Twelve),
             Column(cardSet: imageView.toCardSet().margin.top(50), xsColWidth: .Twelve, centeredWidth: 100)
         ], anchorToBottom: step.showNavButtons == false)
         
@@ -242,6 +293,9 @@ public class TutorialStepView: UIView {
         if step.showNavButtons {
             return self.addNavButtons(infoCard: infoCard, location: step.messageLocation)
         }
+        
+        self.messageLabel = messageLabel
+        self.nextButton = imageView
         
         return nil
     }

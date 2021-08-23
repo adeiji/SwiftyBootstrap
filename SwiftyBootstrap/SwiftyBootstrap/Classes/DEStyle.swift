@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import SnapKit
+import SnapKit 
 
 let kInterfaceStyle = "interfaceStyle"
 
