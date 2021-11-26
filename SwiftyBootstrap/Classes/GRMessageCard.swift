@@ -133,6 +133,7 @@ open class GRMessageCard: GRBootstrapElement {
         
         if (self.addTextField) {
             let textField = Style.wideTextField(withPlaceholder: self.textFieldPlaceholder, superview: nil, color: .black)
+            textField.autocorrectionType = .yes
             self.addRow(columns: [
                 Column(cardSet: textField.toCardSet()
                     .margin.left(25)
