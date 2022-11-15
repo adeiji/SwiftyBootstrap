@@ -8,6 +8,16 @@
 import Foundation
 import UIKit
 
+public struct SBMargin {
+    
+    public static func noMargins () -> BootstrapMargin {
+        return BootstrapMargin(left: .Zero, top: .Zero, right: .Zero, bottom: .Zero)
+    }
+    
+    public static let Five: BootstrapMargin = BootstrapMargin(left: .Five, top: .Five, right: .Five, bottom: .Five)
+    
+}
+
 /**
  Margin that it used specifically within the GRBootstrapElement class. This is the outer margin of the object
  */
@@ -34,13 +44,7 @@ public struct BootstrapMargin {
         case Five
         
     }
-    
-    public static func noMargins () -> BootstrapMargin {
-        return BootstrapMargin(left: .Zero, top: .Zero, right: .Zero, bottom: .Zero)
-    }
-    
-    public static let Five: BootstrapMargin = BootstrapMargin(left: .Five, top: .Five, right: .Five, bottom: .Five)
-    
+
     /**
      Returns what the margin will be in pixels for the size class and the margin given
      */
