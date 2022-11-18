@@ -60,6 +60,9 @@ public class GRCurrentDevice: UIViewController {
         }
     }
     
+    
+    /// A convenience method to get the current top most view controller
+    /// - Returns:The top most vieow controller
     public func getTopController () -> UIViewController? {
         let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
 
