@@ -10,8 +10,9 @@ import UIKit
 
 extension UIView {
         
-    public func withAttributes (closure: (_ view: UIView) -> Void) {
-        closure(self)
+    public func withAttributes (closure: (_ view: UIView) -> Void) -> UIView {
+        closure(self)        
+        return self
     }
     
 }
