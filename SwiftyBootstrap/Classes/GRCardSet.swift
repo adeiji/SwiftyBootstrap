@@ -13,11 +13,12 @@ open class GRCardSet {
     /// Newline is calculated in the addColumns method of the Row class. It is the indicator for whether to put this card (column) on a new line or not.  You should never have to set this manually.  If you want a column/card to be on a new line then use the addRow(column: []) function of the GRBootstrapElement class
     public var newLine:Bool
     private var isSquare:Bool
-    
-    
+        
     /// The height of the content of this card set
-    private var height:CGFloat?
-    private var anchorToViewAbove:Bool?
+    internal var height:CGFloat?
+    
+    /// Whether to anchor the content of this view to the view that's directly above it
+    internal var anchorToViewAbove:Bool?
     
     // The margin is sure to be set in the initializer, but if we don't say that this value can be null than we can't assign the margin's card set to self since margin relies on self and you'll get an error saying trying to access self before all required properties are set
     open var margin:Margin!

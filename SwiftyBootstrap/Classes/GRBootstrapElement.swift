@@ -789,7 +789,7 @@ open class GRBootstrapElement: UIView {
                 make.left.equalTo(self)
             } else {
                 make.left.equalTo(columns[index - 1].snp.right)
-            }
+            }                        
         }
 
         open func getWidth(width: CGFloat) -> CGFloat {
