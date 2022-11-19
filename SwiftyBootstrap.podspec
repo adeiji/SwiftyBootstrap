@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootstrap'
-  s.version          = '1.025.2'
+  s.version          = '1.1'
   s.summary          = 'Bootstrap for Swift.'
   s.swift_versions   = ['5.0']
 
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-My own version of Bootstrap written for Swift and iOS.
+My own version of Bootstrap written for Swift and iOS. I wrote this because I felt that iOS needed a library that made it easier to write UIs programmatically that spanned across devices.
                        DESC
 
   s.homepage         = 'https://github.com/adeiji/SwiftyBootstrap'
@@ -27,7 +27,6 @@ My own version of Bootstrap written for Swift and iOS.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'adeiji' => 'adeiji@yahoo.com' }
   s.source           = { :git => 'https://github.com/adeiji/SwiftyBootstrap.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '11.0'
 
@@ -36,11 +35,6 @@ My own version of Bootstrap written for Swift and iOS.
   s.resource_bundles = {
     'SwiftyBootstrap' => ['SwiftyBootstrap/Assets/*.xcassets']
   }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  
   s.dependency 'SnapKit', '5.0.1'
-  s.dependency 'PodAsset', '1.3.0'
-  s.dependency 'NVActivityIndicatorView', '4.8.0'
 end
