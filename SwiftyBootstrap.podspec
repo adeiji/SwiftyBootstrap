@@ -32,9 +32,5 @@ My own version of Bootstrap written for Swift and iOS. I wrote this because I fe
 
   s.source_files = 'SwiftyBootstrap/Classes/**/*'
   
-  s.resource_bundles = {
-    'SwiftyBootstrap' => ['SwiftyBootstrap/Assets/*.xcassets']
-  }
-  
   s.dependency 'SnapKit', '5.0.1'
 end
