@@ -8,22 +8,8 @@
 
 import Foundation
 import UIKit
-import SnapKit
 
-
-public extension UIView {
-    
-    /// Creates a card set from a UIView object.  This card set can then be used to add to a GRCard for clean,
-    /// simple layout purposes.  For more information look at the initializer for GRCardSet
-    func toCardSet (height:CGFloat? = nil, name:String? = nil, newline:Bool = false) -> GRCardSet {
-        return GRCardSet(
-            content: self,
-            height: height,
-            newLine: newline,
-            name: name)
-    }
-}
-
+/** This class is responsible for handling the margins of a card set. **/
 open class Margin {
     
     public var bottomMargin:CGFloat? = 10.0
@@ -75,7 +61,8 @@ open class Margin {
      
      */
     public var rightMargin:CGFloat? = 10.0
-    
+        
+    /// The card set that we're setting the margin for
     public var cardSet:GRCardSet
     
     public init(cardSet:GRCardSet) {
@@ -103,6 +90,3 @@ open class Margin {
     }
     
 }
- 
- 
-public typealias Column = GRBootstrapElement.Column

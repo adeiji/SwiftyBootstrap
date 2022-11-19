@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ColWidth:CGFloat {
+public enum ColSpan:CGFloat {
     case Zero = 0.0 // Don't add to the superview
     case One = 1.0
     case Two = 2.0

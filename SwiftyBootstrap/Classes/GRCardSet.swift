@@ -65,3 +65,16 @@ open class GRCardSet {
         return self
     }
 }
+
+public extension UIView {
+    
+    /// Creates a card set from a UIView object.  This card set can then be used to add to a GRCard for clean,
+    /// simple layout purposes.  For more information look at the initializer for GRCardSet
+    func toCardSet (height:CGFloat? = nil, name:String? = nil, newline:Bool = false) -> GRCardSet {
+        return GRCardSet(
+            content: self,
+            height: height,
+            newLine: newline,
+            name: name)
+    }
+}
