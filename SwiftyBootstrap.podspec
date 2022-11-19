@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootstrap'
-  s.version          = '1.35'
+  s.version          = '1.36'
   s.summary          = 'Bootstrap for Swift.'
   s.swift_versions   = ['5.0']
 

@@ -888,9 +888,7 @@ open class GRBootstrapElement: UIView {
         ///   - centeredHeight: Whether or not the UI element that is within this column should have a fixed height and not have the height be relative to the height of the column itself. If this value is set the height of the UI element will be fixed but it will be centered in the column
         ///   - centeredWidth: Whether or not he UI element that is within this column should have a fixed width and not have the width be relative to the width of the column itself. If this value is set the width of the UI element will be fixed and centered in the column
         /// - TODO: In the future we need to automatically anchor the last column to a row. However for right now we don't do this because a person may not want this functionality.
-        public init(_ view: UIView, xsColSpan: ColSpan, anchorToBottom: Bool = false, centeredHeight: CGFloat? = nil, centeredWidth: CGFloat? = nil) {
-            
-            let cardSet = GRCardSet(content: view)
+        public init(cardSet: GRCardSet, xsColSpan: ColSpan, anchorToBottom: Bool = false, centeredHeight: CGFloat? = nil, centeredWidth: CGFloat? = nil) {
             self.cardSet = cardSet
             self.columnWidthForClassSizes[.xs] = xsColSpan
             self.anchorToBottom = anchorToBottom
