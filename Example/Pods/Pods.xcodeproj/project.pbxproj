@@ -109,8 +109,8 @@
 		F2C817C166B2DE613222C41015A586C9 /* ConstraintMakerPriortizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A019ECE9D17F862322B62CF1470032D /* ConstraintMakerPriortizable.swift */; };
 		F343BA4E457FFDB0165492AECAEF0BCC /* ConstraintPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385E6A7EFC53360A0FF420CEAAD625BC /* ConstraintPriority.swift */; };
 		F371DE808803F629A291F4BD481579B2 /* Pods-SwiftyBootstrap_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 335060CA0EDE3BC96F16798066BA18FB /* Pods-SwiftyBootstrap_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F43496492927FE9700015DF7 /* GRCurrentDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43496482927FE9700015DF7 /* GRCurrentDevice.swift */; };
-		F434964B2927FEEF00015DF7 /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434964A2927FEEF00015DF7 /* NotificationExtensions.swift */; };
+		F4575A1229291C920045BA79 /* GRCurrentDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4575A1129291C920045BA79 /* GRCurrentDevice.swift */; };
+		F4575A1429291CC80045BA79 /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4575A1329291CC80045BA79 /* NotificationExtensions.swift */; };
 		FE29C4D2E4FC4D1BF4ABE3AC78001B3E /* NVActivityIndicatorAnimationSemiCircleSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831F8B09FB20D1FA47CC9AAD34860E3 /* NVActivityIndicatorAnimationSemiCircleSpin.swift */; };
 /* End PBXBuildFile section */
 
@@ -300,8 +300,8 @@
 		ED121C20807414079192E8644DE8D171 /* NVActivityIndicatorAnimationBallRotate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationBallRotate.swift; path = Source/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationBallRotate.swift; sourceTree = "<group>"; };
 		EE3ED17F40FED15693A6EB09AA969031 /* PodAsset.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PodAsset.h; path = Pod/Classes/PodAsset.h; sourceTree = "<group>"; };
 		F0471DFDF9EEBB6C4AEB1ACB37121D0B /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = SwiftyBootstrap/Assets/Assets.xcassets; sourceTree = "<group>"; };
-		F43496482927FE9700015DF7 /* GRCurrentDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRCurrentDevice.swift; sourceTree = "<group>"; };
-		F434964A2927FEEF00015DF7 /* NotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
+		F4575A1129291C920045BA79 /* GRCurrentDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRCurrentDevice.swift; path = SwiftyBootstrap/Classes/GRCurrentDevice.swift; sourceTree = "<group>"; };
+		F4575A1329291CC80045BA79 /* NotificationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationExtensions.swift; path = SwiftyBootstrap/Classes/NotificationExtensions.swift; sourceTree = "<group>"; };
 		F54EB1163B411D8231FD0C7C0D59F81F /* ConstraintDirectionalInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsetTarget.swift; path = Source/ConstraintDirectionalInsetTarget.swift; sourceTree = "<group>"; };
 		F5F1995E870B3D52C6CB8DF4E1F16B7C /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Source/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
 		F6B0CC524B8A93981B7CEB117837BBB8 /* NVActivityIndicatorAnimationBallGridPulse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationBallGridPulse.swift; path = Source/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationBallGridPulse.swift; sourceTree = "<group>"; };
@@ -546,6 +546,8 @@
 		AD9030005A26C55C6AC7D75CFAE81277 /* SwiftyBootstrap */ = {
 			isa = PBXGroup;
 			children = (
+				F4575A1329291CC80045BA79 /* NotificationExtensions.swift */,
+				F4575A1129291C920045BA79 /* GRCurrentDevice.swift */,
 				F0471DFDF9EEBB6C4AEB1ACB37121D0B /* Assets.xcassets */,
 				D2CFBBC464F661A2EEC4F042B59F7518 /* BootstrapMargin.swift */,
 				B9E61B1F7C64B114F8F76C8E6515AE9A /* ColSpan.swift */,
@@ -554,8 +556,6 @@
 				7F4807BC52567001F7603A09CAC99BF3 /* GRDevice.swift */,
 				B3C8386FA87769C64355A455C38C51C0 /* GRMargin.swift */,
 				84E1173C2C2B6134B66E7A95AEE501F4 /* GRMessageCard.swift */,
-				F43496482927FE9700015DF7 /* GRCurrentDevice.swift */,
-				F434964A2927FEEF00015DF7 /* NotificationExtensions.swift */,
 				72E31BFA5672A83867997A8F544400FB /* Pod */,
 				28A2FA2CBD1C874F3930EC12C9CFEDFF /* Support Files */,
 			);
@@ -964,14 +964,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ABD6AB4702E7DD042FA1D2043C85C2F /* BootstrapMargin.swift in Sources */,
-				F43496492927FE9700015DF7 /* GRCurrentDevice.swift in Sources */,
 				7F2D8D0768E48DB7147BCD4908D1D3A8 /* ColSpan.swift in Sources */,
 				C17A95BB28D3A14DCA86264F0CABAEF6 /* GRBootstrapElement.swift in Sources */,
 				BEDF0B3F5E09027203A04A25C116E559 /* GRCardSet.swift in Sources */,
 				5DC546FA48500B30107DF097477E57A3 /* GRDevice.swift in Sources */,
 				E8A24E0172C172B1AF944E90DE21E12A /* GRMargin.swift in Sources */,
+				F4575A1229291C920045BA79 /* GRCurrentDevice.swift in Sources */,
+				F4575A1429291CC80045BA79 /* NotificationExtensions.swift in Sources */,
 				B15E399E4A4DAE8DF25758CD5B8B7562 /* GRMessageCard.swift in Sources */,
-				F434964B2927FEEF00015DF7 /* NotificationExtensions.swift in Sources */,
 				51781A04F28061385B0024A239629F1E /* SwiftyBootstrap-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

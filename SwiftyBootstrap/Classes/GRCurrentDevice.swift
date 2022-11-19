@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public class GRCurrentDevice: UIViewController {
+open class GRCurrentDevice: UIViewController {
     
     public static let shared = GRCurrentDevice()
     
