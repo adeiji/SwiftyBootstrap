@@ -145,8 +145,8 @@ open class GRMessageCard: GRBootstrapElement {
             
             // TITLE
             
-            Column(cardSet: self.label(withText: title, superview: nil, color: UIColor.black)
-                .toCardSet()
+            Column(self.label(withText: title, superview: nil, color: UIColor.black)
+                .cardSet()
                 .margin.left(30)
                 .margin.right(30)
                 .margin.top(30),
@@ -154,8 +154,8 @@ open class GRMessageCard: GRBootstrapElement {
             
             // MESSAGE
             
-            Column(cardSet: messageLabel
-                .toCardSet()
+            Column(messageLabel
+                .cardSet()
                 .margin.left(30)
                 .margin.right(30)
                 .margin.top(30),
@@ -166,7 +166,8 @@ open class GRMessageCard: GRBootstrapElement {
             let textField = self.wideTextField(withPlaceholder: self.textFieldPlaceholder, superview: nil, color: .black)
             textField.autocorrectionType = .yes
             self.addRow(columns: [
-                Column(cardSet: textField.toCardSet()
+                Column(textField
+                    .cardSet()
                     .margin.left(25)
                     .margin.right(25),
                        xsColSpan: .Twelve)
@@ -178,8 +179,8 @@ open class GRMessageCard: GRBootstrapElement {
                 
                 // OKAY BUTTON
                 
-                Column(cardSet: okayButton
-                    .toCardSet()
+                Column(okayButton
+                    .cardSet()
                     .margin.bottom(10)
                     .margin.left(30)
                     .margin.right(30),
@@ -187,8 +188,8 @@ open class GRMessageCard: GRBootstrapElement {
                 
                 // CANCEL BUTTON
                 
-                Column(cardSet: cancelButton
-                .toCardSet()
+                Column(cancelButton
+                .cardSet()
                 .margin.top(0)
                 .margin.left(30)
                 .margin.right(30)
