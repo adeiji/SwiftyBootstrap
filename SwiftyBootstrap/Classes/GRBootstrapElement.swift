@@ -281,7 +281,7 @@ open class GRBootstrapElement: UIView {
                 make.right.equalTo(superview).offset(-margin)
             }
 
-            self.topConstraint = make.top.equalTo(superview).offset((Sizes.smallMargin.rawValue * 3.0) + margin).constraint
+            self.topConstraint = make.top.equalTo(superview).offset((10 * 3.0) + margin).constraint
         }
 
         UIView.animate(withDuration: 0.2) {
