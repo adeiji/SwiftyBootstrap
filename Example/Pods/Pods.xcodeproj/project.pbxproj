@@ -110,7 +110,7 @@
 		F371DE808803F629A291F4BD481579B2 /* Pods-SwiftyBootstrap_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 335060CA0EDE3BC96F16798066BA18FB /* Pods-SwiftyBootstrap_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4575A1229291C920045BA79 /* GRCurrentDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4575A1129291C920045BA79 /* GRCurrentDevice.swift */; };
 		F4575A1429291CC80045BA79 /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4575A1329291CC80045BA79 /* NotificationExtensions.swift */; };
-		F4575A1629294E460045BA79 /* UIView+WithAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4575A1529294E460045BA79 /* UIView+WithAttributes.swift */; };
+		F4575A182929763D0045BA79 /* UIView+WithAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4575A172929763D0045BA79 /* UIView+WithAttributes.swift */; };
 		FE29C4D2E4FC4D1BF4ABE3AC78001B3E /* NVActivityIndicatorAnimationSemiCircleSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831F8B09FB20D1FA47CC9AAD34860E3 /* NVActivityIndicatorAnimationSemiCircleSpin.swift */; };
 /* End PBXBuildFile section */
 
@@ -301,7 +301,7 @@
 		EE3ED17F40FED15693A6EB09AA969031 /* PodAsset.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PodAsset.h; path = Pod/Classes/PodAsset.h; sourceTree = "<group>"; };
 		F4575A1129291C920045BA79 /* GRCurrentDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRCurrentDevice.swift; path = SwiftyBootstrap/Classes/GRCurrentDevice.swift; sourceTree = "<group>"; };
 		F4575A1329291CC80045BA79 /* NotificationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationExtensions.swift; path = SwiftyBootstrap/Classes/NotificationExtensions.swift; sourceTree = "<group>"; };
-		F4575A1529294E460045BA79 /* UIView+WithAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+WithAttributes.swift"; sourceTree = "<group>"; };
+		F4575A172929763D0045BA79 /* UIView+WithAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+WithAttributes.swift"; path = "SwiftyBootstrap/Classes/UIView+WithAttributes.swift"; sourceTree = "<group>"; };
 		F54EB1163B411D8231FD0C7C0D59F81F /* ConstraintDirectionalInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsetTarget.swift; path = Source/ConstraintDirectionalInsetTarget.swift; sourceTree = "<group>"; };
 		F5F1995E870B3D52C6CB8DF4E1F16B7C /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Source/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
 		F6B0CC524B8A93981B7CEB117837BBB8 /* NVActivityIndicatorAnimationBallGridPulse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationBallGridPulse.swift; path = Source/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationBallGridPulse.swift; sourceTree = "<group>"; };
@@ -546,6 +546,7 @@
 		AD9030005A26C55C6AC7D75CFAE81277 /* SwiftyBootstrap */ = {
 			isa = PBXGroup;
 			children = (
+				F4575A172929763D0045BA79 /* UIView+WithAttributes.swift */,
 				F4575A1329291CC80045BA79 /* NotificationExtensions.swift */,
 				F4575A1129291C920045BA79 /* GRCurrentDevice.swift */,
 				D2CFBBC464F661A2EEC4F042B59F7518 /* BootstrapMargin.swift */,
@@ -557,7 +558,6 @@
 				84E1173C2C2B6134B66E7A95AEE501F4 /* GRMessageCard.swift */,
 				72E31BFA5672A83867997A8F544400FB /* Pod */,
 				28A2FA2CBD1C874F3930EC12C9CFEDFF /* Support Files */,
-				F4575A1529294E460045BA79 /* UIView+WithAttributes.swift */,
 			);
 			name = SwiftyBootstrap;
 			path = ../..;
@@ -971,7 +971,7 @@
 				F4575A1229291C920045BA79 /* GRCurrentDevice.swift in Sources */,
 				F4575A1429291CC80045BA79 /* NotificationExtensions.swift in Sources */,
 				B15E399E4A4DAE8DF25758CD5B8B7562 /* GRMessageCard.swift in Sources */,
-				F4575A1629294E460045BA79 /* UIView+WithAttributes.swift in Sources */,
+				F4575A182929763D0045BA79 /* UIView+WithAttributes.swift in Sources */,
 				51781A04F28061385B0024A239629F1E /* SwiftyBootstrap-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
