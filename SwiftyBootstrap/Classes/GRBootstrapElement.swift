@@ -353,7 +353,7 @@ open class GRBootstrapElement: UIView {
                 make.left.equalTo(superview).offset(margin)
                 make.right.equalTo(superview).offset(-margin)
             }
-            self.topConstraint = make.bottom.equalTo(superview).offset(-margin).constraint
+            self.topConstraint = make.bottom.equalTo(superview.safeAreaLayoutGuide).offset(-margin).constraint
         }
 
         UIView.animate(withDuration: 0.2) {
@@ -391,7 +391,7 @@ open class GRBootstrapElement: UIView {
 
             if anchorToBottom {
                 let bottomMargin = BootstrapMargin.getMarginInPixels(self.margin.bottom)
-                self.snapkitMargins?.bottom = make.bottom.equalTo(superview).offset(-(bottomMargin)).constraint
+                self.snapkitMargins?.bottom = make.bottom.equalTo(superview.safeAreaLayoutGuide).offset(-(bottomMargin)).constraint
             }
         }
 
