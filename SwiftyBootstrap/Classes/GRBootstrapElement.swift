@@ -32,7 +32,7 @@ fileprivate struct SnapkitMargins {
 
 
 /**
- This class allows a user to layout an object similar to how Twitter Bootstrap works, with it's elements spread across columns and rows
+ This class allows a user to layout an object similar to how Twitter Bootstrap works, with it's elements spread across columns and rows.
  
  Each bootstrap element must contain at least one row.  You can then add UI elements inside of columns to create a responsive UI.
  

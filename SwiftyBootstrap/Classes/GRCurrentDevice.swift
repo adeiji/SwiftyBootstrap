@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+
+/// Contains classes responsible for detecting the size of the current device and helper methods to handle global state
 open class GRCurrentDevice: UIViewController {
     
     public static let shared = GRCurrentDevice()

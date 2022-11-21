@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// A card set is used by GRBootstrapElement to layout UI elements on the screen using rows and columns.
 open class GRCardSet {
         
     /// The content that is to be stored in this card set

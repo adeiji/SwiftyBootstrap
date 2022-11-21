@@ -1,11 +1,11 @@
 {
   "name": "SwiftyBootstrap",
-  "version": "1.025.2",
+  "version": "1.38",
   "summary": "Bootstrap for Swift.",
   "swift_versions": [
     "5.0"
   ],
-  "description": "My own version of Bootstrap written for Swift and iOS.",
+  "description": "My own version of Bootstrap written for Swift and iOS. I wrote this because I felt that iOS needed a library that made it easier to write UIs programmatically that spanned across devices.",
   "homepage": "https://github.com/adeiji/SwiftyBootstrap",
   "license": {
     "type": "MIT",
@@ -16,26 +16,15 @@
   },
   "source": {
     "git": "https://github.com/adeiji/SwiftyBootstrap.git",
-    "tag": "1.025.2"
+    "tag": "1.38"
   },
   "platforms": {
-    "ios": "11.0"
+    "ios": "12.0"
   },
   "source_files": "SwiftyBootstrap/Classes/**/*",
-  "resource_bundles": {
-    "SwiftyBootstrap": [
-      "SwiftyBootstrap/Assets/*.xcassets"
-    ]
-  },
   "dependencies": {
     "SnapKit": [
       "5.0.1"
-    ],
-    "PodAsset": [
-      "1.3.0"
-    ],
-    "NVActivityIndicatorView": [
-      "4.8.0"
     ]
   },
   "swift_version": "5.0"
