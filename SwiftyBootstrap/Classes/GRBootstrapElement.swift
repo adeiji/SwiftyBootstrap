@@ -31,15 +31,46 @@ fileprivate struct SnapkitMargins {
 }
 
 
-/*:
-
-They can be stacked horizontally or verticall. A GRCard differs from a Stack View in that a Stack View is used to split a view into equal sizes whereas a GRCard can have elements of all sizes organized within it.
+/**
+ This class allows a user to layout an object similar to how Twitter Bootstrap works, with it's elements spread across columns and rows
  
- How to use the card
+ Each bootstrap element must contain at least one row.  You can then add UI elements inside of columns to create a responsive UI.
+ 
+ Below is an example:
 
- let card = GRCard(color: .white)
- card.addElements(elements: [cardSet1, cardSet2])
- card.addToSuperview(superview: self.view, margin: Sizes.smallMargin.rawValue, viewAbove:nil, anchorToBottom:false)
+ ```
+ card.addRow(columns: [
+     Column(UILabel().withAttributes(closure: { view in
+         let label = view as? UILabel
+         label?.text = "This is just an example."
+     })
+     .cardSet(),
+         /* When the screen is very
+          small like an iPhone in
+          portrait or on the side of the screen in
+          split screen mode then
+          span the full width of
+          the screen */
+         xsColSpan: .Twelve)
+         /** When the screen is
+          smaller like an iPhone
+          in landscape mode or half
+          of the screen in split
+          screen mode then span
+          half the width of the
+          screen */
+         .forSize(.sm, .Six)
+         /** When the screen is
+          medium size like an
+          iPad in portrait mode
+          then the width of this
+          label will be 1/4 the
+          width of the screen */
+         .forSize(.md, .Three)
+ ], anchorToBottom: true)
+ 
+ card.addToSuperview(superview: self.view)
+ ```
 */
 open class GRBootstrapElement: UIView {
 
@@ -409,8 +440,18 @@ open class GRBootstrapElement: UIView {
         return self.getOrRemoveItemWithName(name, elements: self.elements, superCardElements: superCardElements)
     }
 
-    @discardableResult
-    private func getOrRemoveItemWithName(_ name: String, elements: [GRCardSet], superCardElements: [GRCardSet]? = nil, cardToRemoveElementFrom: GRBootstrapElement? = nil, shouldRemoveCard: Bool = false) -> GRCardSet? {
+    /// Gets a card set with given name and either only returns it or removes it.
+    ///
+    /// - Important:
+    /// When you created the card set, you need to have given the card set a name so that you can retrieve it whenever you need to.
+    /// - Parameters:
+    ///   - name: The name of the card set you want to get or remove
+    ///   - elements: The card sets in which to search through
+    ///   - superCardElements: The parents of any of the card sets (this is a recursive function, so this parameter is set only when the function needs to check the superviews for the name of this element)
+    ///   - cardToRemoveElementFrom: The bootstrap element to remove this element from
+    ///   - shouldRemoveCard: Whether or not to remove the card or just return it
+    /// - Returns: The card with the given name
+    @discardableResult private func getOrRemoveItemWithName(_ name: String, elements: [GRCardSet], superCardElements: [GRCardSet]? = nil, cardToRemoveElementFrom: GRBootstrapElement? = nil, shouldRemoveCard: Bool = false) -> GRCardSet? {
 
         var myElements = elements
         if myElements.count > 0 {
@@ -462,6 +503,9 @@ open class GRBootstrapElement: UIView {
         return nil
     }
 
+    
+    /// Remove an element of a given name
+    /// - Parameter name: The name the developer gave the element that needs to now be removed
     open func removeElementNamed(_ name: String) {
         self.getOrRemoveItemWithName(
                 name,
@@ -726,6 +770,13 @@ open class GRBootstrapElement: UIView {
             }
         }
 
+        
+        /// Set the constraint for a columns width or for the constraint relative to an item on it's right
+        /// - Parameters:
+        ///   - column: The column to add constraints for
+        ///   - make: The object which allows us to make constraints
+        ///   - colSpan: How many columns this column should span across
+        ///   - currentXPos: The current x position that we're at when placing colums on the screen
         private func setWidthOrRightConstraint(column: Column, make: ConstraintMaker, colSpan: ColSpan, currentXPos: inout CGFloat) {
             // WIDTH OR RIGHT CONSTRAINT
             // Set the right contraint or the width.  If the element is full screen and we want to show the margins than we set the right constraint, otherwise we set the elements width
@@ -751,6 +802,11 @@ open class GRBootstrapElement: UIView {
             }
         }
 
+        
+        /// Set the height of a column
+        /// - Parameters:
+        ///   - column: The column to set the height for
+        ///   - make: The object that allows us to make constraints
         private func setHeight(column: Column, make: ConstraintMaker) {
             // If element is a text field than give it a specific height
             if (column.cardSet.content.isKind(of: UITextField.self)) {
@@ -762,6 +818,14 @@ open class GRBootstrapElement: UIView {
             }
         }
 
+        
+        /// Set the top constraint for a column
+        /// - Parameters:
+        ///   - column: The column to set the top constraint for
+        ///   - columnAbove: The column above the first column
+        ///   - index: What index in the array is this column
+        ///   - make: The object that allows us to make constraints
+        ///   - currentXPos: The current x position that we're at in placing the columns
         private func setCardSetsTopConstraint(column: Column, columnAbove: inout Column, index: Int, make: ConstraintMaker, currentXPos: inout CGFloat) {
 
             if (column.cardSet.anchorToViewAbove == false) {
@@ -783,6 +847,12 @@ open class GRBootstrapElement: UIView {
             }
         }
 
+        /// Set the left constraint for a column
+        /// - Parameters:
+        ///   - column: The column to set the left constraint for
+        ///   - index: What index in the array is this column
+        ///   - make: The object that allows us to make constraints
+        ///   - currentXPos: The current x position that we're at in placing the columns
         private func setCardSetsLeftConstraint(column: Column, index: Int, make: ConstraintMaker, currentXPos: inout CGFloat) {
             if (column.cardSet.newLine || index == 0) {
                 // Set the left margins relative to the card
@@ -930,4 +1000,6 @@ open class GRBootstrapElement: UIView {
     }
 }
 
+/// Type alias for a GRBootstrapElement.Column
+/// For more information see the documentation for GRBootstrapElement.Column
 public typealias Column = GRBootstrapElement.Column

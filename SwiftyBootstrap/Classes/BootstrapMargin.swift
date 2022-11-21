@@ -18,16 +18,23 @@ public struct BootstrapMargin {
     let right:Margin
     let bottom:Margin
         
+    
+    /// A bootstrap margin that it set to a size of five (this is then calculated to actual pixels)
     public static let five: BootstrapMargin = BootstrapMargin(left: .Five, top: .Five, right: .Five, bottom: .Five)
     
+    /// A bootstrap margin that it set to a size of four (this is then calculated to actual pixels)
     public static let four: BootstrapMargin = BootstrapMargin(left: .Four, top: .Four, right: .Four, bottom: .Four)
     
+    /// A bootstrap margin that it set to a size of three (this is then calculated to actual pixels)
     public static let three: BootstrapMargin = BootstrapMargin(left: .Three, top: .Three, right: .Three, bottom: .Three)
     
+    /// A bootstrap margin that it set to a size of two (this is then calculated to actual pixels)
     public static let two: BootstrapMargin = BootstrapMargin(left: .Two, top: .Two, right: .Two, bottom: .Two)
     
+    /// A bootstrap margin that it set to a size of one (this is then calculated to actual pixels)
     public static let one: BootstrapMargin = BootstrapMargin(left: .One, top: .One, right: .One, bottom: .One)
     
+    /// No margin
     public static func none () -> BootstrapMargin {
         return BootstrapMargin(left: .Zero, top: .Zero, right: .Zero, bottom: .Zero)
     }
@@ -39,6 +46,8 @@ public struct BootstrapMargin {
         self.bottom = bottom
     }
     
+    
+    /// The margin sizes that can be used when creating a bootstrap element
     public enum Margin:CGFloat {
         case Zero
         case One

@@ -11,8 +11,11 @@ import UIKit
 
 /** This class is responsible for handling the margins of a card set. **/
 open class Margin {
-    
+        
+    /// The bottom margin
     public var bottomMargin:CGFloat? = 10.0
+    
+    /// The top margin
     public var topMargin:CGFloat? = 10.0
     
     
@@ -69,21 +72,25 @@ open class Margin {
         self.cardSet = cardSet
     }
     
+    /// Set the bottom margin and return self
     public func bottom(_ value:CGFloat) -> GRCardSet {
         self.bottomMargin = value
         return self.cardSet
     }
     
+    /// Set the top margin and return self
     public func top(_ value:CGFloat) -> GRCardSet {
         self.topMargin = value
         return self.cardSet
     }
     
+    /// Set the left margin and return self
     public func left(_ value:CGFloat) -> GRCardSet {
         self.leftMargin = value
         return self.cardSet
     }
     
+    /// Set the right margin and return self
     public func right(_ value:CGFloat) -> GRCardSet {
         self.rightMargin = value
         return self.cardSet

@@ -28,7 +28,7 @@ My own version of Bootstrap written for Swift and iOS. I wrote this because I fe
   s.author           = { 'adeiji' => 'adeiji@yahoo.com' }
   s.source           = { :git => 'https://github.com/adeiji/SwiftyBootstrap.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '12.0'
 
   s.source_files = 'SwiftyBootstrap/Classes/**/*'
   

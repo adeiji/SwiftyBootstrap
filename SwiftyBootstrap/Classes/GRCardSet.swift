@@ -8,10 +8,14 @@
 import Foundation
 
 open class GRCardSet {
-    
+        
+    /// The content that is to be stored in this card set
     public let content:UIView
+    
     /// Newline is calculated in the addColumns method of the Row class. It is the indicator for whether to put this card (column) on a new line or not.  You should never have to set this manually.  If you want a column/card to be on a new line then use the addRow(column: []) function of the GRBootstrapElement class
     public var newLine:Bool
+        
+    /// Whether or not this card set should be a square
     private var isSquare:Bool
         
     /// The height of the content of this card set
@@ -22,6 +26,8 @@ open class GRCardSet {
     
     // The margin is sure to be set in the initializer, but if we don't say that this value can be null than we can't assign the margin's card set to self since margin relies on self and you'll get an error saying trying to access self before all required properties are set
     open var margin:Margin!
+    
+    /// The name of this card set
     open var name:String?
     
     /// Initialize the GRCardSet object
@@ -43,27 +49,42 @@ open class GRCardSet {
         self.margin = Margin(cardSet: self)
     }
     
+    /// Set height of this card set
+    /// - Parameter height: The height you want the card set
+    /// - Returns: The card set (self)
     open func withHeight(_ height: CGFloat) -> GRCardSet {
         self.height = height
         
         return self
     }
     
+    
+    /// Sets if this card set is square or not
+    /// - Parameter isSquare: Whether or not the card is a square
+    /// - Returns: The card set (self)
     open func isSquare (_ isSquare: Bool) -> GRCardSet {
         self.isSquare = isSquare
         return self
     }
-    
+        
+    /// Returns whether or not this card set is a square
     open func getIsSquare () -> Bool {
         return self.isSquare
     }
     
+    /// Sets the name of this card set
+    /// - Parameter name: The name you want to give the card set
+    /// - Returns: The card set (self)
     open func withName(_ name: String?) -> GRCardSet {
         self.name = name
         
         return self
     }
+
     
+    /// Sets whether or not to anchor this cardset's content to the view above it
+    /// - Parameter shouldAnchor: Whether or not to anchor this content's view to the view above it
+    /// - Returns: The card set (self)
     open func anchorToViewAbove (_ shouldAnchor: Bool) -> GRCardSet {
         self.anchorToViewAbove = shouldAnchor
         return self

@@ -7,6 +7,11 @@
 
 import Foundation
 
+
+
+///The number of columns to span a UI element across. Similar to how a col span works with Bootstrap.
+///
+///A col span of Twelve is full screen. A col span of Six is half the screen. A col span of Three is a quarter of the screen
 public enum ColSpan:CGFloat {
     case Zero = 0.0 // Don't add to the superview
     case One = 1.0
