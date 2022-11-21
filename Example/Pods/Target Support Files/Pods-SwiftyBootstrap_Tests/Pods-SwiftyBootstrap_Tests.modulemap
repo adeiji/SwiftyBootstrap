@@ -1,6 +1,0 @@
-framework module Pods_SwiftyBootstrap_Tests {
-  umbrella header "Pods-SwiftyBootstrap_Tests-umbrella.h"
-
-  export *
-  module * { export * }
-}

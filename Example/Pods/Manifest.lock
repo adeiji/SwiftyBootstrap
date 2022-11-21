@@ -1,28 +1,23 @@
 PODS:
-  - PodAsset (1.3.0)
   - SnapKit (5.0.1)
   - SwiftyBootstrap (1.38):
     - SnapKit (= 5.0.1)
 
 DEPENDENCIES:
-  - PodAsset
-  - SnapKit
-  - SwiftyBootstrap (from `../`)
+  - SwiftyBootstrap (from `../../SwiftyBootstrap`)
 
 SPEC REPOS:
   trunk:
-    - PodAsset
     - SnapKit
 
 EXTERNAL SOURCES:
   SwiftyBootstrap:
-    :path: "../"
+    :path: "../../SwiftyBootstrap"
 
 SPEC CHECKSUMS:
-  PodAsset: 161b57cdf4d7307b0fb652cccab32fa8d5dc580b
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyBootstrap: 83bb6a1cb7eb976757f768f2ce37961de8419ab4
 
-PODFILE CHECKSUM: 63f3ec8c0ed02418dbb44595b69bdfda6a22f2dc
+PODFILE CHECKSUM: 520a3ae7be1fcdbc4f4e4eff218e877a76cb69db
 
 COCOAPODS: 1.11.2
