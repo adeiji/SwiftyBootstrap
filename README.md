@@ -1,6 +1,5 @@
 # SwiftyBootstrap
 
-[![CI Status](https://img.shields.io/travis/adeiji/SwiftyBootstrap.svg?style=flat)](https://travis-ci.org/adeiji/SwiftyBootstrap)
 [![Version](https://img.shields.io/cocoapods/v/SwiftyBootstrap.svg?style=flat)](https://cocoapods.org/pods/SwiftyBootstrap)
 [![License](https://img.shields.io/cocoapods/l/SwiftyBootstrap.svg?style=flat)](https://cocoapods.org/pods/SwiftyBootstrap)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftyBootstrap.svg?style=flat)](https://cocoapods.org/pods/SwiftyBootstrap)
@@ -11,7 +10,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Documentation
 
-To see the full documentation click [here. (https://swiftybootstrap.netlify.app/documentation/swiftybootstrap)]
+To see the full documentation click [here](https://swiftybootstrap.netlify.app/documentation/swiftybootstrap).
 
 ## Requirements
 iOS 12.0+ / Mac OS X 10.12+ / tvOS 10.0+
@@ -38,20 +37,22 @@ Below is a simple example of adding two buttons to the screen that are full scre
 
 ```swift
 let card = GRBootstrapElement()
-        
+                
 card.addRow(columns: [
     Column(UIButton().withAttributes(closure: { view in
         let button = view as? UIButton
         button?.setTitle("Button 1", for: .normal)
     })
     .cardSet(),
-           xsColSpan: .Twelve).forSize(.sm, .Six),
+    xsColSpan: .Twelve) // Full screen on xtra small screen (iPhone Portrait, split screen smaller section)
+    .forSize(.sm, .Six) // Half screen on small screen (iPhone Landscape, split screen half of screen)
+    .forSize(.md, .Three), // Quarter of the screen on iPad portrait
     Column(UIButton().withAttributes(closure: { view in
         let button = view as? UIButton
         button?.setTitle("Button 2", for: .normal)
     })
     .cardSet(),
-           xsColSpan: .Twelve).forSize(.sm, .Six),
+    xsColSpan: .Twelve), // Full screen on xtra small and since no other size classes are specified, full screen on all sizes
 ], anchorToBottom: true)
 
 card.addToSuperview(superview: self.view)
