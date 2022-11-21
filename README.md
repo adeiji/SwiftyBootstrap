@@ -24,15 +24,15 @@ pod 'SwiftyBootstrap'
 ```
 
 ## Communication
-If you found a bug, open an issue.
-If you have a feature request, open an issue.
-If you want to contribute, submit a pull request.
+- If you found a bug, open an issue.
+- If you have a feature request, open an issue.
+- If you want to contribute, submit a pull request.
 
 # Usage
 
 Below is a simple example of adding two buttons to the screen that are full screen on iPhone portrait mode and half screen on iPhone landscape or iPad.
 
-```
+```swift
 let card = GRBootstrapElement()
         
 card.addRow(columns: [
