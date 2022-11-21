@@ -11,7 +11,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Documentation
 
-To see the full documentation click here [https://swiftybootstrap.netlify.app/documentation/swiftybootstrap]
+To see the full documentation click [here. (https://swiftybootstrap.netlify.app/documentation/swiftybootstrap)]
 
 ## Requirements
 iOS 12.0+ / Mac OS X 10.12+ / tvOS 10.0+
