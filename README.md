@@ -4,6 +4,10 @@
 [![License](https://img.shields.io/cocoapods/l/SwiftyBootstrap.svg?style=flat)](https://cocoapods.org/pods/SwiftyBootstrap)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftyBootstrap.svg?style=flat)](https://cocoapods.org/pods/SwiftyBootstrap)
 
+SwiftyBootstrap is a Framework designed to help you build UI's programmatically more quickly. It's designed after Twitter Bootstrap, mainly the use of columns to specify how a UI element will be laid out across various device sizes.  
+
+Now you can quickly specify how you want your layout to show on different devices in only a few lines of code.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
@@ -33,7 +37,7 @@ pod 'SwiftyBootstrap'
 
 # Usage
 
-Below is a simple example of adding two buttons to the screen that are full screen on iPhone portrait mode and half screen on iPhone landscape or iPad.
+Below is a simple example of adding two buttons to the screen.
 
 ```swift
 let card = GRBootstrapElement()
@@ -57,6 +61,11 @@ card.addRow(columns: [
 
 card.addToSuperview(superview: self.view)
 ```
+
+# Example of How It Looks
+In this example we used size classes like above to specify how the layout would change as the size of the device changes.
+
+https://user-images.githubusercontent.com/5272761/203091299-292de878-ac3c-41ed-bb00-206b2030a2a6.MP4
 
 ## Author
 
