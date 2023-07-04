@@ -21,7 +21,7 @@ public extension UIView {
             height: height,
             newLine: newline,
             name: name)
-    }
+    }        
 }
 
 open class Margin {

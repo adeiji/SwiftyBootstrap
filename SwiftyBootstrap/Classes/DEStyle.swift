@@ -243,7 +243,7 @@ open class Style {
             return .xl
         }
     }
-
+    
     /// If in landscape mode we need the width to be whatever the highest dimension is since unfortunately sometimes the height and
     /// the width values are switched.  So for example, in landscape if the height is reading as 1134 and the width 865, we know that we
     /// need to use the height value since in landscape width is always greater than height
@@ -718,6 +718,13 @@ open class Style {
         userView.imageView = imageView
         
         return userView
+    }
+    
+    open class func attributedLabel (withAttributedText attributedText: NSAttributedString, fontName: FontNames = .all, size:FontSizes = .small, color: UIColor, textAlignment: NSTextAlignment = .left) -> UILabel {
+        let label = self.label(withText: "", fontName: fontName, size: size, superview: nil, color: color)
+        label.attributedText = attributedText
+        
+        return label
     }
     
     open class func label (withAttributedText attributedText: NSAttributedString, fontName: FontNames = .all, size:FontSizes = .small, color: UIColor, textAlignment: NSTextAlignment = .left) -> UILabel {

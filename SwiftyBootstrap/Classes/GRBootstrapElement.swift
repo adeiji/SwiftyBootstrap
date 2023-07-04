@@ -83,6 +83,16 @@ open class GRBootstrapElement: UIView {
    
    /// Store the margin snapkit constraints for this bootstrap element.  We store this value so that we can update it later in case there is a screen size change
    private var snapkitMargins:SnapkitMargins?
+    
+   private var bottomRowConstraint:Constraint?
+    
+    /**
+    Changes the bottom constraint from the a different row to a new row
+    This should be used when adding a row after you've already added a card to the superview. Since the last row will be attached to the bottom of the card, when you add another row that new row should be the one that is constrained to the bottom of the card
+    */
+    open func resetBottomConstraint () {
+        self.bottomRowConstraint?.deactivate()
+    }
    
    public init(color: UIColor? = .white, anchorWidthToScreenWidth:Bool = true, margin:BootstrapMargin? = nil, superview: UIView? = nil) {
        self.anchorWidthToScreenWidth = anchorWidthToScreenWidth
@@ -147,7 +157,7 @@ open class GRBootstrapElement: UIView {
            make.top.equalTo(self.rows.last?.snp.bottom ?? self)
            
            if (myAnchorToBottom == true) {
-               make.bottom.equalTo(self)
+               self.bottomRowConstraint = make.bottom.equalTo(self).constraint               
            }
        }
        
@@ -310,7 +320,8 @@ open class GRBootstrapElement: UIView {
                make.left.equalTo(superview).offset(margin)
                make.right.equalTo(superview).offset(-margin)
            }
-           self.topConstraint = make.bottom.equalTo(superview).offset(-margin).constraint
+           
+           self.bottomConstraint = make.bottom.equalTo(superview).offset(-margin).constraint
        }
        
        UIView.animate(withDuration: 0.2) {
@@ -322,8 +333,7 @@ open class GRBootstrapElement: UIView {
    /// Add the card to a view
    ///
    /// - Parameters:
-   ///   - superview: The view to add the card to
-   ///   - margin: The margin for the view
+   ///   - superview: The view to add the card to   
    ///   - viewAbove: If there is a view you want this card to be below
    ///   - anchorToBottom: Whether the card should be anchored to the bottom of the view
    open func addToSuperview (superview: UIView, viewAbove: UIView? = nil, anchorToBottom:Bool = false) {
@@ -946,3 +956,5 @@ open class GRBootstrapElement: UIView {
        }
    }
 }
+
+public typealias Container = GRBootstrapElement

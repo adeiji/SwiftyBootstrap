@@ -132,6 +132,8 @@
 		F481D7EF28A442C2008EEA0C /* ColWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F481D7EE28A442C2008EEA0C /* ColWidth.swift */; };
 		F481D7F128A442F9008EEA0C /* GRCardSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F481D7F028A442F9008EEA0C /* GRCardSet.swift */; };
 		F4B29A5E291DF5D800ABD08F /* GRBootstrapElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B29A5D291DF5D800ABD08F /* GRBootstrapElement.swift */; };
+		F4CD7D9029535ED000DB80D1 /* UILabelConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD7D8F29535ED000DB80D1 /* UILabelConfig.swift */; };
+		F4CD7D94295360C900DB80D1 /* NSAttributedString+EasyAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD7D93295360C900DB80D1 /* NSAttributedString+EasyAttribute.swift */; };
 		F5DD7801BF04E4C1CC10698B57314C1D /* GRUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34313FA6DF5E67C367D6DDEB79602B06 /* GRUser.swift */; };
 		F62A43B8B2A4B0709E553B4C045FF642 /* GRSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C1A195454D51E517FBB22E17E4E7D2 /* GRSelectorCell.swift */; };
 		F64213220213FD9F6AEB344C7541869A /* ConstraintMakerPriortizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDC6B97ED3841FFDB023FE1C5EA1AC /* ConstraintMakerPriortizable.swift */; };
@@ -356,6 +358,8 @@
 		F481D7EE28A442C2008EEA0C /* ColWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColWidth.swift; path = Classes/ColWidth.swift; sourceTree = "<group>"; };
 		F481D7F028A442F9008EEA0C /* GRCardSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GRCardSet.swift; path = SwiftyBootstrap/Classes/GRCardSet.swift; sourceTree = "<group>"; };
 		F4B29A5D291DF5D800ABD08F /* GRBootstrapElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GRBootstrapElement.swift; path = SwiftyBootstrap/Classes/GRBootstrapElement.swift; sourceTree = "<group>"; };
+		F4CD7D8F29535ED000DB80D1 /* UILabelConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILabelConfig.swift; path = SwiftyBootstrap/Classes/UILabelConfig.swift; sourceTree = "<group>"; };
+		F4CD7D93295360C900DB80D1 /* NSAttributedString+EasyAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSAttributedString+EasyAttribute.swift"; path = "SwiftyBootstrap/Classes/NSAttributedString+EasyAttribute.swift"; sourceTree = "<group>"; };
 		F5FFB57D480D39D992F420058C6C1ECE /* SnapKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-prefix.pch"; sourceTree = "<group>"; };
 		F6FD835AD1F2A7A234D772E26C7E96EE /* NVActivityIndicatorView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorView.swift; path = Source/NVActivityIndicatorView/NVActivityIndicatorView.swift; sourceTree = "<group>"; };
 		F71A9DFA7EEA808D0763A62483E74B18 /* UIButton+Simplicity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIButton+Simplicity.swift"; path = "SwiftyBootstrap/Classes/UIButton+Simplicity.swift"; sourceTree = "<group>"; };
@@ -604,6 +608,8 @@
 		B74055BB419D3A49032E6DEC321174D9 /* SwiftyBootstrap */ = {
 			isa = PBXGroup;
 			children = (
+				F4CD7D8F29535ED000DB80D1 /* UILabelConfig.swift */,
+				F4CD7D93295360C900DB80D1 /* NSAttributedString+EasyAttribute.swift */,
 				478FA73CC849D0B91786DA48CE3E1B80 /* Array+RemoveDuplicates.swift */,
 				120DE142F3CA9E270CCE5E2E7605ECB5 /* Assets.xcassets */,
 				2AFB5ADBE00360A8C8D43122532ED062 /* Badge.swift */,
@@ -994,6 +1000,8 @@
 				F81B2CF919564C6FD8531960B11CAB7A /* ButtonRow.swift in Sources */,
 				C0D7DDA00C36E6CA480E261CD7B95C60 /* DateTime+ToString.swift in Sources */,
 				0EEECC64519AAF929C70BFA3BB52EAC4 /* DEBaseLoginView.swift in Sources */,
+				F4CD7D94295360C900DB80D1 /* NSAttributedString+EasyAttribute.swift in Sources */,
+				F4CD7D9029535ED000DB80D1 /* UILabelConfig.swift in Sources */,
 				C3BEA3142A7CDA4B4D549D42A49859F1 /* DEImageHelper.swift in Sources */,
 				D9811F641AB94CC11E0304918C5065B2 /* DEStyle.swift in Sources */,
 				2A846D2C03112AAC5D09DB0F62A606BC /* GraffitiStyle.swift in Sources */,

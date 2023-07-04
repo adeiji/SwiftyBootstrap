@@ -8,21 +8,51 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 open class GRViewWithTableView : UIView {
     
+    open var bottomConstraint: Constraint?
+    
     open weak var navBar:GRNavBar!
+    
     open weak var tableView:UITableView!
     
-    @discardableResult open func setup(withSuperview superview: UIView, header: String, rightNavBarButtonTitle: String) -> GRViewWithTableView {
+    private func setupTableView () -> UITableView {
+        let tableView = UITableView()
+        tableView.showsVerticalScrollIndicator = false
+        self.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { (make) in
+            make.left.equalTo(self)
+            make.right.equalTo(self)
+            let viewAbove = self.navBar
+            if let viewAbove = viewAbove {
+                make.top.equalTo(viewAbove.snp.bottom)
+            } else {
+                make.top.equalTo(self)
+            }
+                        
+            self.bottomConstraint = make.bottom.equalTo(self).constraint
+        }
+        
+        tableView.layer.zPosition = 0;
+        return tableView
+    }
+    
+    @discardableResult open func setup(withSuperview superview: UIView, header: String, rightNavBarButtonTitle: String, addNavBar: Bool = true) -> GRViewWithTableView {
         superview.addSubview(self)
         self.snp.makeConstraints { (make) in
             make.edges.equalTo(superview)
         }
     
         let rightButton = Style.clearButton(with: rightNavBarButtonTitle, superview: nil, fontSize: .small)
-        self.navBar = Style.navBar(withHeader: header, superview: self, leftButton: GRButton(type: .Back), rightButton: rightButton, isBackButton: true, subheadingText: nil)
-        self.tableView = Style.tableView(withSuperview: self, viewAbove: self.navBar, offset: 0)
+        
+        if (addNavBar) {
+            self.navBar = Style.navBar(withHeader: header, superview: self, leftButton: GRButton(type: .Back), rightButton: rightButton, isBackButton: true, subheadingText: nil)
+        }
+        
+        self.tableView = self.setupTableView()
         
         return self
     }
@@ -43,6 +73,5 @@ open class GRViewWithTableView : UIView {
         
         self.tableView.delegate = delegate
         self.tableView.dataSource = dataSource
-    }
-    
+    }    
 }

@@ -37,11 +37,11 @@ open class GRMessageCard: GRBootstrapElement {
         super.init(color: color, anchorWidthToScreenWidth: anchorWidthToScreenWidth, margin: margin, superview: superview)
     }
     
-    func setShowFromTop (_ show: Bool) {
+    public func setShowFromTop (_ show: Bool) {
         self.showFromTop = show
     }
     
-    convenience init(addTextField: Bool, textFieldPlaceholder:String, showFromTop: Bool) {
+    public convenience init(addTextField: Bool, textFieldPlaceholder:String, showFromTop: Bool) {
         self.init()
         self.addTextField = addTextField
         self.showFromTop = showFromTop
@@ -52,7 +52,7 @@ open class GRMessageCard: GRBootstrapElement {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addExitButton () {
+    public func addExitButton () {
         let exitButton = UIButton()
         
         if #available(iOS 12.0, *) {

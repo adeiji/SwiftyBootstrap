@@ -24,10 +24,10 @@ public struct SBMargin {
  Margin that it used specifically within the GRBootstrapElement class. This is the outer margin of the object
  */
 public struct BootstrapMargin {
-    let left:Margin
-    let top:Margin
-    let right:Margin
-    let bottom:Margin
+    public let left:Margin
+    public let top:Margin
+    public let right:Margin
+    public let bottom:Margin
     
     public init (left:Margin = .One, top:Margin = .One, right:Margin = .One, bottom:Margin = .One) {
         self.left = left

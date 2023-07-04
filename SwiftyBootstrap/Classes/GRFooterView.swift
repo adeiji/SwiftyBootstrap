@@ -39,7 +39,7 @@ open class GRFooterView: ButtonRow {
         superview.addSubview(self)
         
         self.snp.makeConstraints { (make) in
-            make.bottom.equalTo(0)
+            make.bottom.equalTo(superview).offset(-20)
             make.left.equalTo(0)
             make.right.equalTo(0)
             make.height.equalTo(height)
