@@ -42,5 +42,5 @@ My own version of Bootstrap written for Swift and iOS.
   # s.dependency 'AFNetworking', '~> 2.3'
   s.dependency 'SnapKit', '5.7.1'
   s.dependency 'PodAsset', '1.3.0'
-  s.dependency 'NVActivityIndicatorView', '4.8.0'
+  s.dependency 'NVActivityIndicatorView', '5.2.0'
 end
